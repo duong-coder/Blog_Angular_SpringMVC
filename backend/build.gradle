@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'com.dependency.inject.'
-version = '0.0.1-SNAPSHOT'
+version = '1.0'
 sourceCompatibility = '1.8'
 
 configurations {
@@ -44,9 +44,13 @@ dependencies {
 	implementation 'org.springframework.data:spring-data-rest-hal-explorer'
 	implementation 'org.springframework.security:spring-security-messaging'
 	implementation 'org.springframework.security:spring-security-rsocket'
+	//compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.2'
 	compileOnly 'org.projectlombok:lombok'
+	//implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.9.8'
+	// https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core
+	compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.11.2'
+    implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.0'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'
 	runtimeOnly 'mysql:mysql-connector-java'
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 	annotationProcessor 'org.projectlombok:lombok'

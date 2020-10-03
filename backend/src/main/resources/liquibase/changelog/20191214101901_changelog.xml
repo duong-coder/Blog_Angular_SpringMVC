@@ -1,0 +1,211 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet author="Huu Duan (generated)" id="1576293550329-1">
+        <createTable tableName="hdht_appointment">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="appointment_code" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="approver" type="BIGINT"/>
+            <column name="finish_time" type="datetime"/>
+            <column name="note" type="VARCHAR(255)"/>
+            <column name="reason" type="VARCHAR(255)"/>
+            <column name="reason_cancel" type="VARCHAR(255)"/>
+            <column name="shift" type="INT"/>
+            <column name="status" type="INT"/>
+            <column name="time_of_service" type="datetime"/>
+            <column name="time_registered" type="datetime"/>
+            <column name="create_by" type="BIGINT"/>
+            <column name="department_id" type="BIGINT"/>
+            <column name="doctor_id" type="BIGINT"/>
+            <column name="patient_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Huu Duan (generated)" id="1576293550329-2">
+        <createTable tableName="hdht_authority">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Huu Duan (generated)" id="1576293550329-3">
+        <createTable tableName="hdht_department">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="introduction" type="VARCHAR(1000)"/>
+            <column name="department_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="note" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Huu Duan (generated)" id="1576293550329-4">
+        <createTable tableName="hdht_doctor">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="bonus" type="VARCHAR(255)"/>
+            <column name="exp" type="VARCHAR(255)"/>
+            <column name="function_user" type="VARCHAR(255)"/>
+            <column name="intro" type="VARCHAR(255)"/>
+            <column name="status" type="INT"/>
+            <column name="studying" type="VARCHAR(255)"/>
+            <column name="department_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Huu Duan (generated)" id="1576293550329-5">
+        <createTable tableName="hdht_medical_history">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="advice_from_doctor" type="VARCHAR(255)"/>
+            <column name="blood_group" type="INT"/>
+            <column name="blood_pressure" type="INT"/>
+            <column name="note" type="VARCHAR(255)"/>
+            <column name="remedial" type="VARCHAR(255)"/>
+            <column name="result" type="VARCHAR(255)"/>
+            <column name="signs_of_illness" type="VARCHAR(255)"/>
+            <column name="temp_body" type="INT"/>
+            <column name="appointment_id" type="BIGINT"/>
+            <column name="user_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Huu Duan (generated)" id="1576293550329-6">
+        <createTable tableName="hdht_nurse">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="exp" type="VARCHAR(255)"/>
+            <column name="function_user" type="VARCHAR(255)"/>
+            <column name="intro" type="VARCHAR(255)"/>
+            <column name="studying" type="VARCHAR(255)"/>
+            <column name="department_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Huu Duan (generated)" id="1576293550329-7">
+        <createTable tableName="hdht_patient">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="card_id" type="VARCHAR(255)"/>
+            <column name="insurance_card_number" type="VARCHAR(255)"/>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Huu Duan (generated)" id="1576293550329-8">
+        <createTable tableName="hdht_user">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="activated" type="INT"/>
+            <column name="address" type="VARCHAR(255)"/>
+            <column name="birthday" type="datetime"/>
+            <column name="create_date" type="datetime"/>
+            <column name="email" type="VARCHAR(255)"/>
+            <column name="first_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="gender" type="INT"/>
+            <column name="image_url" type="VARCHAR(256)"/>
+            <column name="last_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_update_date" type="datetime"/>
+            <column name="password" type="VARCHAR(255)"/>
+            <column name="phone" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Huu Duan (generated)" id="1576293550329-9">
+        <createTable tableName="hdht_user_authority">
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="authority_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Huu Duan (generated)" id="1576293550329-10">
+        <createIndex indexName="FK3dheq2cnpn40u2b4gl5va2vol" tableName="hdht_nurse">
+            <column name="department_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Huu Duan (generated)" id="1576293550329-11">
+        <createIndex indexName="FK3nkaegwmv2injqxundcra2bll" tableName="hdht_patient">
+            <column name="user_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Huu Duan (generated)" id="1576293550329-12">
+        <createIndex indexName="FK76y9xb1hbgioo99j7ntblr4go" tableName="hdht_medical_history">
+            <column name="appointment_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Huu Duan (generated)" id="1576293550329-13">
+        <createIndex indexName="FKa9wxg85ajh3oow0g49emd0vj4" tableName="hdht_user_authority">
+            <column name="authority_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Huu Duan (generated)" id="1576293550329-14">
+        <createIndex indexName="FKavdoyfln3lrnnv8mldxe9jng5" tableName="hdht_appointment">
+            <column name="patient_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Huu Duan (generated)" id="1576293550329-15">
+        <createIndex indexName="FKbcybsncgmmivrq8yggqvq7qyq" tableName="hdht_medical_history">
+            <column name="user_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Huu Duan (generated)" id="1576293550329-16">
+        <createIndex indexName="FKe2sjlrl4e2dhftxcafjyjn4py" tableName="hdht_appointment">
+            <column name="create_by"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Huu Duan (generated)" id="1576293550329-17">
+        <createIndex indexName="FKfkfaa4es4wyvhb3to9mg5n7wr" tableName="hdht_doctor">
+            <column name="department_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Huu Duan (generated)" id="1576293550329-18">
+        <createIndex indexName="FKhd9t8q83evhm8purraountw3t" tableName="hdht_doctor">
+            <column name="user_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Huu Duan (generated)" id="1576293550329-19">
+        <createIndex indexName="FKm8h4ab7bbdpm3m85dllk8j60v" tableName="hdht_appointment">
+            <column name="department_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Huu Duan (generated)" id="1576293550329-20">
+        <createIndex indexName="FKp7ubtio7bos5epx8cs5s1xnhh" tableName="hdht_user_authority">
+            <column name="user_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Huu Duan (generated)" id="1576293550329-21">
+        <createIndex indexName="FKqxbin40j1uv69r8ektt3cuo8a" tableName="hdht_nurse">
+            <column name="user_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Huu Duan (generated)" id="1576293550329-22">
+        <createIndex indexName="FKrpyttpj5dvj3whj6tp23dgga3" tableName="hdht_appointment">
+            <column name="doctor_id"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>
