@@ -1,0 +1,35 @@
+.body-blog {
+    margin: 0px 23%;
+    padding-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    /* justify-items: center; */
+}
+
+.title-post {
+    font-size: 36px;
+    font-weight: 800;
+    line-height: 1.2;
+    box-sizing: border-box;
+    transition: all 0.2s;
+}
+
+.subtitle-post {
+    margin-top: 15px;
+    margin-bottom: 20px;
+    font-weight: 300;
+    font-size: 1.75rem;
+    line-height: 1;
+    box-sizing: border-box;
+    color: rgb(80, 79, 79);
+}
+
+.date-post {
+    font-weight: 300;
+    color: gray;
+    font-size: 18px;
+    font-style: italic;
+    font-family: 'Times New Roman', Times, serif;
+}

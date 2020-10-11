@@ -1,0 +1,25 @@
+.post-item {
+    margin-top: 50px;
+    cursor: pointer;
+}
+
+.post-item:hover {
+    color: #0085a1;
+    transition: all 0.2s;
+}
+
+
+/* 
+.post-item .title-post {
+    font-size: 36px;
+    font-weight: 300px;
+    color: blue;
+}
+
+.subtitle-post {
+    font-size: 24px;
+}
+
+.date-post {
+    font-size: 18px;
+} */
