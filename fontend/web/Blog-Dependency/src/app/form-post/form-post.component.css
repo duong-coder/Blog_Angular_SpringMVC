@@ -1,0 +1,80 @@
+.full-background {
+    height: 100%;
+    background-color: #343a40;
+}
+
+.header-form {
+    z-index: 0;
+    margin: 0px;
+    /* margin-bottom: -90px; */
+    padding: 0px;
+    width: 100%;
+    height: auto;
+    background-color: #343a40;
+    position: relative;
+    top: -90px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* background-image: none; */
+}
+
+.title-form {
+    font-size: xx-large;
+}
+
+.header-form>form {
+    margin-top: 150px;
+    color: white;
+}
+
+.note-input {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: small;
+    color: gray;
+}
+
+.input-text {
+    padding: 10px;
+    width: 90%;
+    height: 30px;
+    line-height: 20px;
+    margin: 10px 0;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: medium;
+    outline: none;
+}
+
+.input-text:focus {
+    box-shadow: 0 0 0 0.2rem rgba(0, 133, 161, .25);
+    border-color: rgba(0, 133, 161, .25);
+    transition: all 0.5s;
+}
+
+.input-text-area {
+    height: 100px;
+}
+
+.error-input {
+    color: #dc3545;
+    font-weight: normal;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.create-post {
+    width: 170px;
+    height: auto;
+    margin-top: 20px;
+    padding: 15px;
+    font-weight: 800;
+    font-family: Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
+    border: none;
+    color: rgb(218, 218, 218);
+    cursor: pointer;
+    background-color: #0085a1;
+}
+
+.create-post:hover {
+    background-color: #216672;
+    transition: all 0.5s;
+}
