@@ -3,7 +3,7 @@ import {faGithub, faTwitter, faFacebook} from '@fortawesome/free-brands-svg-icon
 @Component({
     selector: 'app-footer',
     templateUrl: './footer.component.html',
-    styleUrls: ['./footer.component.css', "../styles/style.component.css"]
+    styleUrls: ['./footer.component.css']
 })
 export class FooterComponent implements OnInit{
     faGithub = faGithub;

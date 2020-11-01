@@ -1,15 +1,14 @@
 .header {
     z-index: 0;
     margin: 0px;
-    margin-bottom: -90px;
+    margin-bottom: -20px;
     padding: 0px;
-    height: 532px;
+    height: fit-content;
     position: relative;
     top: -90px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-image: url("../../assets/img/home-bg.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -21,12 +20,14 @@
     padding-top: 100px;
     height: 100%;
     width: 50%;
-    text-align: center;
+    /* text-align: center; */
+    text-align: left;
     color: white;
 }
 
 .content-header>p:first-child {
-    font-size: 80px;
+    /* font-size: 80px; */
+    font-size: 55px;
 }
 
 .content-header>p:last-child {

@@ -1,0 +1,37 @@
+.form-login {
+    top: 0px;
+    padding-top: 70px;
+    /* width: fit-content; */
+}
+
+.content-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.group {
+    /* width: 25%; */
+    align-items: flex-start;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.title-form-login {
+    color: #fff;
+    width: 100%;
+    text-align: center;
+}
+
+.input-password {
+    /* width: 20%; */
+    height: 27px;
+    margin-right: 20px;
+    color: #216672;
+}
+
+.example-pass {
+    color: gray;
+}

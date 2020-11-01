@@ -1,5 +1,5 @@
 <div class="full-background">
-    <div class="header-form">
+    <div class="form-post">
         <form action="">
             <h2 class="title-form">Post Content</h2>
             <input class="input-text" type="text" placeholder="Post heading"><br>
@@ -12,7 +12,11 @@
                 <fa-icon [icon]="faMarkdown" style="font-size: 12px;"></fa-icon>
                 Markdown supported
             </p>
-            <button class="create-post">CREATE POST</button>
+            <button class="btn-post">CREATE POST</button>
+            <br> <br> <br>
+            <h2 class="title-form">Post Preview</h2>
+            <div class="post-preview"></div><br>
+            <button class="btn-post btn-post-delete" hidden>DELETE POST</button>
         </form>
     </div>
 </div>
