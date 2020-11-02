@@ -1,12 +1,20 @@
 .post-item {
+    display: block;
     margin-top: 50px;
-    cursor: pointer;
+    text-decoration: none;
+    color: black;
 }
 
 .post-item:hover {
     color: #0085a1;
     transition: all 0.2s;
 }
+
+
+/* 
+.link-post-title {
+    text-decoration: none;
+} */
 
 
 /* 

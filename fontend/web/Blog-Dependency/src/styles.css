@@ -103,3 +103,9 @@ div {
     border-color: rgba(0, 133, 161, .25);
     transition: all 0.5s;
 }
+
+@media (max-width: 800px) {
+    .form-post {
+        margin-top: -90px;
+    }
+}

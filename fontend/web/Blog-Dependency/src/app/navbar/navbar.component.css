@@ -57,11 +57,12 @@
     text-align: center;
 }
 
-
-/* .navbar .menu-bar .new-post {
-    background-color: #0085a1;
+.navbar .menu-bar .new-post {
+    width: fit-content;
 }
 
+
+/* 
 .navbar .menu-bar>li:last-child :hover {
     background-color: #216672;
     transition: all 0.5s;

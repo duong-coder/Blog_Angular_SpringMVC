@@ -13,6 +13,14 @@ import { HeaderComponent } from './header/header.component';
 import { PostDetailComponent } from './post-detail/post-detail.component';
 import { FlagAcountComponent } from './flag-acount/flag-acount.component';
 import { LoginComponent } from './login/login.component';
+import { HomePageComponent } from './home-page/home-page.component';
+import { AboutPageComponent } from './about-page/about-page.component';
+import { NewPostPageComponent } from './new-post-page/new-post-page.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PostDetailPageComponent } from './post-detail-page/post-detail-page.component';
+
+import {PostService} from './post.service';
+
 
 @NgModule({
   declarations: [
@@ -25,14 +33,19 @@ import { LoginComponent } from './login/login.component';
     HeaderComponent,
     PostDetailComponent,
     FlagAcountComponent,
-    LoginComponent
+    LoginComponent,
+    HomePageComponent,
+    AboutPageComponent,
+    NewPostPageComponent,
+    PageNotFoundComponent,
+    PostDetailPageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FontAwesomeModule
   ],
-  providers: [],
+  providers: [PostService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

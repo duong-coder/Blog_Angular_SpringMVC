@@ -3,6 +3,7 @@
     margin: 0px;
     margin-bottom: -20px;
     padding: 0px;
+    min-height: 550px;
     height: fit-content;
     position: relative;
     top: -90px;
@@ -20,17 +21,38 @@
     padding-top: 100px;
     height: 100%;
     width: 50%;
-    /* text-align: center; */
-    text-align: left;
     color: white;
 }
 
-.content-header>p:first-child {
-    /* font-size: 80px; */
+.home-header {
+    text-align: center;
+}
+
+.post-header {
+    text-align: left;
+}
+
+.content-header>p.home-heading {
+    font-size: 80px;
+}
+
+.content-header>p.post-heading {
     font-size: 55px;
 }
 
-.content-header>p:last-child {
+.content-header>p.home-sub-heading {
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 1.1;
+}
+
+.content-header>p.post-sub-heading {
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 1.1;
+}
+
+.content-header>p.post-meta {
     font-weight: 300;
     font-size: 20px;
     line-height: 1.1;
@@ -39,7 +61,13 @@
 @media (max-width: 800px) {
     .navbar {
         /* display: block; */
-        flex-direction: column;
+        /* flex-direction: column; */
+    }
+    .header {
+        margin-top: -90px;
+    }
+    .content-header>p.post-heading {
+        font-size: 45px;
     }
     /* .menu-bar {
         display: none;
