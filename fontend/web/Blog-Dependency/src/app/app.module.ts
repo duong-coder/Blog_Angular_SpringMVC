@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +21,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { PostDetailPageComponent } from './post-detail-page/post-detail-page.component';
 
 import {PostService} from './post.service';
+import { EditPostPageComponent } from './edit-post-page/edit-post-page.component';
 
 
 @NgModule({
@@ -38,11 +40,14 @@ import {PostService} from './post.service';
     AboutPageComponent,
     NewPostPageComponent,
     PageNotFoundComponent,
-    PostDetailPageComponent
+    PostDetailPageComponent,
+    EditPostPageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
     FontAwesomeModule
   ],
   providers: [PostService],

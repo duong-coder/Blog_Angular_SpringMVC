@@ -1,18 +1,33 @@
 <div class="full-background">
     <div class="form-post">
-        <form action="">
+        <form action="" [formGroup]="formPost">
             <h2 class="title-form">Post Content</h2>
-            <input class="input-text" type="text" placeholder="Post heading"><br>
-            <p class="error-input">Heading required</p>
-            <input class="input-text" type="text" placeholder="Post subheading"><br>
-            <input class="input-text" type="text" placeholder="Post background image (enter a URL)"><br>
+            <input class="input-text" type="text" formControlName="heading" placeholder="Post heading"><br>
+            <div *ngIf="formPost.get('heading').errors && formPost.get('heading').touched">
+                <p class="error-input" *ngIf="formPost.get('heading').errors?.required">Heading required</p>
+            </div>
+
+            <input class="input-text" type="text" formControlName="subHeading" placeholder="Post subheading"><br>
+            <div *ngIf="formPost.get('subHeading').errors && formPost.get('subHeading').touched">
+                <p class="error-input" *ngIf="formPost.get('heading').errors?.required">Subheading required</p>
+            </div>
+
+            <input class="input-text" type="text" formControlName="urlImage" placeholder="Post background image (enter a URL)"><br>
             <p class="note-input">Use an image URL (ex. https://source.unsplash.com/WLUHO9A_xik/1600x900)</p>
-            <textarea class="input-text input-text-area" name="" id="" cols="100" rows="5" placeholder="Post body text (markdown supported)"></textarea>
+            <div *ngIf="formPost.get('urlImage').errors && formPost.get('urlImage').touched">
+                <p class="error-input" *ngIf="formPost.get('heading').errors?.required">Url image required</p>
+            </div>
+
+            <textarea class="input-text input-text-area" formControlName="content" id="" cols="100" rows="5" placeholder="Post body text (markdown supported)"></textarea>
             <p class="note-input">
                 <fa-icon [icon]="faMarkdown" style="font-size: 12px;"></fa-icon>
                 Markdown supported
             </p>
-            <button class="btn-post">CREATE POST</button>
+            <div *ngIf="formPost.get('content').errors && formPost.get('content').touched">
+                <p class="error-input" *ngIf="formPost.get('heading').errors?.required">Content required</p>
+            </div>
+
+            <button class="btn-post" [disabled]="formPost.invalid">{{flagEdit ? 'UPDATE POST' : 'CREATE POST'}}</button>
             <br> <br> <br>
             <h2 class="title-form">Post Preview</h2>
             <div class="post-preview"></div><br>

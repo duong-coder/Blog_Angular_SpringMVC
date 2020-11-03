@@ -19,6 +19,7 @@
 .content-header {
     margin: 100px 0px;
     padding-top: 100px;
+    /* padding-top: 20px; */
     height: 100%;
     width: 50%;
     color: white;
@@ -47,22 +48,25 @@
 }
 
 .content-header>p.post-sub-heading {
-    font-weight: 300;
-    font-size: 20px;
+    font-weight: 600;
+    font-size: 30px;
     line-height: 1.1;
+    margin: 10px 0 30px;
 }
 
 .content-header>p.post-meta {
     font-weight: 300;
+    color: #fff;
     font-size: 20px;
-    line-height: 1.1;
+    font-style: italic;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 @media (max-width: 800px) {
-    .navbar {
-        /* display: block; */
-        /* flex-direction: column; */
-    }
+    /* .navbar {
+        display: block;
+        flex-direction: column;
+    } */
     .header {
         margin-top: -90px;
     }

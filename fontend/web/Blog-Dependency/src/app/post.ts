@@ -4,5 +4,6 @@ export class Post{
     subTitle: string;
     dateCreate: string;
     content: string;
+    urlImage: string;
     constructor(){}
 }

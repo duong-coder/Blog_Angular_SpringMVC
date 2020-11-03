@@ -3,7 +3,7 @@
     <ul class="menu-bar">
         <li><a routerLink="/home">HOME</a></li>
         <li><a routerLink="/about">ABOUT</a></li>
-        <li><a link="">EDIT POST</a></li>
+        <li *ngIf="showEditPost"><a (click)="editPost()">EDIT POST</a></li>
         <li>
             <a href="">
                 <fa-icon [icon]="faGithub" style="font-size: 34px;"></fa-icon>
