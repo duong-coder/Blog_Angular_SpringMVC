@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 import {faMarkdown} from '@fortawesome/free-brands-svg-icons';
-import { Post } from '../post';
+import { Post } from '../../post';
 
 @Component({
   selector: 'app-form-post',

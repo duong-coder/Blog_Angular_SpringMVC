@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import { Post } from '../post';
+import { Post } from '../../post';
 
-import {PostService} from '../post.service';
+import {PostService} from '../../post.service';
 
 @Component({
   selector: 'app-edit-post-page',

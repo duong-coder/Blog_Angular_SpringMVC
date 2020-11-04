@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AboutPageComponent } from './about-page/about-page.component';
-import { EditPostPageComponent } from './edit-post-page/edit-post-page.component';
-import { HomePageComponent } from './home-page/home-page.component';
-import { NewPostPageComponent } from './new-post-page/new-post-page.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { PostDetailPageComponent } from './post-detail-page/post-detail-page.component';
+import { AboutPageComponent } from './page/about-page/about-page.component';
+import { EditPostPageComponent } from './page/edit-post-page/edit-post-page.component';
+import { HomePageComponent } from './page/home-page/home-page.component';
+import { NewPostPageComponent } from './page/new-post-page/new-post-page.component';
+import { PageNotFoundComponent } from './page/page-not-found/page-not-found.component';
+import { PostDetailPageComponent } from './page/post-detail-page/post-detail-page.component';
 
 const routes: Routes = [
   {path: 'home', component: HomePageComponent},

@@ -4,24 +4,24 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { FooterComponent } from './footer/footer.component';
+import { NavbarComponent } from './common/navbar/navbar.component';
+import { FooterComponent } from './common/footer/footer.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { BodyComponent } from './body/body.component';
-import { PostComponent } from './post-title/post.component';
-import { FormPostComponent } from './form-post/form-post.component';
-import { HeaderComponent } from './header/header.component';
-import { PostDetailComponent } from './post-detail/post-detail.component';
-import { FlagAcountComponent } from './flag-acount/flag-acount.component';
-import { LoginComponent } from './login/login.component';
-import { HomePageComponent } from './home-page/home-page.component';
-import { AboutPageComponent } from './about-page/about-page.component';
-import { NewPostPageComponent } from './new-post-page/new-post-page.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { PostDetailPageComponent } from './post-detail-page/post-detail-page.component';
+import { BodyComponent } from './common/body/body.component';
+import { PostComponent } from './common/post-title/post.component';
+import { FormPostComponent } from './common/form-post/form-post.component';
+import { HeaderComponent } from './common/header/header.component';
+import { PostDetailComponent } from './common/post-detail/post-detail.component';
+import { FlagAcountComponent } from './common/flag-acount/flag-acount.component';
+import { LoginComponent } from './common/login/login.component';
+import { HomePageComponent } from './page/home-page/home-page.component';
+import { AboutPageComponent } from './page/about-page/about-page.component';
+import { NewPostPageComponent } from './page/new-post-page/new-post-page.component';
+import { PageNotFoundComponent } from './page/page-not-found/page-not-found.component';
+import { PostDetailPageComponent } from './page/post-detail-page/post-detail-page.component';
+import { EditPostPageComponent } from './page/edit-post-page/edit-post-page.component';
 
 import {PostService} from './post.service';
-import { EditPostPageComponent } from './edit-post-page/edit-post-page.component';
 
 
 @NgModule({
