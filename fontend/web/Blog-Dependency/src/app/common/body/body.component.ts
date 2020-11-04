@@ -17,7 +17,6 @@ export class BodyComponent implements OnInit {
   }
 
   getAllPost(): void{
-    this.postService.getAllPost().subscribe((posts => this.posts = posts));
+    this.postService.getAllPost().subscribe((posts => this.posts = Array.from(posts).reverse()));
   }
-
 }

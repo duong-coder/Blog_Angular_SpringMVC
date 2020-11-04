@@ -5,7 +5,7 @@
         <ng-container>
             <p [class]="flagHome ? 'home-heading' : 'post-heading'">{{heading}}</p>
             <p [class]="flagHome ? 'home-sub-heading' : 'post-sub-heading'">{{subHeading}}</p>
-            <p [class]="'post-meta'" [hidden]="flagHome">{{dateCreate}}</p>
+            <p [class]="'post-meta'" [hidden]="flagHome">{{dateCreate | date:'MMMM d, y'}}</p>
         </ng-container>
         <!-- <p>Magna nostrud incididunt cupidatat cillum incididunt et nisi in ut minim reprehenderit.</p>
         <p>Labore irure irure laborum quis tempor aliqua. Dude</p> -->

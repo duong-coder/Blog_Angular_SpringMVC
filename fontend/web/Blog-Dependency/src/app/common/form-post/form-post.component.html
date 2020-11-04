@@ -1,6 +1,6 @@
 <div class="full-background">
     <div class="form-post">
-        <form action="" [formGroup]="formPost">
+        <form (ngSubmit)="submitPost()" [formGroup]="formPost">
             <h2 class="title-form">Post Content</h2>
             <input class="input-text" type="text" formControlName="heading" placeholder="Post heading"><br>
             <div *ngIf="formPost.get('heading').errors && formPost.get('heading').touched">
@@ -27,11 +27,11 @@
                 <p class="error-input" *ngIf="formPost.get('heading').errors?.required">Content required</p>
             </div>
 
-            <button class="btn-post" [disabled]="formPost.invalid">{{flagEdit ? 'UPDATE POST' : 'CREATE POST'}}</button>
+            <button class="btn-post" type="submit" [disabled]="formPost.invalid">{{flagEdit ? 'UPDATE POST' : 'CREATE POST'}}</button>
             <br> <br> <br>
             <h2 class="title-form">Post Preview</h2>
             <div class="post-preview"></div><br>
-            <button class="btn-post btn-post-delete" hidden>DELETE POST</button>
+            <button class="btn-post btn-post-delete" [hidden]="!flagEdit">DELETE POST</button>
         </form>
     </div>
 </div>

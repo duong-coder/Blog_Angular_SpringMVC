@@ -22,6 +22,7 @@ import { PostDetailPageComponent } from './page/post-detail-page/post-detail-pag
 import { EditPostPageComponent } from './page/edit-post-page/edit-post-page.component';
 
 import {PostService} from './post.service';
+import {DateService} from './date.service';
 
 
 @NgModule({
@@ -50,7 +51,7 @@ import {PostService} from './post.service';
     ReactiveFormsModule,
     FontAwesomeModule
   ],
-  providers: [PostService],
+  providers: [PostService, DateService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
