@@ -20,6 +20,10 @@ div {
     font-family: Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
 }
 
+a {
+    text-decoration: none;
+}
+
 .body-blog {
     margin: 0px 23%;
     padding-top: 0px;

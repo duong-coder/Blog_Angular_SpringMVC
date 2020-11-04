@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { LoginComponent } from './common/login/login.component';
 import { AboutPageComponent } from './page/about-page/about-page.component';
 import { EditPostPageComponent } from './page/edit-post-page/edit-post-page.component';
 import { HomePageComponent } from './page/home-page/home-page.component';
@@ -13,6 +14,7 @@ const routes: Routes = [
   {path: 'new-post', component: NewPostPageComponent},
   {path: 'post/:id', component: PostDetailPageComponent},
   {path: 'edit/:id', component: EditPostPageComponent},
+  {path: 'login', component: LoginComponent},
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: '**', component: PageNotFoundComponent}
 ];
