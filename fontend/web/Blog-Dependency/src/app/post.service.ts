@@ -26,4 +26,10 @@ export class PostService{
         });
         POST.splice(index, 1, post);
     }
+    deletePost(id: number): void{
+        const index = POST.findIndex(p => {
+            return p.id === id;
+        });
+        POST.splice(index, 1);
+    }
 }

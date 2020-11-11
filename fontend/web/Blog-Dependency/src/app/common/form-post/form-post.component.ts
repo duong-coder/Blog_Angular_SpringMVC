@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import {faMarkdown} from '@fortawesome/free-brands-svg-icons';
 import { DateService } from 'src/app/date.service';
@@ -20,7 +21,9 @@ export class FormPostComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private postService: PostService,
-    private dateService: DateService
+    private dateService: DateService,
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -30,7 +33,8 @@ export class FormPostComponent implements OnInit {
       urlImage: [this.flagEdit ? this.postEditting.urlImage : '', [Validators.required]],
       content: [this.flagEdit ? this.postEditting.content : '', [Validators.required]],
     });
-    console.log(this.formPost);
+    // console.log(this.formPost);
+    this.postPreview = this.formPost.get('content').value;
   }
 
   submitPost(): void{
@@ -46,14 +50,17 @@ export class FormPostComponent implements OnInit {
     } else{
       post.dateCreate = this.dateService.getDayNow();
       this.postService.addPost(post);
-
     }
+    this.router.navigateByUrl(`/post/${this.postEditting.id}`);
+  }
+  deletePost(): void{
+    const idDelete: number = this.postEditting.id;
+    this.postService.deletePost(idDelete);
+    this.router.navigateByUrl('/home');
   }
   resizeInput(element: HTMLTextAreaElement): void{
-    // console.log(element);
     element.style.height = 'auto';
     element.style.height = element.scrollHeight + 'px';
-    console.log(this.formPost.get('content').value);
     this.postPreview = this.formPost.get('content').value;
   }
 

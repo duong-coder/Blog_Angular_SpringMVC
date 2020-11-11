@@ -4,6 +4,8 @@
 
 .form-post>form {
     margin-top: 150px;
+    margin-left: 20%;
+    margin-right: 20%;
     color: white;
 }
 
@@ -15,7 +17,7 @@
 }
 
 .input-text-area {
-    /* height: 100px; */
+    /* height: fit-content; */
     resize: horizontal;
     overflow: hidden;
 }
@@ -34,4 +36,11 @@
     min-height: 50px;
     color: black;
     background-color: #fff;
+}
+
+@media (max-width: 800px) {
+    .form-post>form {
+        margin-left: 10%;
+        margin-right: 10%;
+    }
 }

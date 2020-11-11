@@ -31,10 +31,10 @@
             <br> <br> <br>
             <h2 class="title-form">Post Preview</h2>
             <div class="post-preview">
-                <div markdown [data]="postPreview" style="height: fit-content;">
+                <div markdown [data]="postPreview">
                 </div>
             </div><br>
-            <button class="btn-post btn-post-delete" [hidden]="!flagEdit">DELETE POST</button>
+            <button class="btn-post btn-post-delete" (click)="deletePost()" [hidden]="!flagEdit">DELETE POST</button>
         </form>
     </div>
 </div>
