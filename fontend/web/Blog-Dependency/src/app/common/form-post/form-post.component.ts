@@ -49,5 +49,12 @@ export class FormPostComponent implements OnInit {
 
     }
   }
+  resizeInput(element: HTMLTextAreaElement): void{
+    // console.log(element);
+    element.style.height = 'auto';
+    element.style.height = element.scrollHeight + 'px';
+    console.log(this.formPost.get('content').value);
+    this.postPreview = this.formPost.get('content').value;
+  }
 
 }

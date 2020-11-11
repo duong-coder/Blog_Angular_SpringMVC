@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, SecurityContext } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MarkdownModule, MarkdownService, MarkedOptions } from 'ngx-markdown';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,8 +23,8 @@ import { PageNotFoundComponent } from './page/page-not-found/page-not-found.comp
 import { PostDetailPageComponent } from './page/post-detail-page/post-detail-page.component';
 import { EditPostPageComponent } from './page/edit-post-page/edit-post-page.component';
 
-import {PostService} from './post.service';
-import {DateService} from './date.service';
+import { PostService } from './post.service';
+import { DateService } from './date.service';
 
 
 @NgModule({
@@ -49,9 +51,24 @@ import {DateService} from './date.service';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    HttpClientModule,
+    MarkdownModule.forRoot({
+      sanitize: SecurityContext.NONE,
+      loader: HttpClient, // optional, only if you use [src] attribute
+      markedOptions: {
+        provide: MarkedOptions,
+        useValue: {
+          gfm: true,
+          breaks: false,
+          pedantic: false,
+          smartLists: true,
+          smartypants: false,
+        },
+      },
+    })
   ],
-  providers: [PostService, DateService],
+  providers: [PostService, DateService, MarkdownService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -18,19 +18,22 @@
                 <p class="error-input" *ngIf="formPost.get('heading').errors?.required">Url image required</p>
             </div>
 
-            <textarea class="input-text input-text-area" formControlName="content" id="" cols="100" rows="5" placeholder="Post body text (markdown supported)"></textarea>
+            <textarea class="input-text input-text-area" (keyup)="resizeInput(contentInput)" #contentInput formControlName="content" id="" cols="100" placeholder="Post body text (markdown supported)"></textarea>
             <p class="note-input">
                 <fa-icon [icon]="faMarkdown" style="font-size: 12px;"></fa-icon>
                 Markdown supported
             </p>
             <div *ngIf="formPost.get('content').errors && formPost.get('content').touched">
-                <p class="error-input" *ngIf="formPost.get('heading').errors?.required">Content required</p>
+                <p class="error-input" *ngIf="formPost.get('content').errors?.required">Content required</p>
             </div>
 
             <button class="btn-post" type="submit" [disabled]="formPost.invalid">{{flagEdit ? 'UPDATE POST' : 'CREATE POST'}}</button>
             <br> <br> <br>
             <h2 class="title-form">Post Preview</h2>
-            <div class="post-preview"></div><br>
+            <div class="post-preview">
+                <div markdown [data]="postPreview" style="height: fit-content;">
+                </div>
+            </div><br>
             <button class="btn-post btn-post-delete" [hidden]="!flagEdit">DELETE POST</button>
         </form>
     </div>

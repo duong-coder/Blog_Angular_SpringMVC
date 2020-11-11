@@ -15,7 +15,9 @@
 }
 
 .input-text-area {
-    height: 100px;
+    /* height: 100px; */
+    resize: horizontal;
+    overflow: hidden;
 }
 
 .error-input {
@@ -30,5 +32,6 @@
     padding: 10px;
     line-height: 20px;
     min-height: 50px;
+    color: black;
     background-color: #fff;
 }

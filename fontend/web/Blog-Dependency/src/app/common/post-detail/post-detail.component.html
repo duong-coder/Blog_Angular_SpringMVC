@@ -1,6 +1,10 @@
 <div class="body-blog body-detail">
-    <div class="content-post">
-        <p>{{content}}</p>
+    <div markdown class="content-post">
+        {{content}}
     </div>
+    <!-- <markdown [src]="'https://drive.google.com/file/d/15AhJUaNrzasuCdia3rMU69xJmOaKlUaK/view?usp=sharing/postmd.md'"></markdown> -->
+    <!-- <markdown ngPreserveWhitespaces>
+        {{content}}
+    </markdown> -->
     <button class="btn-post" (click)="editPost()">EDIT POST</button>
 </div>
