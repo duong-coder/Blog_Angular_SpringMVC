@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { PostService } from '../../post.service';
+
+import { Post } from 'src/app/model/post';
+import { PostService } from '../../service/post.service';
 
 @Component({
   selector: 'app-body',
@@ -17,6 +19,10 @@ export class BodyComponent implements OnInit {
   }
 
   getAllPost(): void{
-    this.postService.getAllPost().subscribe((posts => this.posts = Array.from(posts).reverse()));
+    let arrPost: Array<Post> = null;
+    this.postService.getAllPost().subscribe(accSub => {
+      this.posts = accSub.postDTOs;
+      this.posts = Array.from(this.posts).reverse();
+    });
   }
 }

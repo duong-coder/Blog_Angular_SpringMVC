@@ -3,9 +3,9 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import {faMarkdown} from '@fortawesome/free-brands-svg-icons';
-import { DateService } from 'src/app/date.service';
-import { PostService } from 'src/app/post.service';
-import { Post } from '../../post';
+import { DateService } from 'src/app/service/date.service';
+import { PostService } from 'src/app/service/post.service';
+import { Post } from '../../model/post';
 
 @Component({
   selector: 'app-form-post',
@@ -28,8 +28,8 @@ export class FormPostComponent implements OnInit {
 
   ngOnInit(): void {
     this.formPost = this.fb.group({
-      heading: [this.flagEdit ? this.postEditting.title : '', [Validators.required]],
-      subHeading: [this.flagEdit ? this.postEditting.subTitle : '', [Validators.required]],
+      heading: [this.flagEdit ? this.postEditting.heading : '', [Validators.required]],
+      subHeading: [this.flagEdit ? this.postEditting.subHeading : '', [Validators.required]],
       urlImage: [this.flagEdit ? this.postEditting.urlImage : '', [Validators.required]],
       content: [this.flagEdit ? this.postEditting.content : '', [Validators.required]],
     });
@@ -39,8 +39,8 @@ export class FormPostComponent implements OnInit {
 
   submitPost(): void{
     const post = new Post();
-    post.title = this.formPost.get('heading').value;
-    post.subTitle = this.formPost.get('subHeading').value;
+    post.heading = this.formPost.get('heading').value;
+    post.subHeading = this.formPost.get('subHeading').value;
     post.content = this.formPost.get('content').value;
     post.urlImage = this.formPost.get('urlImage').value;
     if (this.flagEdit){

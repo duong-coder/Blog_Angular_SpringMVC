@@ -23,8 +23,8 @@ import { PageNotFoundComponent } from './page/page-not-found/page-not-found.comp
 import { PostDetailPageComponent } from './page/post-detail-page/post-detail-page.component';
 import { EditPostPageComponent } from './page/edit-post-page/edit-post-page.component';
 
-import { PostService } from './post.service';
-import { DateService } from './date.service';
+import { PostService } from './service/post.service';
+import { DateService } from './service/date.service';
 
 
 @NgModule({

@@ -2,10 +2,10 @@
     <ng-container *ngFor="let post of posts">
         <app-post-title [idPost]="post.id">
             <p class="title-post">
-                {{post.title}}
+                {{post.heading}}
             </p>
             <p class="subtitle-post">
-                {{post.subTitle}}
+                {{post.subHeading}}
             </p>
             <p class="date-post">
                 {{post.dateCreate | date:'MMMM d, y'}}
