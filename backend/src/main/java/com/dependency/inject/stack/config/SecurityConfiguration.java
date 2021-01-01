@@ -1,97 +1,97 @@
-//package com.dependency.inject.stack.config;
-//
-//import com.dependency.inject.stack.config.jwt.JwtFilter;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.context.annotation.Bean;
-//import org.springframework.context.annotation.Configuration;
-//import org.springframework.http.HttpMethod;
-//import org.springframework.security.authentication.AuthenticationManager;
-//import org.springframework.security.config.BeanIds;
-//import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-//import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-//import org.springframework.security.config.annotation.web.builders.WebSecurity;
-//import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-//import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-//import org.springframework.security.crypto.password.PasswordEncoder;
-//import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-//import org.springframework.security.web.firewall.HttpFirewall;
-//import org.springframework.security.web.firewall.StrictHttpFirewall;
-//
-//import static com.dependency.inject.stack.common.AuthoritiesConstants.*;
-//import static com.dependency.inject.stack.common.ResourcesConstants.*;
-//
-///**
-// * The type Security configuration.
-// */
-//@Configuration
-//@EnableWebSecurity
-//public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-//
-//    @Autowired
-//    private DomainUserDetailsService userDetailsService;
-//
-//    /**
-//     * Jwt filter jwt filter.
-//     *
-//     * @return the jwt filter
-//     */
-//    @Bean
-//    public JwtFilter jwtFilter() {
-//        return new JwtFilter();
-//    }
-//
-//    @Bean(BeanIds.AUTHENTICATION_MANAGER)
-//    @Override
-//    public AuthenticationManager authenticationManagerBean() throws Exception {
-//        // Get AuthenticationManager bean
-//        return super.authenticationManagerBean();
-//    }
-//
-//    /**
-//     * Password encoder password encoder.
-//     *
-//     * @return the password encoder
-//     */
-//    @Bean
-//    public PasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
-//
-//    /**
-//     * Configure global.
-//     *
-//     * @param auth the auth
-//     * @throws Exception the exception
-//     */
-//    @Autowired
-//    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-//    }
-//
-//    /**
-//     * Allow url encoded slash http firewall http firewall.
-//     *
-//     * @return the http firewall
-//     */
-//    @Bean
-//    public HttpFirewall allowUrlEncodedSlashHttpFirewall() {
-//        StrictHttpFirewall firewall = new StrictHttpFirewall();
-//        firewall.setAllowUrlEncodedSlash(true);
-//        return firewall;
-//    }
-//
-//    /**
-//     * .cors() avoid request from another domain
-//     *
-//     * @param http
-//     * @throws Exception
-//     */
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http
-//                .cors().disable()
-//                .csrf().disable()
+package com.dependency.inject.stack.config;
+
+import com.dependency.inject.stack.config.jwt.JwtFilter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.BeanIds;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.firewall.HttpFirewall;
+import org.springframework.security.web.firewall.StrictHttpFirewall;
+
+import static com.dependency.inject.stack.common.AuthoritiesConstants.*;
+import static com.dependency.inject.stack.common.ResourcesConstants.*;
+
+/**
+ * The type Security configuration.
+ */
+@Configuration
+@EnableWebSecurity
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private DomainAccountDetailsService userDetailsService;
+
+    /**
+     * Jwt filter jwt filter.
+     *
+     * @return the jwt filter
+     */
+    @Bean
+    public JwtFilter jwtFilter() {
+        return new JwtFilter();
+    }
+
+    @Bean(BeanIds.AUTHENTICATION_MANAGER)
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        // Get AuthenticationManager bean
+        return super.authenticationManagerBean();
+    }
+
+    /**
+     * Password encoder password encoder.
+     *
+     * @return the password encoder
+     */
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    /**
+     * Configure global.
+     *
+     * @param auth the auth
+     * @throws Exception the exception
+     */
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+    }
+
+    /**
+     * Allow url encoded slash http firewall http firewall.
+     *
+     * @return the http firewall
+     */
+    @Bean
+    public HttpFirewall allowUrlEncodedSlashHttpFirewall() {
+        StrictHttpFirewall firewall = new StrictHttpFirewall();
+        firewall.setAllowUrlEncodedSlash(true);
+        return firewall;
+    }
+
+    /**
+     * .cors() avoid request from another domain
+     *
+     * @param http
+     * @throws Exception
+     */
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                .cors().disable()
+                .csrf().disable();
 //                .addFilterBefore(jwtFilter(), UsernamePasswordAuthenticationFilter.class)
 //                .headers().frameOptions().disable()
 //                .and()
@@ -124,24 +124,24 @@
 //                .antMatchers("/uploads/", "/uploads").permitAll()
 //                .antMatchers(RESOURCE_SUFFIX).authenticated()
 //                .anyRequest().authenticated();
-//    }
-//
-//    /**
-//     * Configure web security for resources static
-//     *
-//     * @param web WebSecurity
-//     */
-//    @Override
-//    public void configure(WebSecurity web) {
-//        web.httpFirewall(allowUrlEncodedSlashHttpFirewall());
-//        web.ignoring().antMatchers("/css" + RESOURCE_SUFFIX,
-//                "/js" + RESOURCE_SUFFIX,
-//                "/images" + RESOURCE_SUFFIX,
-//                WEBJARS_MAPPING + RESOURCE_SUFFIX,
-//                "/fonts" + RESOURCE_SUFFIX)
-//                .antMatchers(HttpMethod.OPTIONS, RESOURCE_SUFFIX)
-//                .antMatchers("/uploads/**", "/uploads/", "/uploads")
-//                .antMatchers("/swagger-ui/index.html")
-//                .antMatchers("/test" + RESOURCE_SUFFIX);
-//    }
-//}
+    }
+
+    /**
+     * Configure web security for resources static
+     *
+     * @param web WebSecurity
+     */
+    @Override
+    public void configure(WebSecurity web) {
+        web.httpFirewall(allowUrlEncodedSlashHttpFirewall());
+        web.ignoring().antMatchers("/css" + RESOURCE_SUFFIX,
+                "/js" + RESOURCE_SUFFIX,
+                "/images" + RESOURCE_SUFFIX,
+                WEBJARS_MAPPING + RESOURCE_SUFFIX,
+                "/fonts" + RESOURCE_SUFFIX)
+                .antMatchers(HttpMethod.OPTIONS, RESOURCE_SUFFIX)
+                .antMatchers("/uploads/**", "/uploads/", "/uploads")
+                .antMatchers("/swagger-ui/index.html")
+                .antMatchers("/test" + RESOURCE_SUFFIX);
+    }
+}
