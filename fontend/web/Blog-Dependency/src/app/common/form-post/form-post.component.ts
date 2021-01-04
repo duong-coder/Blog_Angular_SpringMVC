@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, OnChanges, Input } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -12,7 +12,7 @@ import { Post } from '../../model/post';
   templateUrl: './form-post.component.html',
   styleUrls: ['./form-post.component.css', '../navbar/navbar.component.css']
 })
-export class FormPostComponent implements OnInit {
+export class FormPostComponent implements OnInit, OnChanges {
   @Input() postEditting: Post;
   @Input() flagEdit: boolean;
   faMarkdown = faMarkdown;
@@ -25,8 +25,7 @@ export class FormPostComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) { }
-
-  ngOnInit(): void {
+  ngOnChanges(): void{
     this.formPost = this.fb.group({
       heading: [this.flagEdit ? this.postEditting.heading : '', [Validators.required]],
       subHeading: [this.flagEdit ? this.postEditting.subHeading : '', [Validators.required]],
@@ -35,6 +34,9 @@ export class FormPostComponent implements OnInit {
     });
     // console.log(this.formPost);
     this.postPreview = this.formPost.get('content').value;
+  }
+  ngOnInit(): void {
+    
   }
 
   submitPost(): void{
@@ -46,12 +48,33 @@ export class FormPostComponent implements OnInit {
     if (this.flagEdit){
       post.id = this.postEditting.id;
       post.dateCreate = this.postEditting.dateCreate;
-      this.postService.updatePost(post);
+      this.postService.updatePost(post).subscribe({
+        next: (next) =>{
+          console.log(next);
+        },
+        error: (err)=>{
+          console.error(err);
+        },
+        complete: () =>{
+          console.log(post);
+        }
+      });
+      this.router.navigateByUrl(`/post/${this.postEditting.id}`);
     } else{
       post.dateCreate = this.dateService.getDayNow();
-      this.postService.addPost(post);
+      console.log("INSERT", post);
+      this.postService.addPost(post).subscribe({
+        next: (next) =>{
+          console.log(next);
+        },
+        error: (err)=>{
+          console.error(err);
+        },
+        complete: () =>{
+          console.log(post);
+        }
+      });
     }
-    this.router.navigateByUrl(`/post/${this.postEditting.id}`);
   }
   deletePost(): void{
     const idDelete: number = this.postEditting.id;

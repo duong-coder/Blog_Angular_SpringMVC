@@ -21,6 +21,7 @@ import com.dependency.inject.stack.service.AccountService;
 import com.dependency.inject.stack.service.PostService;
 import com.dependency.inject.stack.service.dto.AccountDTO;
 import com.dependency.inject.stack.service.dto.PostDTO;
+import com.dependency.inject.stack.web.response.Response;
 
 @RestController
 @RequestMapping(path = "/api/post")
@@ -38,15 +39,16 @@ public class PostResources {
 	}
 	
 	@PostMapping
-	public ResponseEntity<PostDTO> insertNewPost(@RequestBody PostDTO postDTO) {
+	public ResponseEntity<Response> insertNewPost(@RequestBody PostDTO postDTO) {
 		Date date = new Date();
 		System.out.println("TIme" + + date.getTime());
 		try {
 			postDTO.setDateCreate(date);
 			postService.insert(postDTO);
 			System.out.println("new post" + postDTO.getContent());
+			Response response = new Response("Create", 201, postDTO);
 			
-			return ResponseEntity.status(201).body(postDTO);
+			return ResponseEntity.ok(response);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Loi them");

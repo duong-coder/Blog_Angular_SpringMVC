@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import { Post } from '../../model/post';
 
@@ -10,18 +10,19 @@ import {PostService} from '../../service/post.service';
   styleUrls: ['./edit-post-page.component.css']
 })
 export class EditPostPageComponent implements OnInit {
-  post: Post;
+  post: Post = new Post();
   constructor(
     private route: ActivatedRoute,
     private postService: PostService
   ) { }
-
   ngOnInit(): void {
     this.getPostEdit();
   }
   getPostEdit(): void{
     const id = +this.route.snapshot.paramMap.get('id');
-    this.postService.getPostById(id).subscribe(post => this.post = post);
-    console.log('idPost:' + id, this.post);
+    this.postService.getPostById(id).subscribe(post => {
+      this.post = post;
+      console.log('idPost:' + id, this.post);
+    });
   }
 }
