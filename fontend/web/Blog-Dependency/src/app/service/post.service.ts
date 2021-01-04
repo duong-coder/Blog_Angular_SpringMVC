@@ -11,8 +11,9 @@ import { Account } from '../model/account';
 
 @Injectable()
 export class PostService{
-    // private URL_GET_ACCOUNT: string = '/api/account/0773314448';
-    private URL_GET_ACCOUNT: string = environment.apiUrl + '/api/account/0773314448';
+    private URL_GET_ACCOUNT: string = '/api/account/0773314448';
+    // private URL_GET_ACCOUNT: string = environment.apiUrl + '/api/account/0773314448';
+    private URL_GET_POST_BY_ID: string = '/api/post/';
     constructor(
         private dateService: DateService,
         private http: HttpClient
@@ -23,7 +24,7 @@ export class PostService{
         return this.http.get<Account>(this.URL_GET_ACCOUNT);
     }
     getPostById(id: number): Observable<Post>{
-        return of(POST.find(post => post.id === id));
+        return this.http.get<Post>(this.URL_GET_POST_BY_ID + id);
     }
     addPost(post: Post): void{
         let lastId: number = POST[POST.length - 1].id;

@@ -6,5 +6,12 @@ export class Post{
     content: string;
     dateCreate: Date;
     
-    constructor(){}
+    constructor(){
+        // this.id = -1;
+        // this.heading = '';
+        // this.subHeading = '';
+        // this.urlImage = '';
+        // this.content = '';
+        // this.dateCreate = new Date();
+    }
 }

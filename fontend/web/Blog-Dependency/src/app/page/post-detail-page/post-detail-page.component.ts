@@ -9,7 +9,7 @@ import { PostService } from '../../service/post.service';
   styleUrls: ['./post-detail-page.component.css']
 })
 export class PostDetailPageComponent implements OnInit {
-  post: Post;
+  post: Post = new Post();
   constructor(
     private route: ActivatedRoute,
     private postService: PostService
@@ -20,6 +20,10 @@ export class PostDetailPageComponent implements OnInit {
   }
   getPostById(): void{
     const id = +this.route.snapshot.paramMap.get('id');
-    this.postService.getPostById(id).subscribe(post => this.post = post);
+    this.postService.getPostById(id).subscribe(post => {
+      this.post = post;
+      console.log(this.post);
+      
+    });
   }
 }

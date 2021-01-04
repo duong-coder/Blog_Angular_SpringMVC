@@ -23,7 +23,7 @@ import com.dependency.inject.stack.service.dto.AccountDTO;
 import com.dependency.inject.stack.service.dto.PostDTO;
 
 @RestController
-@RequestMapping(path = "/post")
+@RequestMapping(path = "/api/post")
 public class PostResources {
 	
 	@Autowired
