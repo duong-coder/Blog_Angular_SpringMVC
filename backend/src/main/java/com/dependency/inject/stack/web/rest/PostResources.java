@@ -54,38 +54,40 @@ public class PostResources {
 			System.out.println("Loi them");
 		}
 		
-		return null;
+		return ResponseEntity.ok(new Response("Can not insert post", 500, postDTO));
 	}
 	
 	@PutMapping
-	public ResponseEntity<PostDTO> updatePost(@RequestBody PostDTO postDTO) {
+	public ResponseEntity<Response> updatePost(@RequestBody PostDTO postDTO) {
 		try {
 			postService.update(postDTO);
 			System.out.println("PUT - UPDATE" + postDTO.toString());
+			Response response = new Response("Update", 201, postDTO);
 			
-			return ResponseEntity.status(201).body(postDTO);
+			return ResponseEntity.ok(response);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Loi them");
 		}
 		
-		return null;
+		return ResponseEntity.ok(new Response("Can not update post", 500, postDTO));
 	}
 	
 	@DeleteMapping(path = "/{id}")
-	public ResponseEntity<PostDTO> deletePost(@PathVariable("id") int id) {
+	public ResponseEntity<Response> deletePost(@PathVariable("id") int id) {
 		try {
 			PostDTO dto = postService.findById(id);
 			postService.delete(id);
 			System.out.println("DELETE - DELETE");
+			Response response = new Response("Delete", 201, dto);
 			
-			return ResponseEntity.ok(dto);
+			return ResponseEntity.ok(response);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Loi them");
 		}
 		
-		return ResponseEntity.status(500).build();
+		return ResponseEntity.ok(new Response("Post not found", 500, null));
 	}
 	
 }

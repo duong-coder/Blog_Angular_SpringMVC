@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -67,6 +68,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+//    	auth.userDetailsService(userDetailsService);
     }
 
     /**
@@ -91,14 +93,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .cors().disable()
-                .csrf().disable();
-//                .addFilterBefore(jwtFilter(), UsernamePasswordAuthenticationFilter.class)
+                .csrf().disable()
+                .addFilterBefore(jwtFilter(), UsernamePasswordAuthenticationFilter.class)
 //                .headers().frameOptions().disable()
 //                .and()
-//                .authorizeRequests()
-//
-//                .antMatchers("/contacts/**", "/", "/about/**", "/home/**", "/doctors/**", "/services/**",
-//                        "/favicon.ico", "/api/doctors/**", "/api/users/**", "/api/blog/**", "/api/addAppoiment/**","/api/addContact/**", "/account/**").permitAll()
+                .authorizeRequests()
+                .antMatchers("/api/authenticate").permitAll()
+                .antMatchers("/api/post", "/api/post/**").hasAuthority(AUTHORITY_ADMIN)
+                .antMatchers("/api/account/**").hasAuthority(AUTHORITY_USER)
 //
 //                .antMatchers(SWAGGER_UI_MAPPING, SWAGGER_UI_MAPPING.concat(RESOURCE_SUFFIX), SWAGGER_RESOURCES_MAPPING.concat(RESOURCE_SUFFIX), API_DOCS_MAPPING, API_DOCS_MAPPING.concat(RESOURCE_SUFFIX), WEBJARS_MAPPING.concat(RESOURCE_SUFFIX)).permitAll()
 //                .antMatchers(SWAGGER_UI_MAPPING, SWAGGER_UI_MAPPING.concat(RESOURCE_SUFFIX), SWAGGER_RESOURCES_MAPPING.concat(RESOURCE_SUFFIX), API_DOCS_MAPPING, API_DOCS_MAPPING.concat(RESOURCE_SUFFIX), WEBJARS_MAPPING.concat(RESOURCE_SUFFIX)).permitAll()
@@ -123,7 +125,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/uploads/**").permitAll()
 //                .antMatchers("/uploads/", "/uploads").permitAll()
 //                .antMatchers(RESOURCE_SUFFIX).authenticated()
-//                .anyRequest().authenticated();
+                .anyRequest().authenticated();
+//                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        
+//                http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
+        
     }
 
     /**
