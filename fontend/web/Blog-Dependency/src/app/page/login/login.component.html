@@ -1,0 +1,15 @@
+<app-flag-acount></app-flag-acount>
+<div class="full-background">
+    <div class="form-post form-login">
+        <div class="content-left">
+            <form [formGroup]="loginForm" (ngSubmit)="submit()">
+                <h3 class="title-form-login">Enter admin password</h3>
+                <div class="group">
+                    <input type="password" class="input-text input-password" formControlName="password">
+                    <button type="submit" class="btn-post" >LOGIN</button>
+                </div>
+                <span class="example-pass">Default: 123123123</span>
+            </form>
+        </div>
+    </div>
+</div>

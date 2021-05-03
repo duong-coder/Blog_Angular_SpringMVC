@@ -8,42 +8,36 @@ import {POST} from '../model/data-post';
 import { DateService } from './date.service';
 import { Post } from '../model/post';
 import { Account } from '../model/account';
+import { JwttokenService } from './jwttoken.service';
+import { ResponseEnity } from '../model/response-entity';
 
 @Injectable()
 export class PostService{
-    private URL_GET_ACCOUNT: string = '/api/account/0773314448';
-    // private URL_GET_ACCOUNT: string = environment.apiUrl + '/api/account/0773314448';
+    private URL_GET_ALL_POST: string = '/api/post/all/0773314448';
+    // private URL_GET_ALL_POST: string = environment.apiUrl + '/api/account/0773314448';
     private URL_GET_POST_BY_ID: string = '/api/post/';
     private URL_INSERT_PUT_POST: string = '/api/post';
-    
+    private URL_DELETE_POST_BY_ID: string = '/api/post/';
+
     constructor(
         private dateService: DateService,
-        private http: HttpClient
+        private http: HttpClient,
+        private jwttokenService: JwttokenService
     ){}
-    getAllPost(): Observable<Account>{
-        console.log("GET_ACCOUNT");
-
-        return this.http.get<Account>(this.URL_GET_ACCOUNT);
+    getAllPost(): Observable<ResponseEnity<Post[]>>{
+        console.log('GET_ALL_POST');
+        return this.http.get<ResponseEnity<Post[]>>(this.URL_GET_ALL_POST);
     }
-    getPostById(id: number): Observable<Post>{
-        return this.http.get<Post>(this.URL_GET_POST_BY_ID + id);
+    getPostById(id: number): Observable<ResponseEnity<Post>>{
+        return this.http.get<ResponseEnity<Post>>(this.URL_GET_POST_BY_ID + id);
     }
-    addPost(post: Post): Observable<Post>{
-        const httpOptions = {
-            headers: new HttpHeaders({'Content-Type': 'application/json'})
-        };
-        return this.http.post<Post>(this.URL_INSERT_PUT_POST, post, httpOptions);
+    addPost(post: Post): Observable<ResponseEnity<Post>>{
+        return this.http.post<ResponseEnity<Post>>(this.URL_INSERT_PUT_POST, post);
     }
-    updatePost(post: Post): Observable<Post>{
-        const httpOptions = {
-            headers: new HttpHeaders({'Content-Type': 'application/json'})
-        };
-        return this.http.put<Post>(this.URL_INSERT_PUT_POST, post, httpOptions);
+    updatePost(post: Post): Observable<ResponseEnity<Post>>{
+        return this.http.put<ResponseEnity<Post>>(this.URL_INSERT_PUT_POST, post);
     }
-    deletePost(id: number): void{
-        const index = POST.findIndex(p => {
-            return p.id === id;
-        });
-        POST.splice(index, 1);
+    deletePost(id: number): Observable<ResponseEnity<Post>>{
+        return this.http.delete<ResponseEnity<Post>>(this.URL_DELETE_POST_BY_ID + id);
     }
 }

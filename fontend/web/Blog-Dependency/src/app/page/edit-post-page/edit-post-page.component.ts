@@ -20,8 +20,8 @@ export class EditPostPageComponent implements OnInit {
   }
   getPostEdit(): void{
     const id = +this.route.snapshot.paramMap.get('id');
-    this.postService.getPostById(id).subscribe(post => {
-      this.post = post;
+    this.postService.getPostById(id).subscribe(responsePost => {
+      this.post = responsePost.body;
       console.log('idPost:' + id, this.post);
     });
   }

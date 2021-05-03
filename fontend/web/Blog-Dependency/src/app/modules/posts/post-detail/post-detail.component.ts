@@ -1,20 +1,23 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {NavbarComponent} from '../navbar/navbar.component';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NavbarComponent } from 'src/app/common/navbar/navbar.component';
+
 @Component({
   selector: 'app-post-detail',
   templateUrl: './post-detail.component.html',
   styleUrls: ['./post-detail.component.css'],
-  providers: [NavbarComponent]
 })
 export class PostDetailComponent implements OnInit {
   @Input() content: string;
   constructor(
-    private navbarComponent: NavbarComponent
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
   }
   editPost(): void{
-    this.navbarComponent.editPost();
+    const idPost = this.route.snapshot.paramMap.get('id');
+    this.router.navigateByUrl(`/post/edit/${idPost}`);
   }
 }

@@ -17,4 +17,6 @@ public interface PostRepository {
 	Post findById(int id);
 	
 	List<Post> getAll();
+
+	List<Post> getAllById(String phonenumber);
 }

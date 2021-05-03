@@ -1,7 +1,10 @@
 package com.dependency.inject.stack.repository.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.query.*;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,11 +45,28 @@ public class PostRepositoryImpl implements PostRepository{
 		return p;
 	}
 	
-
 	@Override
 	public List<Post> getAll() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+
+	@Override
+	public List<Post> getAllById(String phonenumber) {
+		List<Post> posts = new ArrayList<Post>();
+		Session session = sessionFactory.getCurrentSession() != null ? sessionFactory.getCurrentSession() : sessionFactory.openSession();
+		try {
+			String hql = "select p from Post p where p.account.phonenumber = :phonenumber";
+			Query<Post> query = session.createQuery(hql, Post.class);
+			query.setParameter("phonenumber", phonenumber);
+			
+			posts = query.getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return posts;
 	}
 
 }

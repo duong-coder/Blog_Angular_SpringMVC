@@ -1,0 +1,10 @@
+.body-detail {
+    align-items: flex-start;
+}
+
+.content-post {
+    margin-bottom: 20px;
+    font-size: large;
+    font-family: Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
+    line-height: 1.75;
+}

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {faGithub, faTwitter, faFacebook} from '@fortawesome/free-brands-svg-icons';
 @Component({
     selector: 'app-footer',
@@ -6,6 +6,10 @@ import {faGithub, faTwitter, faFacebook} from '@fortawesome/free-brands-svg-icon
     styleUrls: ['./footer.component.css']
 })
 export class FooterComponent implements OnInit{
+    @Input() urlTwitter;
+    @Input() urlFacebook;
+    @Input() urlGithub;
+    
     faGithub = faGithub;
     faTwitter = faTwitter;
     faFacebook = faFacebook;

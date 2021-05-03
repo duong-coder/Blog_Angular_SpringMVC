@@ -2,20 +2,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, SecurityContext } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MarkdownModule, MarkdownService, MarkedOptions } from 'ngx-markdown';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './common/navbar/navbar.component';
 import { FooterComponent } from './common/footer/footer.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { BodyComponent } from './common/body/body.component';
-import { PostComponent } from './common/post-title/post.component';
-import { FormPostComponent } from './common/form-post/form-post.component';
 import { HeaderComponent } from './common/header/header.component';
-import { PostDetailComponent } from './common/post-detail/post-detail.component';
 import { FlagAcountComponent } from './common/flag-acount/flag-acount.component';
-import { LoginComponent } from './common/login/login.component';
+import { LoginComponent } from './page/login/login.component';
 import { HomePageComponent } from './page/home-page/home-page.component';
 import { AboutPageComponent } from './page/about-page/about-page.component';
 import { NewPostPageComponent } from './page/new-post-page/new-post-page.component';
@@ -25,6 +21,14 @@ import { EditPostPageComponent } from './page/edit-post-page/edit-post-page.comp
 
 import { PostService } from './service/post.service';
 import { DateService } from './service/date.service';
+import { DefaultComponent } from './layouts/default/default.component';
+import { PostListComponent } from './modules/posts/post-list/post-list.component';
+import { PostAddComponent } from './modules/posts/post-add/post-add.component';
+import { PostDetailComponent } from './modules/posts/post-detail/post-detail.component';
+import { AmendPostComponent } from './layouts/amend-post/amend-post.component';
+import { HttpTokenInterceptor } from './interceptors/http.token.interceptor';
+import { ProfileDetailComponent } from './modules/profile/profile-detail/profile-detail.component';
+import { ProfileEditComponent } from './modules/profile/profile-edit/profile-edit.component';
 
 
 @NgModule({
@@ -32,11 +36,7 @@ import { DateService } from './service/date.service';
     AppComponent,
     NavbarComponent,
     FooterComponent,
-    BodyComponent,
-    PostComponent,
-    FormPostComponent,
     HeaderComponent,
-    PostDetailComponent,
     FlagAcountComponent,
     LoginComponent,
     HomePageComponent,
@@ -44,7 +44,14 @@ import { DateService } from './service/date.service';
     NewPostPageComponent,
     PageNotFoundComponent,
     PostDetailPageComponent,
-    EditPostPageComponent
+    EditPostPageComponent,
+    DefaultComponent,
+    PostListComponent,
+    PostAddComponent,
+    PostDetailComponent,
+    AmendPostComponent,
+    ProfileDetailComponent,
+    ProfileEditComponent
   ],
   imports: [
     BrowserModule,
@@ -66,9 +73,13 @@ import { DateService } from './service/date.service';
           smartypants: false,
         },
       },
-    })
+    }),
   ],
-  providers: [PostService, DateService, MarkdownService],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true },
+    PostService, 
+    DateService, 
+    MarkdownService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

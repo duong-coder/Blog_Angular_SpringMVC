@@ -30,20 +30,21 @@ public class PostServiceImpl implements PostService{
 	@Override
 	public void update(PostDTO dto) {
 		postRepository.update(postMapper.toEntity(dto));
-		
 	}
 
 	@Override
 	public void delete(int id) {
 		postRepository.delete(id);
-		
 	}
 
 	@Override
 	public PostDTO findById(int id) {
 		Post p = postRepository.findById(id);
+		if(p != null) {
+			return postMapper.toDto(p);
+		}
 		
-		return postMapper.toDto(p);
+		return null;
 	}
 
 	@Override
@@ -51,5 +52,14 @@ public class PostServiceImpl implements PostService{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
+	@Override
+	public List<PostDTO> getAllById(String phonenumber) {
+		List<Post> posts = postRepository.getAllById(phonenumber);
+		if(posts != null && !posts.isEmpty()) {
+			return postMapper.toDTOs(posts);
+		}
+		
+		return null;
+	}
 }

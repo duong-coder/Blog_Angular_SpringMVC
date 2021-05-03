@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.dependency.inject.stack.domain.Post;
 import com.dependency.inject.stack.service.dto.PostDTO;
 
 @Service
@@ -17,4 +18,6 @@ public interface PostService {
 	PostDTO findById(int id);
 	
 	List<PostDTO> getAll();
+	
+	List<PostDTO> getAllById(String phonenumber);
 }

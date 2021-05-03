@@ -21,7 +21,7 @@ public class AccountServiceImpl implements AccountService{
 	
 	@Override
 	public AccountDTO findByPhone(String phone) {
-		Account entity = accountRepository.findByPhone(phone);
+		Account entity = accountRepository.getAccountByPhone(phone);
 		
 		return accountMapper.toDto(entity);
 	}

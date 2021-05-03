@@ -5,6 +5,11 @@ import static com.dependency.inject.stack.common.ResourcesConstants.RESOURCE_API
 import static com.dependency.inject.stack.common.SecurityConstants.AUTHORIZATION_HEADER;
 import static com.dependency.inject.stack.common.SecurityConstants.TOKEN_PREFIX;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +21,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +31,7 @@ import com.dependency.inject.stack.config.jwt.TokenProvider;
 import com.dependency.inject.stack.web.rest.vm.LoginVM;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import io.jsonwebtoken.impl.DefaultClaims;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -71,6 +78,27 @@ public class JwtController {
 
         return new ResponseEntity<>(new JwtToken(jwt), httpHeaders, HttpStatus.OK);
     }
+    @GetMapping(value = "/refreshtoken")
+	public ResponseEntity<JwtToken> refreshtoken(HttpServletRequest request) throws Exception {
+		// From the HttpRequest get the claims
+		DefaultClaims claims = (io.jsonwebtoken.impl.DefaultClaims) request.getAttribute("claims");
+
+		Map<String, Object> expectedMap = getMapFromIoJsonwebtokenClaims(claims);
+		String jwt = tokenProvider.doGenerateRefreshToken(expectedMap, expectedMap.get("sub").toString());
+		
+		HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add(AUTHORIZATION_HEADER, TOKEN_PREFIX + jwt);
+        
+		return new ResponseEntity<>(new JwtToken(jwt), httpHeaders, HttpStatus.OK);
+	}
+
+	public Map<String, Object> getMapFromIoJsonwebtokenClaims(DefaultClaims claims) {
+		Map<String, Object> expectedMap = new HashMap<String, Object>();
+		for (Entry<String, Object> entry : claims.entrySet()) {
+			expectedMap.put(entry.getKey(), entry.getValue());
+		}
+		return expectedMap;
+	}
 
     /**
      * Object to return as body in JWT Authentication.

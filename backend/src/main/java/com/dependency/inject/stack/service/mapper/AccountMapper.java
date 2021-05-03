@@ -31,6 +31,7 @@ public class AccountMapper implements EntityMapper<Account, AccountDTO>{
 		acc.setFacebook(dto.getFacebook());
 		acc.setGithub(dto.getGithub());
 		acc.setTwitter(dto.getTwitter());
+		acc.setRole(dto.getRole());
 		acc.setWork(dto.getWork());
 		acc.setDateCreate(dto.getDateCreate());
 		
@@ -57,10 +58,11 @@ public class AccountMapper implements EntityMapper<Account, AccountDTO>{
 		dto.setTwitter(entity.getTwitter());
 		dto.setWork(entity.getWork());
 		dto.setFacebook(entity.getFacebook());
+		dto.setRole(entity.getRole());
 		
-		List<PostDTO> postDTOs = new ArrayList<PostDTO>();
-		postDTOs = postMapper.toDTOs(entity.getPosts());
-		dto.setPostDTOs(postDTOs);
+//		List<PostDTO> postDTOs = new ArrayList<PostDTO>();
+//		postDTOs = postMapper.toDTOs(entity.getPosts());
+//		dto.setPostDTOs(postDTOs);
 		
 		return dto;
 	}

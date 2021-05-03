@@ -4,6 +4,7 @@ package com.dependency.inject.stack.config.jwt;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -35,9 +36,12 @@ public class TokenProvider {
     @Value("${app.jwtSecret}")
     private String jwtSecret;
 
-    private long tokenValidityInMilliseconds = 1080000000;
+//    private long tokenValidityInMilliseconds = 1080000000;
+    private long tokenValidityInMilliseconds = 0;
 
     private long tokenValidityInMillisecondsForRememberMe = 259200000;
+    
+    private long refreshExpirationDateInMs = 9000000;
 
     /**
      * Create token string.
@@ -67,6 +71,13 @@ public class TokenProvider {
                 .signWith(SignatureAlgorithm.HS512, this.jwtSecret)
                 .compact();
     }
+    public String doGenerateRefreshToken(Map<String, Object> claims, String subject) {
+
+		return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
+				.setExpiration(new Date(System.currentTimeMillis() + refreshExpirationDateInMs))
+				.signWith(SignatureAlgorithm.HS512, this.jwtSecret).compact();
+
+	}
 
     /**
      * Gets authentication.
@@ -104,8 +115,6 @@ public class TokenProvider {
             log.error("Invalid JWT signature");
         } catch (MalformedJwtException ex) {
             log.error("Invalid JWT token");
-        } catch (ExpiredJwtException ex) {
-            log.error("Expired JWT token");
         } catch (UnsupportedJwtException ex) {
             log.error("Unsupported JWT token");
         } catch (IllegalArgumentException ex) {

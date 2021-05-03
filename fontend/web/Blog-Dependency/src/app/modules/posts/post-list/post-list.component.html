@@ -1,6 +1,6 @@
-<div class="body-blog">
+<div class="body-blog font-style">
     <ng-container *ngFor="let post of posts">
-        <app-post-title [idPost]="post.id">
+        <a class="post-item" routerLink="/post/detail/{{post.id}}">
             <p class="title-post">
                 {{post.heading}}
             </p>
@@ -10,7 +10,6 @@
             <p class="date-post">
                 {{post.dateCreate | date:'MMMM d, y'}}
             </p>
-        </app-post-title>
-
+        </a>
     </ng-container>
 </div>

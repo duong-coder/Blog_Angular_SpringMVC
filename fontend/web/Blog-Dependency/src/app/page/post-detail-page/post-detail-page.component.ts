@@ -13,17 +13,18 @@ export class PostDetailPageComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private postService: PostService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getPostById();
   }
-  getPostById(): void{
+  getPostById(): void {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.postService.getPostById(id).subscribe(post => {
-      this.post = post;
-      console.log(this.post);
-      
+
+    this.postService.getPostById(id).subscribe(responsePost => {
+      this.post = responsePost.body;
+      console.log(this.post, responsePost);
+
     });
   }
 }

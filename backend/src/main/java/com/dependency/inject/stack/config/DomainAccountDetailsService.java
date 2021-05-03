@@ -28,13 +28,13 @@ public class DomainAccountDetailsService implements UserDetailsService {
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String phone) throws UsernameNotFoundException {
-        Account account = accountRepository.findByPhone(phone);
+        Account account = accountRepository.getAccountByPhone(phone);
         if (account == null) {
             throw new UsernameNotFoundException("User not found");
         }
         System.out.println(account.getPhonenumber() + account.getPassword());
         Set<GrantedAuthority> grantedAuthorities = new HashSet<GrantedAuthority>();
-        grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        grantedAuthorities.add(new SimpleGrantedAuthority(account.getRole()));
 
         return new org.springframework.security.core.userdetails.User(
                 account.getPhonenumber(), account.getPassword(), grantedAuthorities);

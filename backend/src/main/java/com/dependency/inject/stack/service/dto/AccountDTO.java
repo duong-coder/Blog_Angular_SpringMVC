@@ -33,5 +33,7 @@ public class AccountDTO {
 	
 	private String twitter;
 	
+	private String role;
+	
 	private List<PostDTO> postDTOs;
 }

@@ -5,10 +5,10 @@
         <li><a routerLink="/about">ABOUT</a></li>
         <li *ngIf="showEditPost"><a (click)="editPost()">EDIT POST</a></li>
         <li>
-            <a href="">
+            <a href="{{account.github}}" target="_blank">
                 <fa-icon [icon]="faGithub" style="font-size: 34px;"></fa-icon>
             </a>
         </li>
-        <li class="btn-post new-post"><a routerLink="/new-post">NEW POST</a></li>
+        <li class="btn-post new-post"><a routerLink="/post/new">NEW POST</a></li>
     </ul>
 </div>

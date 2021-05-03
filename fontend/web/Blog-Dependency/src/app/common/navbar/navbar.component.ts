@@ -1,33 +1,45 @@
-import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router, UrlSegment} from '@angular/router';
-import {faGithub} from '@fortawesome/free-brands-svg-icons';
+import { Component, OnInit, DoCheck, Input} from '@angular/core';
+import { ActivatedRoute, Router, UrlSegment } from '@angular/router';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import { Account } from 'src/app/model/account';
+import { AccountService } from 'src/app/service/account.service';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit{
+  account: Account = new Account();
+  
   faGithub = faGithub;
   showEditPost: boolean;
   constructor(
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private accountService: AccountService
   ) { }
 
   ngOnInit(): void {
     this.checkAtPageDetailPost();
   }
-  checkAtPageDetailPost(): void{
-    console.log(this.route.snapshot.url);
-    const pathExist = this.route.snapshot.url.find((urlSegment: UrlSegment) => {
-      return urlSegment.path === 'post';
-    });
-    if (pathExist){
-      this.showEditPost = true;
-    }
+
+  getAccountCurrent(): void{
+    
   }
-  editPost(): void{
+
+  checkAtPageDetailPost(): void {
+    this.route.url.subscribe((urlSegment) => {
+      console.log(urlSegment);
+      const existUrlSegment = urlSegment.find((url) => {
+        return url.path.includes('detail') ? url : null;
+      });
+      if (existUrlSegment != null){
+        this.showEditPost = true;
+      }
+    });
+  }
+  editPost(): void {
     const idPost = this.route.snapshot.paramMap.get('id');
-    this.router.navigateByUrl(`/edit/${idPost}`);
+    this.router.navigateByUrl(`/post/edit/${idPost}`);
   }
 }

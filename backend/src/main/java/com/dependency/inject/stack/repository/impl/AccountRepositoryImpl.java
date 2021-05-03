@@ -15,7 +15,7 @@ public class AccountRepositoryImpl implements AccountRepository{
 	private SessionFactory sessionFactory;
 	
 	@Override
-	public Account findByPhone(String phone) {
+	public Account getAccountByPhone(String phone) {
 		Account ac = sessionFactory.getCurrentSession().get(Account.class, phone);
 		
 		return ac;

@@ -1,18 +1,17 @@
-import { Component, OnInit, OnChanges, Input } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
-
-import {faMarkdown} from '@fortawesome/free-brands-svg-icons';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { faMarkdown } from '@fortawesome/free-brands-svg-icons';
+import { Post } from 'src/app/model/post';
 import { DateService } from 'src/app/service/date.service';
 import { PostService } from 'src/app/service/post.service';
-import { Post } from '../../model/post';
 
 @Component({
-  selector: 'app-form-post',
-  templateUrl: './form-post.component.html',
-  styleUrls: ['./form-post.component.css', '../navbar/navbar.component.css']
+  selector: 'app-post-add',
+  templateUrl: './post-add.component.html',
+  styleUrls: ['./post-add.component.css']
 })
-export class FormPostComponent implements OnInit, OnChanges {
+export class PostAddComponent implements OnInit {
   @Input() postEditting: Post;
   @Input() flagEdit: boolean;
   faMarkdown = faMarkdown;
@@ -25,7 +24,7 @@ export class FormPostComponent implements OnInit, OnChanges {
     private route: ActivatedRoute,
     private router: Router
   ) { }
-  ngOnChanges(): void{
+  ngOnChanges(): void {
     this.formPost = this.fb.group({
       heading: [this.flagEdit ? this.postEditting.heading : '', [Validators.required]],
       subHeading: [this.flagEdit ? this.postEditting.subHeading : '', [Validators.required]],
@@ -36,52 +35,55 @@ export class FormPostComponent implements OnInit, OnChanges {
     this.postPreview = this.formPost.get('content').value;
   }
   ngOnInit(): void {
-    
+
   }
 
-  submitPost(): void{
+  submitPost(): void {
     const post = new Post();
     post.heading = this.formPost.get('heading').value;
     post.subHeading = this.formPost.get('subHeading').value;
     post.content = this.formPost.get('content').value;
     post.urlImage = this.formPost.get('urlImage').value;
-    if (this.flagEdit){
+    if (this.flagEdit) {
       post.id = this.postEditting.id;
       post.dateCreate = this.postEditting.dateCreate;
       this.postService.updatePost(post).subscribe({
-        next: (next) =>{
+        next: (next) => {
           console.log(next);
         },
-        error: (err)=>{
+        error: (err) => {
           console.error(err);
         },
-        complete: () =>{
+        complete: () => {
           console.log(post);
+          this.router.navigateByUrl(`/post/detail/${this.postEditting.id}`);
         }
       });
-      this.router.navigateByUrl(`/post/${this.postEditting.id}`);
-    } else{
+    } else {
       post.dateCreate = this.dateService.getDayNow();
       console.log("INSERT", post);
       this.postService.addPost(post).subscribe({
-        next: (next) =>{
+        next: (next) => {
           console.log(next);
         },
-        error: (err)=>{
+        error: (err) => {
           console.error(err);
         },
-        complete: () =>{
+        complete: () => {
           console.log(post);
+          this.router.navigateByUrl('/home');
         }
       });
     }
   }
-  deletePost(): void{
+  deletePost(): void {
     const idDelete: number = this.postEditting.id;
-    this.postService.deletePost(idDelete);
-    this.router.navigateByUrl('/home');
+    this.postService.deletePost(idDelete).subscribe(post => {
+      console.log(post);
+      this.router.navigateByUrl('/home');
+    });
   }
-  resizeInput(element: HTMLTextAreaElement): void{
+  resizeInput(element: HTMLTextAreaElement): void {
     element.style.height = 'auto';
     element.style.height = element.scrollHeight + 'px';
     this.postPreview = this.formPost.get('content').value;

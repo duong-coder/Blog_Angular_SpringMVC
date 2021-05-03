@@ -6,5 +6,5 @@ import com.dependency.inject.stack.domain.Account;
 
 @Repository
 public interface AccountRepository {
-	Account findByPhone(String phone);
+	Account getAccountByPhone(String phone);
 }

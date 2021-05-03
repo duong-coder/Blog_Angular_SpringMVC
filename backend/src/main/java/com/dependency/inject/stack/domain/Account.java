@@ -59,6 +59,9 @@ public class Account implements Serializable{
 	@Column(name = "twitter")
 	private String twitter;
 	
+	@Column(name = "role")
+	private String role;
+	
 	@OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
 	private List<Post> posts;
 }
