@@ -1,0 +1,26 @@
+
+/* The actual content */
+
+.content {
+    font-weight: normal;
+    padding: 10px 15px;
+    background-color: white;
+    position: relative;
+    border-radius: 6px;
+}
+
+.head{
+    display: flex;
+    justify-content: space-between;
+}
+.head .__name{
+    text-align: left;
+}
+.head .__time{
+    text-align: right;
+}
+
+.details p{
+    font-style: italic;
+    font-size:smaller;
+}

@@ -29,6 +29,9 @@ import { AmendPostComponent } from './layouts/amend-post/amend-post.component';
 import { HttpTokenInterceptor } from './interceptors/http.token.interceptor';
 import { ProfileDetailComponent } from './modules/profile/profile-detail/profile-detail.component';
 import { ProfileEditComponent } from './modules/profile/profile-edit/profile-edit.component';
+import { ProfileContentComponent } from './modules/profile/profile-content/profile-content.component';
+import { ProfileTimelineComponent } from './modules/profile/profile-timeline/profile-timeline.component';
+import { ProfileTimeItemComponent } from './modules/profile/profile-time-item/profile-time-item.component';
 
 
 @NgModule({
@@ -51,7 +54,10 @@ import { ProfileEditComponent } from './modules/profile/profile-edit/profile-edi
     PostDetailComponent,
     AmendPostComponent,
     ProfileDetailComponent,
-    ProfileEditComponent
+    ProfileEditComponent,
+    ProfileContentComponent,
+    ProfileTimelineComponent,
+    ProfileTimeItemComponent
   ],
   imports: [
     BrowserModule,
