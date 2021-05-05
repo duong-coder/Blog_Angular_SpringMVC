@@ -1,10 +1,22 @@
 <div class="profile_timeline">
     <div class="timeline">
-        <div class="container left">
-            <app-profile-time-item></app-profile-time-item>
-        </div>
-        <div class="container right">
-            <app-profile-time-item></app-profile-time-item>
-        </div>
+        <ng-container [ngSwitch]="listItem.kind">
+            <ng-container *ngSwitchCase="'Education'">
+                <ng-container *ngFor="let item of listItem.list; even as isEven">
+                    <div class="container {{ isEven ? 'left' : 'right'}}">
+                        <app-profile-time-item [itemEducation]="item">
+                        </app-profile-time-item>
+                    </div>
+                </ng-container>
+            </ng-container>
+            <ng-container *ngSwitchCase="'WorkExperience'">
+                <ng-container *ngFor="let item of listItem.list; even as isEven">
+                    <div class="container {{ isEven ? 'left' : 'right'}}">
+                        <app-profile-time-item [itemWorkExperience]="item">
+                        </app-profile-time-item>
+                    </div>
+                </ng-container>
+            </ng-container>
+        </ng-container>
     </div>
 </div>

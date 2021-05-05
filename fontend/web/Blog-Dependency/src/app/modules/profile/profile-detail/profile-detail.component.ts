@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { faAward, faBookmark, faBullseye, faCalendarAlt, faEnvelope, faLightbulb, faMapMarkedAlt, faPen, faPhone, faUser, faUsers } from '@fortawesome/free-solid-svg-icons';
+import { Account } from 'src/app/model/account';
+import { AccountService } from 'src/app/service/account.service';
 
 interface IProfileContent {
   hasIcon: boolean;
@@ -13,6 +15,9 @@ interface IProfileContent {
   styleUrls: ['./profile-detail.component.css']
 })
 export class ProfileDetailComponent implements OnInit {
+  account: Account;
+  skills: { item, percent }[];
+
   faCalendar = faCalendarAlt;
   faUser = faUser;
   faPhone = faPhone;
@@ -29,9 +34,30 @@ export class ProfileDetailComponent implements OnInit {
     { hasIcon: false, icon: undefined, title: 'Skills' },
     { hasIcon: false, icon: undefined, title: 'INTERESTS' }
   ];
-  constructor() { }
+
+
+  constructor(private acccountService: AccountService) { }
 
   ngOnInit(): void {
+    this.acccountService.getAccountByPhone().subscribe({
+      next: (res) => {
+        if (res.status === 200) {
+          this.account = res.body;
+          this.skills = this.account.skillDTOs.map(dto => {
+            return { item: dto, percent: (dto.level / 5) * 100 };
+          });
+        }
+      },
+      error: (error) => {
+        console.error(error);
+      },
+      complete: () => {
+        console.log('Complete get profile');
+      }
+    });
   }
 
+  getPercentSkill(): void {
+
+  }
 }

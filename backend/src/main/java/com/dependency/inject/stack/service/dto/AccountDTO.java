@@ -3,6 +3,8 @@ package com.dependency.inject.stack.service.dto;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
+
 import lombok.Data;
 
 @Data
@@ -19,10 +21,6 @@ public class AccountDTO {
 	
 	private String address;
 	
-	private String academicLevel;
-	
-	private String work;
-	
 	private String email;
 	
 	private boolean gender;
@@ -35,5 +33,22 @@ public class AccountDTO {
 	
 	private String role;
 	
+	private String hobby;
+	
+	private String objective;
+	
+	private String addInformation;
+	
+	private String references;
+	
+	private String awards;	
+	
 	private List<PostDTO> postDTOs;
+	
+	private List<SkillDTO> skillDTOs;
+	
+	private List<EducationDTO> educationDTOs;
+	
+	private List<WorkExperienceDTO> workExperienceDTOs;
+	
 }

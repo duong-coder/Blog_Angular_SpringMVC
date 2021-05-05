@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 
 import com.dependency.inject.stack.domain.Account;
@@ -20,10 +22,11 @@ public class PostMapper implements EntityMapper<Post, PostDTO>{
 	public Post toEntity(PostDTO dto) {
 		Post post = new Post();
 		
-		Account account = new Account();
-		account.setPhonenumber("0773314448");
-		post.setAccount(account);
+		User userContext = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String phoneNumber = userContext.getUsername();
+		Account account = ((AccountMapper) accountMapper).toEntityFromId(phoneNumber);
 		
+		post.setAccount(account);
 		post.setId(dto.getId());
 		post.setHeading(dto.getHeading());
 		post.setSubHeading(dto.getSubHeading());

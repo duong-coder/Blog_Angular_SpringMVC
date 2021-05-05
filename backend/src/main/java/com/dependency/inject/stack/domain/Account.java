@@ -37,15 +37,8 @@ public class Account implements Serializable{
 	@Column(name = "address")
 	private String address;
 	
-	@Column(name = "academic_level")
-	private String academicLevel;
-	
-	@Column(name = "work")
-	private String work;
-	
 	@Column(name = "email")
 	private String email;
-	
 	
 	@Column(name = "gender")
 	private boolean gender;
@@ -62,6 +55,31 @@ public class Account implements Serializable{
 	@Column(name = "role")
 	private String role;
 	
+	@Column(name = "hobby")
+	private String hobby;
+	
+	@Column(name = "objective")
+	private String objective;
+	
+	@Column(name = "add_information")
+	private String addInformation;
+	
+	@Column(name = "references")
+	private String references;
+	
+	@Column(name = "awards")
+	private String awards;	
+	
 	@OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
 	private List<Post> posts;
+	
+	@OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
+	private List<Skill> skills;
+	
+	@OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
+	private List<Education> educations;
+	
+	@OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
+	private List<WorkExperience> workExperiences;
+	
 }

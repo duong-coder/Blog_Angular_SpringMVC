@@ -1,22 +1,27 @@
 <div class="content">
-    <!-- <h2>2017</h2>
-    <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea
-        mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto
-        primis.</p> -->
-    <div class="head">
-        <h5 class="__name">WEB APP BLOG</h5>
-        <h5 class="__time">AUG 2020 - TO PRESENT</h5>
-    </div>
-    <p>Angular 8</p>
-    <div class="details">
-        <p>
-            <span>Description: </span>
-            <span>Phone sales website includes functions such as product management, user management, list display (all or by brand), pagination, and shopping cart.
-            </span>
-        </p>
-        <p>
-            <span>Team size: </span>
-            <span>1</span>
-        </p>
-    </div>    
+    <ng-container [ngSwitch]="item.kind">
+        <div class="head">
+            <ng-container *ngSwitchCase="'Education'">
+                <h5 class="__name">{{item.obj.name}}</h5>
+                <h5 class="__time"><span>{{item.obj.dateStart | date: 'MMM y'}}</span> - <span>{{item.obj.dateEnd |
+                        date: 'MMM y'}}</span></h5>
+            </ng-container>
+            <ng-container *ngSwitchCase="'WorkExperience'">
+                <h5 class="__name">{{item.obj.companyOrAppName}}</h5>
+                <h5 class="__time"><span>{{item.obj.dateStart | date: 'MMM y'}}</span> - <span>{{item.obj.dateEnd |
+                        date: 'MMM y'}}</span></h5>
+            </ng-container>
+            <ng-container *ngSwitchDefault>
+                <h5 class="__name">WEB APP BLOG</h5>
+                <h5 class="__time">AUG 2020 - TO PRESENT</h5>
+            </ng-container>
+        </div>
+        <p *ngIf="item.kind === 'WorkExperience'">{{item.obj.titleOrPosition}}</p>
+        <div class="details">
+            <div markdown [data]="item.obj.description">
+
+            </div>
+            <p *ngIf="item.kind === 'Education'">GPA: {{item.obj.gpa}}</p>
+        </div>
+    </ng-container>
 </div>
