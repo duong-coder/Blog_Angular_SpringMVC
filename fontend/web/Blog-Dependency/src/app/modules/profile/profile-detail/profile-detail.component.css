@@ -1,6 +1,7 @@
 .body-profile {
     margin: 0px 10%;
     padding-top: 0px;
+    font-family: robotocondensed,Arial,sans-serif;
 }
 
 .profile-container {
@@ -9,14 +10,21 @@
 }
 
 .contents {
+    padding: 20px;
     flex-grow: 8;
     background-color: #fcf8e0;
+    font-weight: normal;
 }
+/* 
+.contents .__item{
+    position: relative;
+} */
 
 .sub-contents {
     flex-grow: 4;
-    width: 300px;
+    width: 200px;
     padding: 20px 15px;
+    color: #fcf8e0 !important;
     border-right: solid 1px #fcf8e0;
     background-color: #414142;
 }
@@ -24,7 +32,6 @@
 .sub-contents .__about {
     /* height: 300px; */
     background-color: #514f50;
-    color: #fcf8e0;
 }
 
 .__about ul {
@@ -43,7 +50,6 @@
 }
 
 .sub-contents .__skilss .__item .__name{
-    color: #fcf8e0;
     font-size: smaller;
     font-weight: normal;
     margin-bottom: 0;
@@ -63,7 +69,6 @@
 }
 
 .__favorites{
-    color: #fcf8e0;
     font-size: smaller;
     font-weight: normal;
 }

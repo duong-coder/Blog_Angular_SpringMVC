@@ -1,0 +1,48 @@
+.control{
+    /* width: 100%; */
+    display: flex;
+    justify-content: flex-end;
+    position: absolute;
+    top: -30px;
+    right: 0px;
+}
+
+.control .__btn{
+    color: #fff;
+    outline: none;
+    border-style: none;
+    margin: 0 3px;
+    padding: 3px 15px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    /* align-content: center; */
+    /* justify-content: space-between; */
+}
+
+.control .__move{
+    background-color: #fff;
+    border: 1px solid #000;
+    color: #000;
+}
+
+.control .__move:hover{
+    border: 1px solid rgb(35, 154, 233);
+    color: rgb(35, 154, 233);
+}
+
+.control .__add{
+    background-color: #3cb371;
+}
+
+.control .__add:hover{
+    background-color: #2a8251;
+}
+
+.control .__delete{
+    background-color: #f15c4c;
+}
+
+.control .__delete:hover{
+    background-color: #c4483b;
+}

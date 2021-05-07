@@ -9,6 +9,7 @@ import { PageNotFoundComponent } from './page/page-not-found/page-not-found.comp
 import { PostDetailPageComponent } from './page/post-detail-page/post-detail-page.component';
 import { DefaultComponent } from './layouts/default/default.component';
 import { AmendPostComponent } from './layouts/amend-post/amend-post.component';
+import { EditAboutPageComponent } from './page/edit-about-page/edit-about-page.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,7 @@ const routes: Routes = [
     children: [
       { path: 'home', component: HomePageComponent },
       { path: 'about', component: AboutPageComponent },
+      { path: 'about/edit', component: EditAboutPageComponent },
       { path: 'post/detail/:id', component: PostDetailPageComponent },
     ]
   },

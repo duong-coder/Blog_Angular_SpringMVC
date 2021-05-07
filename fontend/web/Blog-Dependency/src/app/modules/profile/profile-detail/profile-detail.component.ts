@@ -3,7 +3,7 @@ import { faAward, faBookmark, faBullseye, faCalendarAlt, faEnvelope, faLightbulb
 import { Account } from 'src/app/model/account';
 import { AccountService } from 'src/app/service/account.service';
 
-interface IProfileContent {
+export interface IProfileContent {
   hasIcon: boolean;
   icon?: any;
   title: string;

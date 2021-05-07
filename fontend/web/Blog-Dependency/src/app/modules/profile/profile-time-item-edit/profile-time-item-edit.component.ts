@@ -8,15 +8,16 @@ import { ComponentService } from 'src/app/service/component.service';
 import { ProfileTimelineComponent } from '../profile-timeline/profile-timeline.component';
 
 @Component({
-  selector: 'app-profile-time-item',
-  templateUrl: './profile-time-item.component.html',
-  styleUrls: ['./profile-time-item.component.css']
+  selector: 'app-profile-time-item-edit',
+  templateUrl: './profile-time-item-edit.component.html',
+  styleUrls: ['./profile-time-item-edit.component.css']
 })
-export class ProfileTimeItemComponent implements OnInit, OnChanges {
+export class ProfileTimeItemEditComponent implements OnInit {
   @Input() itemEducation?: Education;
   @Input() itemWorkExperience?: WorkExperience;
   @Input() isEven?: boolean;
   @Input() event: ProfileTimelineComponent;
+  @Input() itemTimeForm: FormGroup;
 
   item: {
     obj: Education | WorkExperience,
@@ -59,9 +60,4 @@ export class ProfileTimeItemComponent implements OnInit, OnChanges {
     this.event.listItem.list.splice(indexItemExist, 0, value.obj);
   }
 
-  // addEducationItem(value: any): void {
-  //   console.log('Value add time item', value);
-  //   this.componentService.setRootViewContainerRef(this.viewContainerRef);
-  //   this.componentService.addComponent(ProfileTimeItemComponent, value);
-  // }
 }

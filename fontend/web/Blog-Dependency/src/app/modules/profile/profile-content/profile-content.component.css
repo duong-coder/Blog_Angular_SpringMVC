@@ -1,14 +1,15 @@
 .profile-content{
+    margin: 20px 0;
     display: flex;
     justify-content: center;
     align-items: center;
     align-content: center;
     color: #7c7a79;
-    font-family: robotocondensed,Arial,sans-serif;
+    font-weight: bolder;
 }
 .icon{
     flex-grow: .3;
-    text-align: center;
+    text-align: left;
 }
 .icon_title{
     background-color: #7c7a79;
@@ -17,7 +18,9 @@
 }
 .title{
     flex-grow: .5;
-    font-weight: bolder;
+}
+.title_has_icon{
+    color: #fcf8e0;
 }
 .line{
     flex-grow: 10;
