@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, OnChanges, ViewContainerRef, AfterViewInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormArray, FormGroup } from '@angular/forms';
 import { Education } from 'src/app/model/education';
 import { WorkExperience } from 'src/app/model/work-experience';
 import { ComponentService } from 'src/app/service/component.service';
@@ -13,7 +13,8 @@ import { ProfileTimeItemComponent } from '../profile-time-item/profile-time-item
 export class ProfileTimelineComponent implements OnInit, OnChanges, AfterViewInit {
   @Input() listItemEducation?: Education[];
   @Input() listItemWorkExperience?: WorkExperience[];
-  @Input() itemTimeForm?: FormGroup;
+  @Input() listEduationForm?: FormArray;
+  @Input() listWorkExperienceForm?: FormArray;
   @Input() isEdit?: boolean;
 
   listItem: {

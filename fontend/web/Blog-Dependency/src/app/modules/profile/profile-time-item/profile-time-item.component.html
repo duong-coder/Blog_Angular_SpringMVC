@@ -25,7 +25,5 @@
                 <p *ngIf="item.kind === 'Education'">GPA: {{item.obj.gpa}}</p>
             </div>
         </ng-container>
-        <app-profile-control-edit [item]="item" (addEducationEvent)="addEducationItem($event)">
-        </app-profile-control-edit>
     </div>
 </div>

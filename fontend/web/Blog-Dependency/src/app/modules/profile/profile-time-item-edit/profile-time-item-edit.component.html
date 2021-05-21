@@ -1,18 +1,18 @@
-<form [formGroup]="itemTimeForm">
+<form [formGroup]="itemFormGroup.formGroup">
     <div class="container {{ isEven ? 'left' : 'right'}}">
         <div class="content">
-            <ng-container [ngSwitch]="item.kind">
+            <ng-container [ngSwitch]="itemFormGroup.kind">
                 <div class="head">
                     <ng-container *ngSwitchCase="'Education'">
-                        <h5 class="__name">{{item.obj.name}}</h5>
-                        <h5 class="__time"><span>{{item.obj.dateStart | date: 'MMM y'}}</span> -
-                            <span>{{item.obj.dateEnd |
+                        <h5 class="__name">{{itemFormGroup.formGroup.get('name').value}}</h5>
+                        <h5 class="__time"><span>{{itemFormGroup.formGroup.get('dateStart').value | date: 'MMM y'}}</span> -
+                            <span>{{itemFormGroup.formGroup.get('dateEnd').value |
                                 date: 'MMM y'}}</span></h5>
                     </ng-container>
                     <ng-container *ngSwitchCase="'WorkExperience'">
-                        <h5 class="__name">{{item.obj.companyOrAppName}}</h5>
-                        <h5 class="__time"><span>{{item.obj.dateStart | date: 'MMM y'}}</span> -
-                            <span>{{item.obj.dateEnd |
+                        <h5 class="__name">{{itemFormGroup.formGroup.get('companyOrAppName').value}}</h5>
+                        <h5 class="__time"><span>{{itemFormGroup.formGroup.get('dateStart').value | date: 'MMM y'}}</span> -
+                            <span>{{itemFormGroup.formGroup.get('dateEnd').value |
                                 date: 'MMM y'}}</span></h5>
                     </ng-container>
                     <ng-container *ngSwitchDefault>
@@ -20,16 +20,15 @@
                         <h5 class="__time">AUG 2020 - TO PRESENT</h5>
                     </ng-container>
                 </div>
-                <p *ngIf="item.kind === 'WorkExperience'">{{item.obj.titleOrPosition}}</p>
+                <p *ngIf="itemFormGroup.kind === 'WorkExperience'">{{itemFormGroup.formGroup.get('titleOrPosition').value}}</p>
                 <div class="details">
-                    <div markdown [data]="item.obj.description">
+                    <div markdown [data]="itemFormGroup.formGroup.get('description').value">
 
                     </div>
-                    <p *ngIf="item.kind === 'Education'">GPA: {{item.obj.gpa}}</p>
+                    <p *ngIf="itemFormGroup.kind === 'Education'">GPA: {{itemFormGroup.formGroup.get('gpa').value}}</p>
                 </div>
             </ng-container>
-            <input class="input-text" type="text" formControlName="time" placeholder="Time"><br>
-            <app-profile-control-edit [item]="item" (addEducationEvent)="addEducationItem($event)">
+            <app-profile-control-edit [item]="itemFormGroup" (addEducationEvent)="addEducationItem($event)">
             </app-profile-control-edit>
         </div>
     </div>

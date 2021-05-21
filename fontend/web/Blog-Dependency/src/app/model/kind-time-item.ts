@@ -1,7 +1,8 @@
+import { FormGroup } from '@angular/forms';
 import { Education } from './education';
 import { WorkExperience } from './work-experience';
 
-export interface KindTimeItem {
-    obj: Education | WorkExperience;
+export interface KindTimeItemForm {
+    formGroup: FormGroup;
     kind: string;
 }

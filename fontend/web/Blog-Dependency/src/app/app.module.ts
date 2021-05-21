@@ -35,6 +35,7 @@ import { ProfileTimeItemComponent } from './modules/profile/profile-time-item/pr
 import { ProfileControlEditComponent } from './modules/profile/profile-control-edit/profile-control-edit.component';
 import { EditAboutPageComponent } from './page/edit-about-page/edit-about-page.component';
 import { ProfileTimeItemEditComponent } from './modules/profile/profile-time-item-edit/profile-time-item-edit.component';
+import { ProfileTimelineEditComponent } from './modules/profile/profile-timeline-edit/profile-timeline-edit.component';
 
 
 @NgModule({
@@ -63,7 +64,8 @@ import { ProfileTimeItemEditComponent } from './modules/profile/profile-time-ite
     ProfileTimeItemComponent,
     ProfileControlEditComponent,
     EditAboutPageComponent,
-    ProfileTimeItemEditComponent
+    ProfileTimeItemEditComponent,
+    ProfileTimelineEditComponent
   ],
   imports: [
     BrowserModule,

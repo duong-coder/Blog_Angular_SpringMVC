@@ -3,18 +3,14 @@
         <ng-container [ngSwitch]="listItem.kind">
             <ng-container *ngSwitchCase="'Education'">
                 <ng-container *ngFor="let item of listItem.list; even as isEven">
-                    <app-profile-time-item [event]="self" [isEven]="isEven" [itemEducation]="item">
+                    <app-profile-time-item [isEven]="isEven" [itemEducation]="item">
                     </app-profile-time-item>
-                    <app-profile-time-item-edit *ngIf="isEdit" [event]="self" [isEven]="isEven" [itemEducation]="item">
-                    </app-profile-time-item-edit>
                 </ng-container>
             </ng-container>
             <ng-container *ngSwitchCase="'WorkExperience'">
                 <ng-container *ngFor="let item of listItem.list; even as isEven">
-                    <app-profile-time-item [event]="self" [isEven]="isEven" [itemWorkExperience]="item">
+                    <app-profile-time-item [isEven]="isEven" [itemWorkExperience]="item">
                     </app-profile-time-item>
-                    <app-profile-time-item-edit *ngIf="isEdit" [event]="self" [isEven]="isEven" [itemWorkExperience]="item">
-                    </app-profile-time-item-edit>
                 </ng-container>
             </ng-container>
         </ng-container>

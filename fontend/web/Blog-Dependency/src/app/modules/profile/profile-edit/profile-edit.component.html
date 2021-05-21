@@ -13,12 +13,12 @@
                 <div class="__item">
                     <app-profile-content [hasIcon]="profileContents[1].hasIcon" [icon]="profileContents[1].icon"
                         [title]="profileContents[1].title"></app-profile-content>
-                    <app-profile-timeline [isEdit]="isEdit" [itemTimeForm]="profileForm.get('listEducation')" [listItemEducation]="account.educationDTOs"></app-profile-timeline>
+                    <app-profile-timeline-edit [listEducationForm]="profileForm.get('listEducation')"></app-profile-timeline-edit>
                 </div>
                 <div class="__item">
                     <app-profile-content [hasIcon]="profileContents[2].hasIcon" [icon]="profileContents[2].icon"
                         [title]="profileContents[2].title"></app-profile-content>
-                    <!-- <app-profile-timeline [listItemWorkExperience]="account.workExperienceDTOs"></app-profile-timeline> -->
+                    <app-profile-timeline-edit [listWorkExperienceForm]="profileForm.get('listWorkExperience')"></app-profile-timeline-edit>
                 </div>
                 <div class="__item">
                     <app-profile-content [hasIcon]="profileContents[3].hasIcon" [icon]="profileContents[3].icon"

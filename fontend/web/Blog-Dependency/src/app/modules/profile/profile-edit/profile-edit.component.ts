@@ -1,5 +1,5 @@
 import { Component, OnInit, forwardRef } from '@angular/core';
-import { FormBuilder, NG_VALUE_ACCESSOR, NG_VALIDATORS } from '@angular/forms';
+import { FormBuilder, NG_VALUE_ACCESSOR, NG_VALIDATORS, FormArray } from '@angular/forms';
 import { faAward, faBookmark, faBullseye, faCalendarAlt, faEnvelope, faLightbulb, faMapMarkedAlt, faPen, faPhone, faUser, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { Account } from 'src/app/model/account';
 import { AccountService } from 'src/app/service/account.service';
@@ -99,8 +99,7 @@ export class ProfileEditComponent implements OnInit {
     });
     this.profileForm.setControl('listEducation', listEduForm);
     this.profileForm.setControl('listWorkExperience', listWEForm);
-
-    console.log('Profile Form', this.profileForm);
+    console.log('Profile Form', this.profileForm, (this.profileForm.get('listEducation') as FormArray).at(0));
   }
 
   getPercentSkill(): void {

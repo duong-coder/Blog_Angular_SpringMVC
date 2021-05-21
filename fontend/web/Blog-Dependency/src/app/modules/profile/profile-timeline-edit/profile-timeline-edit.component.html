@@ -1,0 +1,18 @@
+<div class="profile_timeline">
+    <div class="timeline">
+        <ng-container [ngSwitch]="listFormByKind.kind">
+            <ng-container *ngSwitchCase="'Education'">
+                <ng-container *ngFor="let item of listFormByKind.formArray.controls; even as isEven">
+                    <app-profile-time-item-edit [event]="self" [isEven]="isEven" [itemEducationForm]="item">
+                    </app-profile-time-item-edit>
+                </ng-container>
+            </ng-container>
+            <ng-container *ngSwitchCase="'WorkExperience'">
+                <ng-container *ngFor="let item of listFormByKind.formArray.controls; even as isEven">
+                    <app-profile-time-item-edit [event]="self" [isEven]="isEven" [itemWorkExperienceForm]="item">
+                    </app-profile-time-item-edit>
+                </ng-container>
+            </ng-container>
+        </ng-container>
+    </div>
+</div>
