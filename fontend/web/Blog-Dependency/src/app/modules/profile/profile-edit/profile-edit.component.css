@@ -1,0 +1,16 @@
+textarea{
+    min-height: 100px;
+    background: none;
+    border: 1px solid #fcf8e0;
+    outline: none;
+    transition: all 0.5s ease;
+}
+
+textarea:hover{
+    border: 1px solid #514f50;
+}
+textarea:focus{
+    border: 1px solid #514f50;
+    outline: none;
+    box-shadow: none;
+}

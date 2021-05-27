@@ -5,41 +5,36 @@
                 <div class="__item">
                     <app-profile-content [hasIcon]="profileContents[0].hasIcon" [icon]="profileContents[0].icon"
                         [title]="profileContents[0].title"></app-profile-content>
-                    <div markdown [data]="account.objective" class="__text">
-
-                    </div>
-                    <input class="input-text" type="text" (change)="update()" formControlName="objective" placeholder="Objective"><br>
+                    <textarea class="input-text" type="text"
+                        formControlName="objective" placeholder="Objective"></textarea>
                 </div>
                 <div class="__item">
                     <app-profile-content [hasIcon]="profileContents[1].hasIcon" [icon]="profileContents[1].icon"
                         [title]="profileContents[1].title"></app-profile-content>
-                    <app-profile-timeline-edit [listEducationForm]="profileForm.get('listEducation')"></app-profile-timeline-edit>
+                    <app-profile-timeline-edit [listEducationForm]="profileForm.get('educationDTOs')"></app-profile-timeline-edit>
                 </div>
                 <div class="__item">
                     <app-profile-content [hasIcon]="profileContents[2].hasIcon" [icon]="profileContents[2].icon"
                         [title]="profileContents[2].title"></app-profile-content>
-                    <app-profile-timeline-edit [listWorkExperienceForm]="profileForm.get('listWorkExperience')"></app-profile-timeline-edit>
+                    <app-profile-timeline-edit [listWorkExperienceForm]="profileForm.get('workExperienceDTOs')"></app-profile-timeline-edit>
                 </div>
                 <div class="__item">
                     <app-profile-content [hasIcon]="profileContents[3].hasIcon" [icon]="profileContents[3].icon"
                         [title]="profileContents[3].title"></app-profile-content>
-                    <div markdown [data]="account.awards" class="__text">
-
-                    </div>
+                    <textarea class="input-text" type="text"
+                        formControlName="awards" placeholder="Award"></textarea>
                 </div>
                 <div class="__item">
                     <app-profile-content [hasIcon]="profileContents[4].hasIcon" [icon]="profileContents[4].icon"
                         [title]="profileContents[4].title"></app-profile-content>
-                    <div markdown [data]="account.addInformation" class="__text">
-
-                    </div>
+                    <textarea class="input-text" type="text"
+                        formControlName="addInformation" placeholder="Addinformation"></textarea>
                 </div>
                 <div class="__item">
                     <app-profile-content [hasIcon]="profileContents[5].hasIcon" [icon]="profileContents[5].icon"
                         [title]="profileContents[5].title"></app-profile-content>
-                    <div markdown [data]="account.references" class="__text">
-
-                    </div>
+                    <textarea class="input-text" type="text"
+                        formControlName="references" placeholder="References"></textarea>
                 </div>
             </div>
             <div class="sub-contents">
@@ -93,6 +88,6 @@
 
             </div>
         </div>
-
+        <button class="btn-post" (click)="update()">EDIT PROFILE</button>
     </div>
 </form>

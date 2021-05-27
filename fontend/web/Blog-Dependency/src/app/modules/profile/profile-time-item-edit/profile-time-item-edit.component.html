@@ -4,28 +4,46 @@
             <ng-container [ngSwitch]="itemFormGroup.kind">
                 <div class="head">
                     <ng-container *ngSwitchCase="'Education'">
-                        <h5 class="__name">{{itemFormGroup.formGroup.get('name').value}}</h5>
+                        <!-- <h5 class="__name">{{itemFormGroup.formGroup.get('name').value}}</h5>
                         <h5 class="__time"><span>{{itemFormGroup.formGroup.get('dateStart').value | date: 'MMM y'}}</span> -
                             <span>{{itemFormGroup.formGroup.get('dateEnd').value |
-                                date: 'MMM y'}}</span></h5>
+                                date: 'MMM y'}}</span></h5> -->
+                        <input class="__name" type="text" formControlName="name">
+                        <div class="wrap-date">
+                            <input class="__time" type="date" formControlName="dateStart">
+                            <span class="sperator-date"> - </span>
+                            <input class="__time" type="date" formControlName="dateEnd">
+                        </div>
                     </ng-container>
                     <ng-container *ngSwitchCase="'WorkExperience'">
-                        <h5 class="__name">{{itemFormGroup.formGroup.get('companyOrAppName').value}}</h5>
+                        <!-- <h5 class="__name">{{itemFormGroup.formGroup.get('companyOrAppName').value}}</h5>
                         <h5 class="__time"><span>{{itemFormGroup.formGroup.get('dateStart').value | date: 'MMM y'}}</span> -
                             <span>{{itemFormGroup.formGroup.get('dateEnd').value |
-                                date: 'MMM y'}}</span></h5>
+                                date: 'MMM y'}}</span></h5> -->
+                        <input class="__name" type="text" formControlName="companyOrAppName">
+                        <div class="wrap-date">
+                            <input class="__time" type="date" formControlName="dateStart">
+                            <span class="sperator-date"> - </span>
+                            <input class="__time" type="date" formControlName="dateEnd">
+                        </div>
                     </ng-container>
                     <ng-container *ngSwitchDefault>
                         <h5 class="__name">WEB APP BLOG</h5>
                         <h5 class="__time">AUG 2020 - TO PRESENT</h5>
                     </ng-container>
                 </div>
-                <p *ngIf="itemFormGroup.kind === 'WorkExperience'">{{itemFormGroup.formGroup.get('titleOrPosition').value}}</p>
+                <!-- <p *ngIf="itemFormGroup.kind === 'WorkExperience'">{{itemFormGroup.formGroup.get('titleOrPosition').value}}</p> -->
+                <input *ngIf="itemFormGroup.kind === 'WorkExperience'" type="text" formControlName="titleOrPosition">
                 <div class="details">
-                    <div markdown [data]="itemFormGroup.formGroup.get('description').value">
+                    <!-- <div markdown [data]="itemFormGroup.formGroup.get('description').value">
 
+                    </div> -->
+                    <textarea  type="text" formControlName="description" placeholder="Description"></textarea>
+                    <!-- <p *ngIf="itemFormGroup.kind === 'Education'">GPA: {{itemFormGroup.formGroup.get('gpa').value}}</p> -->
+                    <div class="wrap-gpa" *ngIf="itemFormGroup.kind === 'Education'">
+                        <span>GPA: </span>
+                        <input type="number" formControlName="gpa">
                     </div>
-                    <p *ngIf="itemFormGroup.kind === 'Education'">GPA: {{itemFormGroup.formGroup.get('gpa').value}}</p>
                 </div>
             </ng-container>
             <app-profile-control-edit [item]="itemFormGroup" (addEducationEvent)="addEducationItem($event)">

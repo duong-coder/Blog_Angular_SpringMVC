@@ -1,0 +1,52 @@
+.head{
+    display: block !important;
+}
+.details{
+    display: flex;
+    flex-direction: column;
+}
+.head .__name{
+    margin: 0px;
+    padding: 0px;
+    font-weight: 800;
+    font-family: Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
+}
+.head .__name:focus{
+    font-weight: normal;
+}
+.wrap-date{
+    display: flex;
+}
+.sperator-date{
+    margin:0 5px;
+}
+
+input{
+    /* display: flex; */
+    word-wrap: break-word;
+    width: 100%;
+    
+}
+.wrap-gpa, .wrap-gpa input{
+    display: flex;
+    font-style: italic;
+    font-size: 12px;
+}
+ textarea{
+    display: flex;
+    width: 100%;
+    min-height: 150px;
+}
+input, textarea{
+    background-color: #df7861;
+    border: 1px #df7861 solid;
+    outline: none;
+    transition: all 0.5s ease;
+}
+input:hover, textarea:hover{
+    border: 1px solid #514f50;
+}
+input:focus, textarea:focus{
+    border: 1px solid #514f50;
+    box-shadow: none;
+}

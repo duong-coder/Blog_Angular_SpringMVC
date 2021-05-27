@@ -20,6 +20,7 @@ const routes: Routes = [
       { path: 'about', component: AboutPageComponent },
       { path: 'about/edit', component: EditAboutPageComponent },
       { path: 'post/detail/:id', component: PostDetailPageComponent },
+      { path: '', redirectTo: '/home', pathMatch: 'full'},
     ]
   },
   {

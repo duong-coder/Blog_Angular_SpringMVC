@@ -10,7 +10,7 @@ import { ProfileTimeItemComponent } from '../profile-time-item/profile-time-item
   templateUrl: './profile-timeline-edit.component.html',
   styleUrls: ['./profile-timeline-edit.component.css']
 })
-export class ProfileTimelineEditComponent implements OnInit {
+export class ProfileTimelineEditComponent implements OnInit, OnChanges {
   @Input() listEducationForm?: FormArray;
   @Input() listWorkExperienceForm?: FormArray;
   // @Input() isEdit?: boolean;
@@ -23,6 +23,20 @@ export class ProfileTimelineEditComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    // this.listFormByKind = {
+    //   kind: 'WorkExperience',
+    //   formArray: this.listWorkExperienceForm
+    // };
+    // if (this.listEducationForm) {
+    //   this.listFormByKind = {
+    //     kind: 'Education',
+    //     formArray: this.listEducationForm
+    //   };
+    // }
+    // console.log('INIT TimeLine Edit', this.listFormByKind);
+  }
+
+  ngOnChanges(): void{
     this.listFormByKind = {
       kind: 'WorkExperience',
       formArray: this.listWorkExperienceForm
@@ -33,7 +47,7 @@ export class ProfileTimelineEditComponent implements OnInit {
         formArray: this.listEducationForm
       };
     }
-    console.log('INIT TimeLine Edit', this.listFormByKind);
+    console.log('CHANGE TimeLine Edit', this.listFormByKind);
   }
 
   counter(i: number): Array<number> {
