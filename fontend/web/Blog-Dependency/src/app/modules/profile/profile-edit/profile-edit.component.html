@@ -1,4 +1,4 @@
-<form (ngSubmit)="update()" [formGroup]="profileForm">
+<form [formGroup]="profileForm">
     <div class="body-profile font-style">
         <div class="profile-container">
             <div class="contents">
@@ -42,23 +42,29 @@
                     <ul>
                         <li>
                             <fa-icon [icon]="faCalendar" style="font-size: 18px;"></fa-icon>
-                            <span>{{account.birthday | date: 'MMM d, y'}}</span>
+                            <!-- <span>{{account.birthday | date: 'MMM d, y'}}</span> -->
+                            <input class="edit input-text" type="date" formControlName="birthday" placeholder="Birthday">
                         </li>
                         <li>
                             <fa-icon [icon]="faUser" style="font-size: 18px;"></fa-icon>
-                            <span>{{account.gender ? 'Male' : "Female"}}</span>
+                            <!-- <span>{{account.gender ? 'Male' : "Female"}}</span> -->
+                            <input class="edit input-text" type="text" formControlName="gender" placeholder="Gender">
                         </li>
                         <li>
                             <fa-icon [icon]="faPhone" style="font-size: 18px;"></fa-icon>
-                            <span>{{account.phonenumber}}</span>
+                            <!-- <span>{{account.phonenumber}}</span> -->
+                            <input class="edit input-text" type="text" formControlName="phonenumber" placeholder="Phonenumber">
                         </li>
                         <li>
                             <fa-icon [icon]="faMail" style="font-size: 18px;"></fa-icon>
-                            <span>{{account.email}}</span>
+                            <!-- <span>{{account.email}}</span> -->
+                            <input class="edit input-text" type="text" formControlName="email" placeholder="Email">
                         </li>
                         <li>
                             <fa-icon [icon]="faAddress" style="font-size: 18px;"></fa-icon>
-                            <span>{{account.address}}</span>
+                            <!-- <span>{{account.address}}</span> -->
+                            <textarea class="edit input-text" formControlName="address"
+                             rows="2" cols="30" (keyup)="resizeInput(addressTmp)" #addressTmp placeholder="Address"></textarea>
                         </li>
                     </ul>
                 </div>
@@ -66,10 +72,10 @@
                     <app-profile-content [hasIcon]="profileContents[6].hasIcon" [icon]="profileContents[6].icon"
                         [title]="profileContents[6].title"></app-profile-content>
                     <div class="__skilss">
-                        <div *ngFor="let skill of skills" class="__item">
-                            <p class="__name">{{skill.item.skill}}</p>
+                        <div *ngFor="let skill of account.skillDTOs" class="__item">
+                            <p class="__name"  (click)="openSkillRatingModal(skill)">{{skill.skill}}</p>
                             <div class="container">
-                                <div class="__skill" [ngStyle]="{'width.%': skill.percent}"></div>
+                                <div class="__skill" [ngStyle]="{'width.%': skill.getPercent()}"  ></div>
                             </div>
                         </div>
                     </div>
@@ -80,7 +86,8 @@
                     <div class="__favorites">
                         <ul>
                             <li>
-                                <span>{{account.hobby}}</span>
+                              <textarea class="edit input-text" formControlName="hobby"
+                                rows="2" cols="30" (keyup)="resizeInput(hobbyTmp)" #hobbyTmp placeholder="Hobby"></textarea>
                             </li>
                         </ul>
                     </div>
@@ -91,3 +98,4 @@
         <button class="btn-post" (click)="update()">EDIT PROFILE</button>
     </div>
 </form>
+<app-star-rating [id]="skillRating.skill" [skill]="skillRating" (skillRating)="getSkillRating($event)"></app-star-rating>

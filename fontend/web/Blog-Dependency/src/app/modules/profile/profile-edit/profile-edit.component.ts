@@ -1,8 +1,11 @@
-import { Component, OnInit, forwardRef, OnChanges } from '@angular/core';
+import { Component, OnInit, forwardRef, OnChanges, ElementRef } from '@angular/core';
 import { FormBuilder, NG_VALUE_ACCESSOR, NG_VALIDATORS, FormArray } from '@angular/forms';
 import { faAward, faBookmark, faBullseye, faCalendarAlt, faEnvelope, faLightbulb, faMapMarkedAlt, faPen, faPhone, faUser, faUsers } from '@fortawesome/free-solid-svg-icons';
+import { StarRatingComponent } from 'src/app/common/star-rating/star-rating.component';
 import { Account } from 'src/app/model/account';
+import { Skill } from 'src/app/model/skill';
 import { AccountService } from 'src/app/service/account.service';
+import { ModalService } from 'src/app/service/modal.service';
 import { IProfileContent } from '../profile-detail/profile-detail.component';
 
 @Component({
@@ -12,7 +15,7 @@ import { IProfileContent } from '../profile-detail/profile-detail.component';
 })
 export class ProfileEditComponent implements OnInit, OnChanges {
   account: Account = new Account();
-  skills: { item, percent }[];
+  skillRating: Skill = new Skill(0, '', 0);
 
   faCalendar = faCalendarAlt;
   faUser = faUser;
@@ -35,13 +38,20 @@ export class ProfileEditComponent implements OnInit, OnChanges {
     awards: [''],
     addInformation: [''],
     references: [''],
+    phonenumber: [''],
+    birthday: [new Date()],
+    address: [''],
+    email: [''],
+    gender: [''],
+    hobby: [''],
     educationDTOs: this.fb.array([]),
     workExperienceDTOs: this.fb.array([]),
   });
 
   constructor(
     private acccountService: AccountService,
-    private fb: FormBuilder) { }
+    private fb: FormBuilder,
+    private modalService: ModalService) { }
 
   ngOnInit(): void {
     this.getProfile();
@@ -55,21 +65,8 @@ export class ProfileEditComponent implements OnInit, OnChanges {
       next: (res) => {
         if (res.status === 200) {
           this.account = { ...res.body };
-          this.account.educationDTOs = res.body.educationDTOs.map(edu => {
-            const eduRt = edu;
-            eduRt.dateEnd = new Date(edu.dateEnd);
-            eduRt.dateStart = new Date(edu.dateStart);
-            return eduRt;
-          });
-          this.account.workExperienceDTOs = res.body.workExperienceDTOs.map(we => {
-            const weRt = we;
-            weRt.dateEnd = new Date(we.dateEnd);
-            weRt.dateStart = new Date(we.dateStart);
-            return weRt;
-          });
-          this.skills = this.account.skillDTOs.map(dto => {
-            return { item: dto, percent: (dto.level / 5) * 100 };
-          });
+          this.skillRating = this.account.skillDTOs[0];
+
           console.log('response', this.account);
           this.mapDataToForm();
         }
@@ -112,11 +109,18 @@ export class ProfileEditComponent implements OnInit, OnChanges {
 
       listWEForm.push(weForm);
     });
+
     this.profileForm = this.fb.group({
       objective: [this.account.objective],
       awards: [this.account.awards],
       addInformation: [this.account.addInformation],
       references: [this.account.references],
+      phonenumber: [this.account.phonenumber],
+      birthday: [new Date(this.account.birthday).toISOString().split('T')[0]],
+      address: [this.account.address],
+      email: [this.account.email],
+      gender: [this.account.gender ? 'Male' : 'Female'],
+      hobby: [this.account.hobby],
       educationDTOs: listEduForm,
       workExperienceDTOs: listWEForm,
     });
@@ -124,9 +128,47 @@ export class ProfileEditComponent implements OnInit, OnChanges {
 
   getPercentSkill(): void {
   }
+  openSkillRatingModal(skill: Skill): void {
+    this.skillRating = skill;
+    const ele = document.getElementsByTagName('app-star-rating').item(0);
+    const eleRef = new ElementRef<Element>(ele);
+    const modal = new StarRatingComponent(eleRef, this.modalService);
 
-  update(): void {
-    console.log('post in serve', this.profileForm.getRawValue());
+    this.modalService.set(modal);
+    console.log('OPEN MODAL', skill);
+
+  }
+  getSkillRating(item: Skill): void {
+    console.log('SKILL RATING', item);
+    const skill = this.account.skillDTOs.find(s => {
+      return s.skill === item.skill;
+    });
+    skill.level = item.level;
   }
 
+  update(): void {
+    const accountAfterUpdate = this.profileForm.getRawValue() as Account;
+    accountAfterUpdate.skillDTOs = this.account.skillDTOs;
+
+    console.log('post in serve', accountAfterUpdate);
+
+    this.acccountService.updateByUsername(accountAfterUpdate).subscribe({
+      next: (res) => {
+        console.log('RESPONSE UPDATE: ', res);
+
+      },
+      error: (error) => {
+        console.error('RESPONSE UPDATE: ', error);
+
+      },
+      complete: () => {
+        console.error('RESPONSE UPDATE: COMPLETE');
+
+      }
+    });
+  }
+  resizeInput(element: HTMLTextAreaElement): void {
+    element.style.height = 'auto';
+    element.style.height = element.scrollHeight + 'px';
+  }
 }

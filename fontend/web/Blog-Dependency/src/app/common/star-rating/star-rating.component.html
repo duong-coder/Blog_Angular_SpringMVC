@@ -1,0 +1,23 @@
+<div class="star-rating">
+  <div class="star-rating__body">
+    <p>{{id}}</p>
+    <div class="__icons">
+      <span *ngFor="let level of levels">
+        <fa-icon (mousemove)="getSkillRating(level)" class="--icon --icon-big checked" [icon]="faStar"></fa-icon>
+      </span>
+      <!-- <span>
+        <fa-icon class="--icon --icon-big" [icon]="faStar"></fa-icon>
+      </span>
+      <span>
+        <fa-icon class="--icon --icon-big" [icon]="faStar"></fa-icon>
+      </span>
+      <span>
+        <fa-icon class="--icon --icon-big" [icon]="faStar"></fa-icon>
+      </span>
+      <span>
+        <fa-icon class="--icon --icon-big" [icon]="faStar"></fa-icon>
+      </span> -->
+    </div>
+  </div>
+</div>
+<div class="star-rating-background"></div>

@@ -1,4 +1,4 @@
-export interface WorkExperience{
+export class WorkExperience{
     id: number;
     companyOrAppName: string;
     titleOrPosition: string;

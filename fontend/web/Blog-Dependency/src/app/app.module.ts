@@ -36,6 +36,8 @@ import { ProfileControlEditComponent } from './modules/profile/profile-control-e
 import { EditAboutPageComponent } from './page/edit-about-page/edit-about-page.component';
 import { ProfileTimeItemEditComponent } from './modules/profile/profile-time-item-edit/profile-time-item-edit.component';
 import { ProfileTimelineEditComponent } from './modules/profile/profile-timeline-edit/profile-timeline-edit.component';
+import { StarRatingComponent } from './common/star-rating/star-rating.component';
+import { ModalService } from './service/modal.service';
 
 
 @NgModule({
@@ -65,7 +67,8 @@ import { ProfileTimelineEditComponent } from './modules/profile/profile-timeline
     ProfileControlEditComponent,
     EditAboutPageComponent,
     ProfileTimeItemEditComponent,
-    ProfileTimelineEditComponent
+    ProfileTimelineEditComponent,
+    StarRatingComponent
   ],
   imports: [
     BrowserModule,

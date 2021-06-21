@@ -1,16 +1,51 @@
-textarea{
-    min-height: 100px;
-    background: none;
-    border: 1px solid #fcf8e0;
-    outline: none;
-    transition: all 0.5s ease;
+
+textarea {
+  min-height: 100px;
+  background: none;
+  border: 1px solid #fcf8e0;
+  outline: none;
+  transition: all 0.5s ease;
 }
 
-textarea:hover{
-    border: 1px solid #514f50;
+textarea:hover {
+  border: 1px solid #514f50;
 }
-textarea:focus{
-    border: 1px solid #514f50;
-    outline: none;
-    box-shadow: none;
+
+textarea:focus {
+  border: 1px solid #514f50;
+  outline: none;
+  box-shadow: none;
+}
+.sub-contents .edit{
+  color: #fcf8e0;
+  margin: 0px;
+  padding: 5px;
+  background: none;
+  border: 1px solid #514f50;
+  outline: none;
+  transition: all 0.5s ease;
+}
+.sub-contents textarea{
+  color: #fcf8e0;
+  /* width: 85%; */
+  min-height: auto;
+  height: fit-content;
+}
+
+.sub-contents input {
+  color: #fcf8e0;
+  line-height: normal;
+  width: 100%;
+  height: fit-content;
+
+}
+
+.sub-contents input:hover,.sub-contents textarea:hover {
+  border: 1px solid #fcf8e0;
+}
+
+.sub-contents input:focus,.sub-contents textarea:focus {
+  border: 1px solid #fcf8e0;
+  outline: none;
+  box-shadow: none;
 }
