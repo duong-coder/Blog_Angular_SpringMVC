@@ -7,4 +7,5 @@ public class SkillDTO {
 	private int id;
 	private String skill;
 	private int level;
+	private AccountDTO accountDTO;
 }

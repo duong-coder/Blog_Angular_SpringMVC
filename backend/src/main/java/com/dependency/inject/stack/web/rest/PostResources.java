@@ -6,10 +6,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dependency.inject.stack.service.PostService;
-import com.dependency.inject.stack.service.dto.AccountDTO;
 import com.dependency.inject.stack.service.dto.PostDTO;
 import com.dependency.inject.stack.web.response.Response;
 
@@ -49,12 +44,12 @@ public class PostResources {
 		return ResponseEntity.ok(response);
 	}
 
-	@GetMapping(path = "/all/{phone}")
-	public ResponseEntity<Response> getAllPostByAccount(@PathVariable("phone") String phonenumber) {
+	@GetMapping(path = "/all/{username}")
+	public ResponseEntity<Response> getAllPostByAccount(@PathVariable("usernaame") String username) {
 		List<PostDTO> postDTOs = new ArrayList<PostDTO>();
 		Response response = null;
 		try {
-			postDTOs = postService.getAllById(phonenumber);
+			postDTOs = postService.findAllByAccountId(username);
 			if (postDTOs != null && !postDTOs.isEmpty()) {
 				response = new Response("Get all post success", 200, postDTOs);
 			}else {
@@ -70,7 +65,7 @@ public class PostResources {
 	@PostMapping
 	public ResponseEntity<Response> insertNewPost(@RequestBody PostDTO postDTO) {
 		Date date = new Date();
-		System.out.println("TIme" + +date.getTime());
+		System.out.println("Time" + date.getTime());
 		try {
 			postDTO.setDateCreate(date);
 			postService.insert(postDTO);

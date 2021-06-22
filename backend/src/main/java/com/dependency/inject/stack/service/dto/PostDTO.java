@@ -3,7 +3,6 @@ package com.dependency.inject.stack.service.dto;
 import java.util.Date;
 
 import lombok.Data;
-import lombok.ToString;
 
 @Data
 public class PostDTO {
@@ -19,4 +18,5 @@ public class PostDTO {
 	
 	private Date dateCreate;
 	
+	private AccountDTO accountDTO;
 }

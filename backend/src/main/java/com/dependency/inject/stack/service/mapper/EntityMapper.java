@@ -9,7 +9,7 @@ import java.util.List;
  * @param <D> - DTO type parameter.
  * @author Huu Duan
  */
-public interface EntityMapper<E, D> {
+public interface EntityMapper<E, D, K> {
 
     /**
      * To entity e.
@@ -25,7 +25,7 @@ public interface EntityMapper<E, D> {
      * @param entity the entity
      * @return the d
      */
-    D toDto(E entity);
+    D toDTO(E entity);
 
     /**
      * To dt os list.
@@ -49,6 +49,12 @@ public interface EntityMapper<E, D> {
      * @param id the id
      * @return the e
      */
-    E toEntityFromId(Long id);
+    E toEntityFromId(K id);
+    
+    /**
+     * @param id
+     * @return e
+     */
+    D toDTOFromId(K id);
 
 }

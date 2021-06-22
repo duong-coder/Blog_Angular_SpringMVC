@@ -12,4 +12,6 @@ public class WorkExperienceDTO {
 	private String description;
 	private Date dateStart;
 	private Date dateEnd;
+	private AccountDTO accountDTO; 
+	
 }

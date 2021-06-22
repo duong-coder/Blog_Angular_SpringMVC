@@ -6,5 +6,5 @@ import com.dependency.inject.stack.service.dto.AccountDTO;
 
 @Service
 public interface AccountService {
-	AccountDTO findByPhone(String phone);
+	AccountDTO findById(String id);
 }

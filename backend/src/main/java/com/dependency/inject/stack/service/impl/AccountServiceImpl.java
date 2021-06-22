@@ -1,5 +1,7 @@
 package com.dependency.inject.stack.service.impl;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,13 +19,16 @@ public class AccountServiceImpl implements AccountService{
 	@Autowired
 	private AccountRepository accountRepository;
 	@Autowired
-	private EntityMapper<Account, AccountDTO> accountMapper;
+	private EntityMapper<Account, AccountDTO, String> accountMapper;
 	
 	@Override
-	public AccountDTO findByPhone(String phone) {
-		Account entity = accountRepository.getAccountByPhone(phone);
+	public AccountDTO findById(String id) {
+		Optional<Account> entityOp = accountRepository.findById(id);
+		if(entityOp.isPresent()) {
+			return accountMapper.toDTO(entityOp.get());
+		}
 		
-		return accountMapper.toDto(entity);
+		return null;
 	}
 
 }

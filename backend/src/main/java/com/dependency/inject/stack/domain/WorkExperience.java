@@ -42,7 +42,7 @@ public class WorkExperience implements Serializable{
 	private Date dateEnd;
 
 	@ManyToOne
-	@JoinColumn(name = "phone_number")
+	@JoinColumn(name = "username")
 	private Account account;
 	
 }

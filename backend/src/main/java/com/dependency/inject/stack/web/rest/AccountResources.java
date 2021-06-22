@@ -2,7 +2,6 @@ package com.dependency.inject.stack.web.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,16 +18,15 @@ public class AccountResources {
 	@Autowired
 	private AccountService accountService;
 	
-	@GetMapping(path = "/{phone}")
-	public ResponseEntity<Response> getAccExist(@PathVariable("phone") String phone) {
-		System.out.println("Phone:" + phone);
+	@GetMapping(path = "/{username}")
+	public ResponseEntity<Response> getAccount(@PathVariable("username") String username) {
 		Response response = null;
 		try {
-			AccountDTO accountDTO = accountService.findByPhone(phone);
+			AccountDTO accountDTO = accountService.findById(username);
 			if(accountDTO != null) {
 				response = new Response("Get account success", 200, accountDTO);
 			}else {
-				response = new Response("No found account", 200, accountDTO);
+				response = new Response("Account not found", 200, accountDTO);
 			}
 		} catch (Exception e) {
 			response = new Response("System error", 500, null);

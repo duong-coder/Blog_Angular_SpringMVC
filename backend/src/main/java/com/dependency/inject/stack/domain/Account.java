@@ -19,10 +19,13 @@ public class Account implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
+	@Column(name = "username")
+	private String username;
+	
 	@Column(name = "phone_number")
 	private String phonenumber;
 	
-	@Column(name = "pass_word")
+	@Column(name = "password")
 	private String password;
 	
 	@Column(name = "date_create")

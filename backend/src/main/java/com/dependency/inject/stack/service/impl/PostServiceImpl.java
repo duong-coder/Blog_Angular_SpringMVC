@@ -1,6 +1,8 @@
 package com.dependency.inject.stack.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,7 +13,6 @@ import com.dependency.inject.stack.repository.PostRepository;
 import com.dependency.inject.stack.service.PostService;
 import com.dependency.inject.stack.service.dto.PostDTO;
 import com.dependency.inject.stack.service.mapper.EntityMapper;
-import com.dependency.inject.stack.service.mapper.PostMapper;
 
 @Service
 @Transactional
@@ -20,46 +21,59 @@ public class PostServiceImpl implements PostService{
 	@Autowired
 	private PostRepository postRepository;
 	@Autowired
-	private EntityMapper<Post, PostDTO> postMapper;
+	private EntityMapper<Post, PostDTO, Integer> postMapper;
 	
 	@Override
 	public void insert(PostDTO dto) {
-		postRepository.insert(postMapper.toEntity(dto));
+		if(dto != null) {
+			Post post = postMapper.toEntity(dto);
+			
+			postRepository.save(post);
+		}
 	}
 
 	@Override
 	public void update(PostDTO dto) {
-		postRepository.update(postMapper.toEntity(dto));
+		if(dto != null) {
+			Post post = postMapper.toEntity(dto);
+			
+			postRepository.save(post);
+		}
 	}
 
 	@Override
 	public void delete(int id) {
-		postRepository.delete(id);
+		boolean isExist = postRepository.existsById(id);
+		if(isExist) {
+			postRepository.deleteById(id);
+		}
 	}
 
 	@Override
 	public PostDTO findById(int id) {
-		Post p = postRepository.findById(id);
-		if(p != null) {
-			return postMapper.toDto(p);
+		Optional<Post> postOp = postRepository.findById(id);
+		if(postOp.isPresent()) {
+			return postMapper.toDTO(postOp.get());
 		}
 		
 		return null;
 	}
 
 	@Override
-	public List<PostDTO> getAll() {
+	public List<PostDTO> findAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	
 	@Override
-	public List<PostDTO> getAllById(String phonenumber) {
-		List<Post> posts = postRepository.getAllById(phonenumber);
-		if(posts != null && !posts.isEmpty()) {
-			return postMapper.toDTOs(posts);
+	public List<PostDTO> findAllByAccountId(String id) {
+		List<Post> posts = postRepository.findAllByAccountId(id);
+		List<PostDTO> postDTOs = new ArrayList<>();
+		
+ 		if(posts != null && !posts.isEmpty()) {
+			postDTOs = postMapper.toDTOs(posts);
 		}
 		
-		return null;
+		return postDTOs;
 	}
 }

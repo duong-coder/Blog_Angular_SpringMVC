@@ -1,3 +1,5 @@
+import { Account } from './account';
+
 export class WorkExperience{
     id: number;
     companyOrAppName: string;
@@ -5,4 +7,5 @@ export class WorkExperience{
     description: string;
     dateStart: Date;
     dateEnd: Date;
+    accountDTO: Account;
 }

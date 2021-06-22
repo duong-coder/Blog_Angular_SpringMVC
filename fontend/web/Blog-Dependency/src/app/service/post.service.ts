@@ -13,11 +13,11 @@ import { ResponseEnity } from '../model/response-entity';
 
 @Injectable()
 export class PostService{
-    private URL_GET_ALL_POST: string = '/api/post/all/0773314448';
+    private URL_GET_ALL_POST = '/api/post/all/duongnh';
     // private URL_GET_ALL_POST: string = environment.apiUrl + '/api/account/0773314448';
-    private URL_GET_POST_BY_ID: string = '/api/post/';
-    private URL_INSERT_PUT_POST: string = '/api/post';
-    private URL_DELETE_POST_BY_ID: string = '/api/post/';
+    private URL_GET_POST_BY_ID = '/api/post/';
+    private URL_INSERT_PUT_POST = '/api/post';
+    private URL_DELETE_POST_BY_ID = '/api/post/';
 
     constructor(
         private dateService: DateService,

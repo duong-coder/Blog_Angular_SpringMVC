@@ -1,3 +1,5 @@
+import { Account } from './account';
+
 export class Education{
     id: number;
     name: string;
@@ -5,4 +7,5 @@ export class Education{
     gpa: number;
     dateStart: Date;
     dateEnd: Date;
+    accountDTO: Account;
 }

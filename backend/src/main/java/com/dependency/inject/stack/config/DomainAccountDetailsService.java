@@ -13,8 +13,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.dependency.inject.stack.domain.Account;
-import com.dependency.inject.stack.repository.AccountRepository;
+import com.dependency.inject.stack.service.AccountService;
+import com.dependency.inject.stack.service.dto.AccountDTO;
 
 /**
  * The type Domain user details service.
@@ -23,20 +23,19 @@ import com.dependency.inject.stack.repository.AccountRepository;
 public class DomainAccountDetailsService implements UserDetailsService {
 
     @Autowired
-    private AccountRepository accountRepository;
+    private AccountService accountService;
 
     @Override
     @Transactional
-    public UserDetails loadUserByUsername(String phone) throws UsernameNotFoundException {
-        Account account = accountRepository.getAccountByPhone(phone);
-        if (account == null) {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        AccountDTO accountDTO = accountService.findById(username);
+        if (accountDTO == null) {
             throw new UsernameNotFoundException("User not found");
         }
-        System.out.println(account.getPhonenumber() + account.getPassword());
         Set<GrantedAuthority> grantedAuthorities = new HashSet<GrantedAuthority>();
-        grantedAuthorities.add(new SimpleGrantedAuthority(account.getRole()));
+        grantedAuthorities.add(new SimpleGrantedAuthority(accountDTO.getRole()));
 
         return new org.springframework.security.core.userdetails.User(
-                account.getPhonenumber(), account.getPassword(), grantedAuthorities);
+        		accountDTO.getUsername(), accountDTO.getPassword(), grantedAuthorities);
     }
 }

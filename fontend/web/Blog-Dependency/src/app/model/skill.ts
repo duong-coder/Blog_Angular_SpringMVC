@@ -1,7 +1,10 @@
+import { Account } from './account';
+
 export class Skill{
     id: number;
     skill: string;
     level: number;
+    accountDTO: Account;
 
     constructor(id: number, skill: string, level: number){
       this.id = id;

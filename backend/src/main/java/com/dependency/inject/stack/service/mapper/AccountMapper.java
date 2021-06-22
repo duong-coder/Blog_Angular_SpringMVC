@@ -18,20 +18,21 @@ import com.dependency.inject.stack.service.dto.SkillDTO;
 import com.dependency.inject.stack.service.dto.WorkExperienceDTO;
 
 @Component
-public class AccountMapper implements EntityMapper<Account, AccountDTO>{
+public class AccountMapper implements EntityMapper<Account, AccountDTO, String>{
 	
 	@Autowired
-	private PostMapper postMapper;
+	private EntityMapper<Post, PostDTO, Integer> postMapper;
 	@Autowired
-	private SkillMapper skillMapper;
+	private EntityMapper<Skill, SkillDTO, Integer> skillMapper;
 	@Autowired
-	private EducationMapper educationMapper;
+	private EntityMapper<Education, EducationDTO, Integer> educationMapper;
 	@Autowired
-	private WorkExperienceMapper experienceMapper;
+	private EntityMapper<WorkExperience, WorkExperienceDTO, Integer> experienceMapper;
 	
 	@Override
 	public Account toEntity(AccountDTO dto) {
 		Account acc = new Account();
+		acc.setUsername(dto.getUsername());
 		acc.setPhonenumber(dto.getPhonenumber());
 		acc.setPassword(dto.getPassword());
 		acc.setFullname(dto.getFullname());
@@ -70,8 +71,9 @@ public class AccountMapper implements EntityMapper<Account, AccountDTO>{
 	}
 
 	@Override
-	public AccountDTO toDto(Account entity) {
+	public AccountDTO toDTO(Account entity) {
 		AccountDTO dto = new AccountDTO();
+		dto.setUsername(entity.getUsername());
 		dto.setPhonenumber(entity.getPhonenumber());
 		dto.setPassword(entity.getPassword());
 		dto.setFullname(entity.getFullname());
@@ -122,14 +124,17 @@ public class AccountMapper implements EntityMapper<Account, AccountDTO>{
 	}
 
 	@Override
-	public Account toEntityFromId(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+	public AccountDTO toDTOFromId(String id) {
+		AccountDTO dto = new AccountDTO();
+		dto.setUsername(id);
+		
+		return dto;
 	}
 	
+	@Override
 	public Account toEntityFromId(String id) {
 		Account account = new Account();
-		account.setPhonenumber(id);
+		account.setUsername(id);
 		
 		return account;
 	}

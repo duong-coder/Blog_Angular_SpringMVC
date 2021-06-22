@@ -1,7 +1,6 @@
 package com.dependency.inject.stack.domain;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -34,6 +33,6 @@ public class Skill implements Serializable{/**
 	private int level;
 	
 	@ManyToOne
-	@JoinColumn(name = "phone_number")
+	@JoinColumn(name = "username")
 	private Account account;
 }

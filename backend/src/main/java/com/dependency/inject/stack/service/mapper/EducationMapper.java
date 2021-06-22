@@ -3,14 +3,20 @@ package com.dependency.inject.stack.service.mapper;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.dependency.inject.stack.domain.Account;
 import com.dependency.inject.stack.domain.Education;
+import com.dependency.inject.stack.service.dto.AccountDTO;
 import com.dependency.inject.stack.service.dto.EducationDTO;
 
 @Component
-public class EducationMapper implements EntityMapper<Education, EducationDTO>{
-
+public class EducationMapper implements EntityMapper<Education, EducationDTO, Integer>{
+	
+	@Autowired
+	private EntityMapper<Account, AccountDTO, String> accountMapper;
+	
 	@Override
 	public Education toEntity(EducationDTO dto) {
 		Education education = new Education();
@@ -21,11 +27,17 @@ public class EducationMapper implements EntityMapper<Education, EducationDTO>{
 		education.setDateStart(dto.getDateStart());
 		education.setDateEnd(dto.getDateEnd());
 		
+		AccountDTO accountDTO = dto.getAccountDTO();
+		if(accountDTO != null) {
+			Account account = accountMapper.toEntityFromId(accountDTO.getUsername());
+			education.setAccount(account);
+		}
+		
 		return education;
 	}
 
 	@Override
-	public EducationDTO toDto(Education entity) {
+	public EducationDTO toDTO(Education entity) {
 		EducationDTO dto = new EducationDTO();
 		dto.setId(entity.getId());
 		dto.setName(entity.getName());
@@ -34,6 +46,12 @@ public class EducationMapper implements EntityMapper<Education, EducationDTO>{
 		dto.setDateStart(entity.getDateStart());
 		dto.setDateEnd(entity.getDateEnd());
 		
+		Account account = entity.getAccount();
+		if(account != null) {
+			AccountDTO accountDTO = accountMapper.toDTOFromId(account.getUsername());
+			dto.setAccountDTO(accountDTO);
+		}
+		
 		return dto;
 	}
 
@@ -41,7 +59,7 @@ public class EducationMapper implements EntityMapper<Education, EducationDTO>{
 	public List<EducationDTO> toDTOs(List<Education> entities) {
 		List<EducationDTO> educationDTOs = new ArrayList<EducationDTO>();
 		entities.forEach((entity) ->{
-			EducationDTO dto = toDto(entity);
+			EducationDTO dto = toDTO(entity);
 			
 			educationDTOs.add(dto);
 		});
@@ -62,11 +80,18 @@ public class EducationMapper implements EntityMapper<Education, EducationDTO>{
 	}
 
 	@Override
-	public Education toEntityFromId(Long id) {
+	public Education toEntityFromId(Integer id) {
 		Education education = new Education();
 		education.setId(id.intValue());
 		
 		return education;
 	}
 	
+	@Override
+	public EducationDTO toDTOFromId(Integer id) {
+		EducationDTO dto = new EducationDTO();
+		dto.setId(id);
+		
+		return dto;
+	}
 }

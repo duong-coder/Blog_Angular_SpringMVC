@@ -14,7 +14,7 @@ import { MappingService } from './mapping.service';
 })
 export class AccountService {
   private URL_LOGIN_APP = '/api/authenticate';
-  private URL_GET_ACCOUNT = '/api/account/0773314448';
+  private URL_GET_ACCOUNT = '/api/account/duongnh';
   private URL_UPDATE_ACCOUNT = '/api/account/duongnh';
 
   constructor(
