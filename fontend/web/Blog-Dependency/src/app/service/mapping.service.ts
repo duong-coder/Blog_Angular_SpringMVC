@@ -15,6 +15,7 @@ export class MappingService {
   mappingAccount(accountMapping: Account): Account {
     const account = new Account();
 
+    account.username = accountMapping.username;
     account.phonenumber = accountMapping.phonenumber;
     account.password = accountMapping.password;
     account.dateCreate = new Date(accountMapping.dateCreate);
@@ -50,7 +51,12 @@ export class MappingService {
     post.subHeading = postMapping.subHeading;
     post.content = postMapping.content;
     post.urlImage = postMapping.urlImage;
-    post.dateCreate = new Date(post.dateCreate);
+    // post.dateCreate = new Date(post.dateCreate);
+    post.dateCreate = post.dateCreate;
+
+    const account = new Account();
+    account.username = postMapping.accountDTO.username;
+    post.accountDTO = account;
 
     return post;
   }
@@ -72,6 +78,10 @@ export class MappingService {
     skill.skill = skillMapping.skill;
     skill.level = skillMapping.level;
 
+    const account = new Account();
+    account.username = skillMapping.accountDTO.username;
+    skill.accountDTO = account;
+
     return skill;
   }
   mappingSkillArray(skillArrayMapping: any): Array<Skill> {
@@ -84,7 +94,7 @@ export class MappingService {
     return skills;
   }
 
-  mappingEducation(educationMapping: any): Education{
+  mappingEducation(educationMapping: any): Education {
     const education = new Education();
 
     education.id = educationMapping.id;
@@ -93,6 +103,10 @@ export class MappingService {
     education.description = educationMapping.description;
     education.dateStart = new Date(educationMapping.dateStart);
     education.dateEnd = new Date(educationMapping.dateEnd);
+
+    const account = new Account();
+    account.username = educationMapping.accountDTO.username;
+    education.accountDTO = account;
 
     return education;
   }
@@ -107,7 +121,7 @@ export class MappingService {
     return educations;
   }
 
-  mappingWorkExperience(weMapping: any): WorkExperience{
+  mappingWorkExperience(weMapping: any): WorkExperience {
     const workExperience = new WorkExperience();
 
     workExperience.id = weMapping.id;
@@ -116,6 +130,10 @@ export class MappingService {
     workExperience.description = weMapping.description;
     workExperience.dateStart = new Date(weMapping.dateStart);
     workExperience.dateEnd = new Date(weMapping.dateEnd);
+
+    const account = new Account();
+    account.username = weMapping.accountDTO.username;
+    workExperience.accountDTO = account;
 
     return workExperience;
   }

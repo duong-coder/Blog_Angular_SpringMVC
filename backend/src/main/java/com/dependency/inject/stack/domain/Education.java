@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import lombok.Data;
 
@@ -37,9 +39,11 @@ public class Education implements Serializable{/**
 	private float gpa;
 	
 	@Column(name = "date_start")
+	@Temporal(TemporalType.DATE)
 	private Date dateStart;
 	
 	@Column(name = "date_end")
+	@Temporal(TemporalType.DATE)
 	private Date dateEnd;
 	
 	@ManyToOne

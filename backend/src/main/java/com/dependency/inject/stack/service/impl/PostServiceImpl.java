@@ -16,35 +16,48 @@ import com.dependency.inject.stack.service.mapper.EntityMapper;
 
 @Service
 @Transactional
-public class PostServiceImpl implements PostService{
-	
+public class PostServiceImpl implements PostService {
+
 	@Autowired
 	private PostRepository postRepository;
 	@Autowired
 	private EntityMapper<Post, PostDTO, Integer> postMapper;
-	
+
 	@Override
-	public void insert(PostDTO dto) {
-		if(dto != null) {
-			Post post = postMapper.toEntity(dto);
-			
-			postRepository.save(post);
+	public PostDTO insert(PostDTO dto) {
+		if (dto == null) {
+			return null;
 		}
+		Post post = postMapper.toEntity(dto);
+		Post postRT = postRepository.save(post);
+
+		return postMapper.toDTO(postRT);
 	}
 
 	@Override
-	public void update(PostDTO dto) {
-		if(dto != null) {
-			Post post = postMapper.toEntity(dto);
-			
-			postRepository.save(post);
+	public PostDTO update(PostDTO dto) {
+		if (dto == null) {
+			return null;
 		}
+		if (isExistById(dto.getId())) {
+			Post post = postMapper.toEntity(dto);
+			Post postRT = postRepository.save(post);
+
+			return postMapper.toDTO(postRT);
+
+		}
+		return null;
+	}
+
+	@Override
+	public boolean isExistById(int id) {
+		return postRepository.existsById(id);
 	}
 
 	@Override
 	public void delete(int id) {
 		boolean isExist = postRepository.existsById(id);
-		if(isExist) {
+		if (isExist) {
 			postRepository.deleteById(id);
 		}
 	}
@@ -52,10 +65,10 @@ public class PostServiceImpl implements PostService{
 	@Override
 	public PostDTO findById(int id) {
 		Optional<Post> postOp = postRepository.findById(id);
-		if(postOp.isPresent()) {
+		if (postOp.isPresent()) {
 			return postMapper.toDTO(postOp.get());
 		}
-		
+
 		return null;
 	}
 
@@ -64,16 +77,16 @@ public class PostServiceImpl implements PostService{
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	@Override
 	public List<PostDTO> findAllByAccountId(String id) {
 		List<Post> posts = postRepository.findAllByAccountId(id);
 		List<PostDTO> postDTOs = new ArrayList<>();
-		
- 		if(posts != null && !posts.isEmpty()) {
+
+		if (posts != null && !posts.isEmpty()) {
 			postDTOs = postMapper.toDTOs(posts);
 		}
-		
+
 		return postDTOs;
 	}
 }

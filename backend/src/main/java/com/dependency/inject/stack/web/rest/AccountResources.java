@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,10 +31,32 @@ public class AccountResources {
 				response = new Response("Account not found", 200, accountDTO);
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			response = new Response("System error", 500, null);
 		}
 		
 		return ResponseEntity.ok(response);
 	}
 	
+	@PutMapping
+	public ResponseEntity<Response> updateAccount(@RequestBody AccountDTO accountDTO){
+		Response response = null;
+//		System.out.println("ACCOUNT UPDATE: " + accountDTO.toString());
+		try {
+			boolean isExist = accountService.isExistById(accountDTO.getUsername());
+			if(isExist) {
+				AccountDTO accountDTORT = accountService.update(accountDTO);
+				if(accountDTORT != null) {
+					response = new Response("update account success", 200, accountDTORT);
+				}else {
+					response = new Response("update fail", 200, accountDTORT);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			response = new Response("System error", 500, null);
+		}
+		
+		return ResponseEntity.ok(response);
+	}
 }

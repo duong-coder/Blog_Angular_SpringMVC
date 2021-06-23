@@ -1,5 +1,8 @@
 <form [formGroup]="profileForm">
     <div class="body-profile font-style">
+      <div class="title">
+        <input class="edit input-text __text " type="text" formControlName="fullname" placeholder="Fullname">
+      </div>
         <div class="profile-container">
             <div class="contents">
                 <div class="__item">
@@ -42,27 +45,38 @@
                     <ul>
                         <li>
                             <fa-icon [icon]="faCalendar" style="font-size: 18px;"></fa-icon>
-                            <!-- <span>{{account.birthday | date: 'MMM d, y'}}</span> -->
                             <input class="edit input-text" type="date" formControlName="birthday" placeholder="Birthday">
                         </li>
                         <li>
                             <fa-icon [icon]="faUser" style="font-size: 18px;"></fa-icon>
-                            <!-- <span>{{account.gender ? 'Male' : "Female"}}</span> -->
                             <input class="edit input-text" type="text" formControlName="gender" placeholder="Gender">
                         </li>
                         <li>
                             <fa-icon [icon]="faPhone" style="font-size: 18px;"></fa-icon>
-                            <!-- <span>{{account.phonenumber}}</span> -->
                             <input class="edit input-text" type="text" formControlName="phonenumber" placeholder="Phonenumber">
                         </li>
                         <li>
                             <fa-icon [icon]="faMail" style="font-size: 18px;"></fa-icon>
-                            <!-- <span>{{account.email}}</span> -->
-                            <input class="edit input-text" type="text" formControlName="email" placeholder="Email">
+                            <textarea class="edit input-text" formControlName="email"
+                             rows="2" cols="30" (keyup)="resizeInput(emailTmp)" #emailTmp placeholder="Email"></textarea>
+                        </li>
+                        <li>
+                            <fa-icon [icon]="faFacebook" style="font-size: 18px;"></fa-icon>
+                            <textarea class="edit input-text" formControlName="facebook"
+                             rows="2" cols="30" (keyup)="resizeInput(facebookTmp)" #facebookTmp placeholder="Facebook"></textarea>
+                        </li>
+                        <li>
+                            <fa-icon [icon]="faGithub" style="font-size: 18px;"></fa-icon>
+                            <textarea class="edit input-text" formControlName="github"
+                             rows="2" cols="30" (keyup)="resizeInput(githubTmp)" #githubTmp placeholder="Github"></textarea>
+                        </li>
+                        <li>
+                            <fa-icon [icon]="faTwitter" style="font-size: 18px;"></fa-icon>
+                            <textarea class="edit input-text" formControlName="twitter"
+                             rows="2" cols="30" (keyup)="resizeInput(twitterTmp)" #twitterTmp placeholder="Twitter"></textarea>
                         </li>
                         <li>
                             <fa-icon [icon]="faAddress" style="font-size: 18px;"></fa-icon>
-                            <!-- <span>{{account.address}}</span> -->
                             <textarea class="edit input-text" formControlName="address"
                              rows="2" cols="30" (keyup)="resizeInput(addressTmp)" #addressTmp placeholder="Address"></textarea>
                         </li>

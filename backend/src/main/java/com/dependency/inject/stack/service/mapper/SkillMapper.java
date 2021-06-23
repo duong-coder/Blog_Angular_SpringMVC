@@ -12,82 +12,90 @@ import com.dependency.inject.stack.service.dto.AccountDTO;
 import com.dependency.inject.stack.service.dto.SkillDTO;
 
 @Component
-public class SkillMapper implements EntityMapper<Skill, SkillDTO, Integer>{
+public class SkillMapper implements EntityMapper<Skill, SkillDTO, Integer> {
 
 	@Autowired
 	private EntityMapper<Account, AccountDTO, String> accountMapper;
-	
+
 	@Override
 	public Skill toEntity(SkillDTO dto) {
 		Skill skill = new Skill();
-		
+
 		skill.setId(dto.getId());
 		skill.setLevel(dto.getLevel());
 		skill.setSkill(dto.getSkill());
-		
+
 		AccountDTO accountDTO = dto.getAccountDTO();
-		if(accountDTO != null) {
+		if (accountDTO != null) {
 			Account account = accountMapper.toEntityFromId(accountDTO.getUsername());
 			skill.setAccount(account);
 		}
-		
+
 		return skill;
 	}
 
 	@Override
 	public SkillDTO toDTO(Skill entity) {
 		SkillDTO skillDTO = new SkillDTO();
-		
+
 		skillDTO.setId(entity.getId());
 		skillDTO.setSkill(entity.getSkill());
 		skillDTO.setLevel(entity.getLevel());
-		
+
 		Account account = entity.getAccount();
-		if(account != null) {
+		if (account != null) {
 			AccountDTO dto = accountMapper.toDTOFromId(account.getUsername());
 			skillDTO.setAccountDTO(dto);
 		}
-		
+
 		return skillDTO;
 	}
 
 	@Override
 	public List<SkillDTO> toDTOs(List<Skill> entities) {
-		List<SkillDTO> skillDTOs = new ArrayList<SkillDTO>();
-		entities.forEach((entity) ->{
-			SkillDTO skillDTO = toDTO(entity);
-			
-			skillDTOs.add(skillDTO);
-		});
-		
-		return skillDTOs;
+		if (entities != null && !entities.isEmpty()) {
+			List<SkillDTO> skillDTOs = new ArrayList<SkillDTO>();
+			entities.forEach((entity) -> {
+				SkillDTO skillDTO = toDTO(entity);
+
+				skillDTOs.add(skillDTO);
+			});
+
+			return skillDTOs;
+		}
+
+		return new ArrayList<SkillDTO>();
 	}
 
 	@Override
 	public List<Skill> toEntities(List<SkillDTO> dtos) {
-		List<Skill> skills = new ArrayList<Skill>();
-		dtos.forEach((dto) ->{
-			Skill skill = toEntity(dto);
-			
-			skills.add(skill);
-		});
-		
-		return skills;
+		if (dtos != null && !dtos.isEmpty()) {
+			List<Skill> skills = new ArrayList<Skill>();
+			dtos.forEach((dto) -> {
+				Skill skill = toEntity(dto);
+
+				skills.add(skill);
+			});
+
+			return skills;
+		}
+
+		return new ArrayList<Skill>();
 	}
 
 	@Override
 	public Skill toEntityFromId(Integer id) {
 		Skill skill = new Skill();
 		skill.setId(id);
-		
+
 		return skill;
 	}
-	
+
 	@Override
 	public SkillDTO toDTOFromId(Integer id) {
 		SkillDTO dto = new SkillDTO();
 		dto.setId(id);
-		
+
 		return dto;
 	}
 }

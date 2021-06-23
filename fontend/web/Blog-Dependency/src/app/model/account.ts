@@ -4,6 +4,7 @@ import { Skill } from './skill';
 import { WorkExperience } from './work-experience';
 
 export class Account {
+    username: string;
     phonenumber: string;
     password: string;
     dateCreate: Date;

@@ -12,7 +12,7 @@ import { ModalService } from 'src/app/service/modal.service';
 })
 export class StarRatingComponent implements OnInit, OnChanges {
   @Input() id: string;
-  @Input() skill: Skill;
+  @Input() skill: Skill = new Skill(0, '', 0);
   @Output() skillRating = new EventEmitter<Skill>();
 
   faStar = faStar;
@@ -29,18 +29,17 @@ export class StarRatingComponent implements OnInit, OnChanges {
     this.element.addEventListener('click', el => {
       this.closeModal();
     });
-    this.modalService.set(this);
-    // this.closeModal();
+    this.modalService.set(this, true);
   }
   ngOnChanges(): void{
     console.log('CHANGE MODAL');
+    this.getSkillRating(this.skill.level);
 
-    this.modalService.set(this);
+    // this.modalService.set(this, false);
   }
 
   openModal(): void {
     console.log('OPEN');
-
     this.element.style.display = 'block';
     document.body.style.overflow = 'hidden';
   }
@@ -50,16 +49,6 @@ export class StarRatingComponent implements OnInit, OnChanges {
     console.log('CLOSE');
     this.element.style.display = 'none';
     document.body.style.overflow = 'visible';
-  }
-
-  previewStarHover(index: number): void {
-    const iconElements = this.element.getElementsByClassName('--icon');
-    for (let i = 0; i < iconElements.length; i++) {
-      iconElements.item(i).classList.remove('checked');
-      for (let t = 0; t < index; t++) {
-        iconElements.item(t).classList.add('checked');
-      }
-    }
   }
 
   getSkillRating(index: number): void {

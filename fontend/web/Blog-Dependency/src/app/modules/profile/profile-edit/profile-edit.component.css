@@ -1,3 +1,24 @@
+.edit{
+  color: #fcf8e0;
+  margin: 0px;
+  padding: 5px;
+  background: none;
+  border: 1px solid #514f50;
+  outline: none;
+  transition: all 0.5s ease;
+}
+.title{
+  display: flex;
+  justify-content: flex-end;
+  background-color: #7c7a79;
+}
+.__text{
+    width: 40%;
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 46px;
+    border: 1px solid #7c7a79;
+}
 
 textarea {
   min-height: 100px;
@@ -16,23 +37,15 @@ textarea:focus {
   outline: none;
   box-shadow: none;
 }
-.sub-contents .edit{
-  color: #fcf8e0;
-  margin: 0px;
-  padding: 5px;
-  background: none;
-  border: 1px solid #514f50;
-  outline: none;
-  transition: all 0.5s ease;
-}
-.sub-contents textarea{
-  color: #fcf8e0;
+
+textarea{
+  /* color: #fcf8e0; */
   /* width: 85%; */
   min-height: auto;
   height: fit-content;
 }
 
-.sub-contents input {
+input {
   color: #fcf8e0;
   line-height: normal;
   width: 100%;
@@ -40,11 +53,11 @@ textarea:focus {
 
 }
 
-.sub-contents input:hover,.sub-contents textarea:hover {
+input:hover,textarea:hover {
   border: 1px solid #fcf8e0;
 }
 
-.sub-contents input:focus,.sub-contents textarea:focus {
+input:focus,textarea:focus {
   border: 1px solid #fcf8e0;
   outline: none;
   box-shadow: none;

@@ -7,10 +7,13 @@ export class ModalService {
   modal: any;
 
   constructor() { }
-  set(modal: any): void {
+  set(modal: any, isClose: boolean): void {
     this.modal = modal;
     console.log('MODALS: ', this.modal);
     this.open(modal.id);
+    if (isClose){
+      this.close(modal.id);
+    }
   }
   open(id: string): void {
     if (this.modal && this.modal.id === id) {
@@ -19,9 +22,9 @@ export class ModalService {
   }
   close(id: string): void {
     if (this.modal && this.modal.id === id) {
-      this.modal.openModal();
+      this.modal.closeModal();
     }
-    this.modal.closeModal();
+    // this.modal.closeModal();
   }
   remove(id: string): void {
     if (this.modal && this.modal.id === id) {

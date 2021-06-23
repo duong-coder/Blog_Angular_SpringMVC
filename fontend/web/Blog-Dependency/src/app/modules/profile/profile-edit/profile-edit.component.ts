@@ -1,5 +1,6 @@
-import { Component, OnInit, forwardRef, OnChanges, ElementRef } from '@angular/core';
+import { Component, OnInit, forwardRef, OnChanges, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, NG_VALUE_ACCESSOR, NG_VALIDATORS, FormArray } from '@angular/forms';
+import { faFacebook, faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { faAward, faBookmark, faBullseye, faCalendarAlt, faEnvelope, faLightbulb, faMapMarkedAlt, faPen, faPhone, faUser, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { StarRatingComponent } from 'src/app/common/star-rating/star-rating.component';
 import { Account } from 'src/app/model/account';
@@ -14,13 +15,20 @@ import { IProfileContent } from '../profile-detail/profile-detail.component';
   styleUrls: ['./profile-edit.component.css', '../profile-detail/profile-detail.component.css']
 })
 export class ProfileEditComponent implements OnInit, OnChanges {
-  account: Account = new Account();
+  @ViewChild(StarRatingComponent)
+  starRatingComponent: StarRatingComponent;
+
   skillRating: Skill = new Skill(0, '', 0);
+
+  account: Account = new Account();
 
   faCalendar = faCalendarAlt;
   faUser = faUser;
   faPhone = faPhone;
   faMail = faEnvelope;
+  faGithub = faGithub;
+  faTwitter = faTwitter;
+  faFacebook = faFacebook;
   faAddress = faMapMarkedAlt;
   profileContents: IProfileContent[] = [
     { hasIcon: true, icon: faBullseye, title: 'Objective' },
@@ -34,6 +42,7 @@ export class ProfileEditComponent implements OnInit, OnChanges {
   ];
   isEdit: true;
   profileForm = this.fb.group({
+    fullname: [''],
     objective: [''],
     awards: [''],
     addInformation: [''],
@@ -42,6 +51,9 @@ export class ProfileEditComponent implements OnInit, OnChanges {
     birthday: [new Date()],
     address: [''],
     email: [''],
+    facebook: [''],
+    github: [''],
+    twitter: [''],
     gender: [''],
     hobby: [''],
     educationDTOs: this.fb.array([]),
@@ -91,7 +103,8 @@ export class ProfileEditComponent implements OnInit, OnChanges {
         description: [edu.description],
         dateStart: [edu.dateStart.toISOString().split('T')[0]],
         dateEnd: [edu.dateEnd.toISOString().split('T')[0]],
-        gpa: [edu.gpa]
+        gpa: [edu.gpa],
+        accountDTO: [edu.accountDTO]
       });
 
       listEduForm.push(eduForm);
@@ -104,13 +117,15 @@ export class ProfileEditComponent implements OnInit, OnChanges {
         titleOrPosition: [we.titleOrPosition],
         description: [we.description],
         dateStart: [we.dateStart.toISOString().split('T')[0]],
-        dateEnd: [we.dateEnd.toISOString().split('T')[0]]
+        dateEnd: [we.dateEnd.toISOString().split('T')[0]],
+        accountDTO: [we.accountDTO]
       });
 
       listWEForm.push(weForm);
     });
 
     this.profileForm = this.fb.group({
+      fullname: [this.account.fullname],
       objective: [this.account.objective],
       awards: [this.account.awards],
       addInformation: [this.account.addInformation],
@@ -119,6 +134,9 @@ export class ProfileEditComponent implements OnInit, OnChanges {
       birthday: [new Date(this.account.birthday).toISOString().split('T')[0]],
       address: [this.account.address],
       email: [this.account.email],
+      facebook: [this.account.facebook],
+      github: [this.account.github],
+      twitter: [this.account.twitter],
       gender: [this.account.gender ? 'Male' : 'Female'],
       hobby: [this.account.hobby],
       educationDTOs: listEduForm,
@@ -130,25 +148,34 @@ export class ProfileEditComponent implements OnInit, OnChanges {
   }
   openSkillRatingModal(skill: Skill): void {
     this.skillRating = skill;
-    const ele = document.getElementsByTagName('app-star-rating').item(0);
-    const eleRef = new ElementRef<Element>(ele);
-    const modal = new StarRatingComponent(eleRef, this.modalService);
+    // const ele = document.getElementsByTagName('app-star-rating').item(0);
+    // const eleRef = new ElementRef<Element>(ele);
+    // const modal = new StarRatingComponent(eleRef, this.modalService);
+    const modal = this.starRatingComponent;
 
-    this.modalService.set(modal);
+    this.modalService.set(modal, false);
     console.log('OPEN MODAL', skill);
 
   }
   getSkillRating(item: Skill): void {
-    console.log('SKILL RATING', item);
-    const skill = this.account.skillDTOs.find(s => {
-      return s.skill === item.skill;
-    });
-    skill.level = item.level;
+    const skillDTOs = this.account.skillDTOs;
+    let skill: Skill;
+    if (skillDTOs != null && skillDTOs !== undefined) {
+      skill = skillDTOs.find(s => {
+        return s.skill === item.skill;
+      });
+      skill.level = item.level;
+    }
   }
 
   update(): void {
-    const accountAfterUpdate = this.profileForm.getRawValue() as Account;
+    const accountAfterUpdate = this.profileForm.getRawValue();
     accountAfterUpdate.skillDTOs = this.account.skillDTOs;
+    accountAfterUpdate.gender = accountAfterUpdate.gender === 'Female';
+    accountAfterUpdate.password = this.account.password;
+    accountAfterUpdate.role = this.account.role;
+    accountAfterUpdate.username = this.account.username;
+    accountAfterUpdate.dateCreate = this.account.dateCreate;
 
     console.log('post in serve', accountAfterUpdate);
 
@@ -162,7 +189,7 @@ export class ProfileEditComponent implements OnInit, OnChanges {
 
       },
       complete: () => {
-        console.error('RESPONSE UPDATE: COMPLETE');
+        console.log('RESPONSE UPDATE: COMPLETE');
 
       }
     });

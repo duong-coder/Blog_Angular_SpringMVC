@@ -7,11 +7,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.dependency.inject.stack.domain.Post;
+import com.dependency.inject.stack.domain.WorkExperience;
 
 @Repository
 @Transactional
-public interface PostRepository extends JpaRepository<Post, Integer>{
+public interface WorkExperienceRepository extends JpaRepository<WorkExperience, Integer>{
 //	void insert(Post post);
 //	
 //	void update(Post post);
@@ -22,6 +22,6 @@ public interface PostRepository extends JpaRepository<Post, Integer>{
 //	
 //	List<Post> getAll();
 //
-	@Query(value = "SELECT p FROM Post p WHERE p.account.username = ?1")
-	List<Post> findAllByAccountId(String id);
+	@Query(value = "SELECT we FROM Skill we WHERE we.account.username = ?1")
+	List<WorkExperience> findAllByAccountId(String id);
 }

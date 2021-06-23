@@ -45,7 +45,7 @@ public class PostResources {
 	}
 
 	@GetMapping(path = "/all/{username}")
-	public ResponseEntity<Response> getAllPostByAccount(@PathVariable("usernaame") String username) {
+	public ResponseEntity<Response> getAllPostByAccount(@PathVariable("username") String username) {
 		List<PostDTO> postDTOs = new ArrayList<PostDTO>();
 		Response response = null;
 		try {

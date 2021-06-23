@@ -3,9 +3,13 @@ package com.dependency.inject.stack.service.dto;
 import java.util.Date;
 import java.util.List;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class AccountDTO {
 	
 	private String username;
@@ -32,4 +36,7 @@ public class AccountDTO {
 	private List<EducationDTO> educationDTOs;
 	private List<WorkExperienceDTO> workExperienceDTOs;
 	
+	public AccountDTO (String username) {
+		this.username = username;
+	}
 }

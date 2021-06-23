@@ -10,6 +10,8 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import lombok.Data;
 @Data
@@ -29,12 +31,14 @@ public class Account implements Serializable{
 	private String password;
 	
 	@Column(name = "date_create")
+//	@Temporal(TemporalType.TIME)
 	private Date dateCreate;
 	
-	@Column(name = "full_name")
+	@Column(name = "fullname")
 	private String fullname;
 	
 	@Column(name = "birthday")
+	@Temporal(TemporalType.DATE)
 	private Date birthday;
 	
 	@Column(name = "address")
@@ -55,7 +59,7 @@ public class Account implements Serializable{
 	@Column(name = "twitter")
 	private String twitter;
 	
-	@Column(name = "role")
+	@Column(name = "roles")
 	private String role;
 	
 	@Column(name = "hobby")
@@ -67,7 +71,7 @@ public class Account implements Serializable{
 	@Column(name = "add_information")
 	private String addInformation;
 	
-	@Column(name = "references")
+	@Column(name = "reference")
 	private String references;
 	
 	@Column(name = "awards")

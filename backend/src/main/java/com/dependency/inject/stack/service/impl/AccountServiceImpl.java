@@ -1,5 +1,6 @@
 package com.dependency.inject.stack.service.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,13 @@ import org.springframework.transaction.annotation.Transactional;
 import com.dependency.inject.stack.domain.Account;
 import com.dependency.inject.stack.repository.AccountRepository;
 import com.dependency.inject.stack.service.AccountService;
+import com.dependency.inject.stack.service.EducationService;
+import com.dependency.inject.stack.service.SkillService;
+import com.dependency.inject.stack.service.WorkExperienceService;
 import com.dependency.inject.stack.service.dto.AccountDTO;
+import com.dependency.inject.stack.service.dto.EducationDTO;
+import com.dependency.inject.stack.service.dto.SkillDTO;
+import com.dependency.inject.stack.service.dto.WorkExperienceDTO;
 import com.dependency.inject.stack.service.mapper.EntityMapper;
 
 @Service
@@ -21,6 +28,49 @@ public class AccountServiceImpl implements AccountService{
 	@Autowired
 	private EntityMapper<Account, AccountDTO, String> accountMapper;
 	
+	@Autowired
+	private SkillService skillService;
+	@Autowired
+	private EducationService educationService;
+	@Autowired
+	private WorkExperienceService weService;
+	
+	@Override
+	public AccountDTO update(AccountDTO dto) {
+		if(dto == null) {
+			return null;
+		}
+		if(isExistById(dto.getUsername())) {
+			
+			List<SkillDTO> skillDTOs = dto.getSkillDTOs();
+			if(skillDTOs != null) {
+				skillDTOs.forEach((s) -> {
+					skillService.update(s);
+				});
+			}
+			List<EducationDTO> educationDTOs = dto.getEducationDTOs();
+			if(educationDTOs != null) {
+				educationDTOs.forEach(e -> {
+					educationService.update(e);
+				});
+			}
+			List<WorkExperienceDTO> weDTOs = dto.getWorkExperienceDTOs();
+			if(weDTOs != null) {
+				weDTOs.forEach(w -> {
+					weService.update(w);
+				});
+			}
+			
+			Account account = accountMapper.toEntity(dto);
+			Account accountRT = accountRepository.save(account);
+			
+			
+			return accountMapper.toDTO(accountRT);
+		}
+		
+		return null;
+	}
+	
 	@Override
 	public AccountDTO findById(String id) {
 		Optional<Account> entityOp = accountRepository.findById(id);
@@ -30,5 +80,8 @@ public class AccountServiceImpl implements AccountService{
 		
 		return null;
 	}
-
+	@Override
+	public boolean isExistById(String id) {
+		return accountRepository.existsById(id);
+	}
 }

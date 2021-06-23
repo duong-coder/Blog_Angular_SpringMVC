@@ -8,9 +8,9 @@ import com.dependency.inject.stack.service.dto.PostDTO;
 
 @Service
 public interface PostService {
-	void insert(PostDTO dto);
+	PostDTO insert(PostDTO dto);
 	
-	void update(PostDTO dto);
+	PostDTO update(PostDTO dto);
 	
 	void delete(int id);
 	
@@ -19,4 +19,6 @@ public interface PostService {
 	List<PostDTO> findAll();
 	
 	List<PostDTO> findAllByAccountId(String id);
+
+	boolean isExistById(int id);
 }
