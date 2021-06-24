@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -84,9 +85,11 @@ public class Account implements Serializable{
 	private List<Skill> skills;
 	
 	@OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
+	@OrderBy(value = "sortIndex DESC")
 	private List<Education> educations;
 	
 	@OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
+	@OrderBy(value = "sortIndex DESC")
 	private List<WorkExperience> workExperiences;
 	
 }

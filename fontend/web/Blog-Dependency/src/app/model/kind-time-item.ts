@@ -5,4 +5,5 @@ import { WorkExperience } from './work-experience';
 export interface KindTimeItemForm {
     formGroup: FormGroup;
     kind: string;
+    index: number;
 }

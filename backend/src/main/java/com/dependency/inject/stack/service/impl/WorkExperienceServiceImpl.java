@@ -1,5 +1,6 @@
 package com.dependency.inject.stack.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,11 +41,18 @@ public class WorkExperienceServiceImpl implements WorkExperienceService{
 		if(isExistById(dto.getId())) {
 			WorkExperience we = weMapper.toEntity(dto);
 			WorkExperience weRT = experienceRepository.save(we); 
-			
+
 			return weMapper.toDTO(weRT);
 		}
 		
 		return null;
+	}
+	
+	@Override
+	public void setOrderIndex(int id) {
+		if(isExistById(id)) {
+			experienceRepository.setSortIndex(id);
+		}
 	}
 
 	@Override
@@ -73,8 +81,57 @@ public class WorkExperienceServiceImpl implements WorkExperienceService{
 
 	@Override
 	public List<WorkExperienceDTO> findAllByAccountId(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		List<WorkExperience> experiences = experienceRepository.findAllByAccountId(id);
+		List<WorkExperienceDTO> dtos = new ArrayList<>();
+		if(experiences != null && !experiences.isEmpty()) {
+			dtos = weMapper.toDTOs(experiences);
+		}
+		
+		return dtos;
 	}
-
+	
+	@Override
+	public List<WorkExperienceDTO> findAllDTOWillAdd(List<WorkExperienceDTO> experienceDTOs, String accountId){
+		List<WorkExperienceDTO> experienceDTOsWillAdd = new ArrayList<>();
+		if(experienceDTOs == null) {
+			return experienceDTOsWillAdd;
+		}
+		List<WorkExperienceDTO> experienceDTOsInDB = this.findAllByAccountId(accountId);
+		for(WorkExperienceDTO we : experienceDTOs) {
+			boolean isAdd = true;
+			for(WorkExperienceDTO weDB : experienceDTOsInDB) {
+				if(weDB.getId() == we.getId()) {
+					isAdd = false;
+				}
+			}
+			if(isAdd) {
+				experienceDTOsWillAdd.add(we);
+			}
+		}
+		
+		return experienceDTOsWillAdd;
+	}
+	
+	@Override
+	public List<WorkExperienceDTO> findAllDTOWillDelete(List<WorkExperienceDTO> experienceDTOs, String accountId){
+		List<WorkExperienceDTO> experienceDTOsWillDelete = new ArrayList<>();
+		if(experienceDTOs == null) {
+			return experienceDTOsWillDelete;
+		}
+		
+		List<WorkExperienceDTO> experienceDTOsInDB = this.findAllByAccountId(accountId);
+		for(WorkExperienceDTO weDb : experienceDTOsInDB) {
+			boolean isDelete = true;
+			for(WorkExperienceDTO we : experienceDTOs) {
+				if(we.getId() == weDb.getId()) {
+					isDelete = false;
+				}
+			}
+			if(isDelete) {
+				experienceDTOsWillDelete.add(weDb);
+			}
+		}
+		
+		return experienceDTOsWillDelete;
+	}
 }

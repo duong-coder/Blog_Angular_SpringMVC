@@ -26,7 +26,8 @@ public class WorkExperienceMapper implements EntityMapper<WorkExperience, WorkEx
 		wE.setDescription(dto.getDescription());
 		wE.setDateStart(dto.getDateStart());
 		wE.setDateEnd(dto.getDateEnd());
-
+		wE.setSortIndex(dto.getSortIndex());
+		
 		AccountDTO accountDTO = dto.getAccountDTO();
 		if (accountDTO != null) {
 			Account account = accountMapper.toEntityFromId(accountDTO.getUsername());
@@ -45,7 +46,8 @@ public class WorkExperienceMapper implements EntityMapper<WorkExperience, WorkEx
 		dto.setDescription(entity.getDescription());
 		dto.setDateStart(entity.getDateStart());
 		dto.setDateEnd(entity.getDateEnd());
-
+		dto.setSortIndex(entity.getSortIndex());
+		
 		Account account = entity.getAccount();
 		if (account != null) {
 			AccountDTO accountDTO = accountMapper.toDTOFromId(account.getUsername());

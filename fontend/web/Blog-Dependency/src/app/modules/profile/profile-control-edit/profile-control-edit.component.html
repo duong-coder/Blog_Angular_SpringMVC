@@ -5,11 +5,11 @@
     <button class="__btn __move" (click)="moveDown()">
         <fa-icon [icon]="icons[1]" style="font-size: 16px;"></fa-icon>
     </button>
-    <button class="__btn __add" (click)="add(item, isEven)">
+    <button class="__btn __add" (click)="add(item)">
         <fa-icon [icon]="icons[2]" style="font-size: 16px;"></fa-icon>
         <span>Thêm</span>
     </button>
-    <button class="__btn __delete" (click)="delete()">
+    <button class="__btn __delete" (click)="delete(item.index)">
         <fa-icon [icon]="icons[3]" style="font-size: 16px;"></fa-icon>
         <span>Xóa</span>
     </button>

@@ -19,4 +19,10 @@ public interface EducationService {
 	
 	List<EducationDTO> findAllByAccountId(String id);
 
+	List<EducationDTO> findAllDTOWillDelete(List<EducationDTO> dtos, String accountId);
+
+	List<EducationDTO> findAllDTOWillAdd(List<EducationDTO> dtos, String accountId);
+
+	void setSortIndex(int id);
+
 }

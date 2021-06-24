@@ -1,16 +1,37 @@
-.edit{
-  color: #fcf8e0;
-  margin: 0px;
-  padding: 5px;
+
+textarea {
+  padding: 10px;
+  width: 100%;
+  height: fit-content;
   background: none;
-  border: 1px solid #514f50;
+  border: 1px solid #fcf8e0;
   outline: none;
+  box-shadow: none;
+  font-family: robotocondensed,Arial,sans-serif;
   transition: all 0.5s ease;
 }
+
+input {
+  padding: 5px;
+  line-height: normal;
+  width: 100%;
+  height: fit-content;
+  background: none;
+  outline: none;
+  box-shadow: none;
+  font-family: robotocondensed,Arial,sans-serif;
+  transition: all 0.5s ease;
+}
+
+
 .title{
   display: flex;
   justify-content: flex-end;
   background-color: #7c7a79;
+  padding: 20px;
+}
+.title input{
+  border: 1px solid #7c7a79;
 }
 .__text{
     width: 40%;
@@ -19,46 +40,40 @@
     line-height: 46px;
     border: 1px solid #7c7a79;
 }
-
-textarea {
-  min-height: 100px;
-  background: none;
+.edit-left{
+  color: #514f50;
+  margin: 0px;
+  padding: 5px;
+  height: 75px;
   border: 1px solid #fcf8e0;
-  outline: none;
-  transition: all 0.5s ease;
 }
-
-textarea:hover {
+.contents input:hover,.contents textarea:hover{
   border: 1px solid #514f50;
 }
-
-textarea:focus {
+.contents input:focus,.contents textarea:focus{
   border: 1px solid #514f50;
   outline: none;
   box-shadow: none;
 }
 
-textarea{
-  /* color: #fcf8e0; */
-  /* width: 85%; */
-  min-height: auto;
-  height: fit-content;
-}
-
-input {
+.edit-right{
   color: #fcf8e0;
-  line-height: normal;
-  width: 100%;
-  height: fit-content;
-
+  margin: 0px;
+  padding: 5px;
+  border: 1px solid #514f50;
 }
-
-input:hover,textarea:hover {
+.sub-contents input:hover,.sub-contents textarea:hover,
+.title input:hover,.title textarea:hover {
   border: 1px solid #fcf8e0;
 }
 
-input:focus,textarea:focus {
+.sub-contents input:focus,.sub-contents textarea:focus,
+.title input:focus,.title textarea:focus {
   border: 1px solid #fcf8e0;
   outline: none;
   box-shadow: none;
+}
+
+.__favorites textarea{
+  border: 1px solid #414142;
 }

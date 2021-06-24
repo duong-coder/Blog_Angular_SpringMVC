@@ -44,6 +44,9 @@ public class WorkExperience implements Serializable{
 	@Column(name = "date_end")
 	@Temporal(TemporalType.DATE)
 	private Date dateEnd;
+	
+	@Column(name = "sort_index")
+	private int sortIndex;
 
 	@ManyToOne
 	@JoinColumn(name = "username")

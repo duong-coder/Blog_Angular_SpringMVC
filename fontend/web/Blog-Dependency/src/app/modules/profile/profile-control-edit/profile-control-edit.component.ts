@@ -12,16 +12,13 @@ import { ComponentService } from 'src/app/service/component.service';
   styleUrls: ['./profile-control-edit.component.css']
 })
 export class ProfileControlEditComponent implements OnInit {
-  @Output() addEducationEvent = new EventEmitter<KindTimeItemForm>();
+  @Output() addItemForm = new EventEmitter<KindTimeItemForm>();
+  @Output() deleteItemForm = new EventEmitter<number>();
   @Input() item: KindTimeItemForm;
-  @Input() isEven?: boolean;
 
   icons: IconDefinition[] = [faSortUp, faSortDown, faPlus, faMinus];
 
-  constructor(
-    private componentService: ComponentService,
-    private viewContainerRef: ViewContainerRef
-  ) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
@@ -34,23 +31,11 @@ export class ProfileControlEditComponent implements OnInit {
 
   }
 
-  add(item: KindTimeItemForm, isEven: boolean): void {
-    this.addEducationEvent.emit(item);
+  add(item: KindTimeItemForm): void {
+    this.addItemForm.emit(item);
   }
 
-  delete(): void {
-
+  delete(index: number): void {
+    this.deleteItemForm.emit(index);
   }
-
-  // add(item: KindTimeItem, isEven: boolean): void {
-  //   let propItemObj = 'itemEducation';
-  //   if (item.kind === 'WorkExperience') {
-  //     propItemObj = 'itemWorkExperience';
-  //   }
-  //   const inputs: InputComponent[] = [
-  //     { prop: propItemObj, value: item.obj },
-  //     { prop: 'isEven', value: !isEven }
-  //   ];
-  //   this.addEducationEvent.emit(inputs);
-  // }
 }

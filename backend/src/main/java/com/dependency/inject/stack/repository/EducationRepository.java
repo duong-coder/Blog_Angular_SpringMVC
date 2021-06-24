@@ -3,6 +3,7 @@ package com.dependency.inject.stack.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +16,10 @@ public interface EducationRepository extends JpaRepository<Education, Integer>{
 //	void insert(Post post);
 //	
 //	void update(Post post);
+	
+	@Modifying
+	@Query(value = "UPDATE Education e SET e.sortIndex = ?1 WHERE e.id = ?1")
+	void setSortIndex(int id);
 //	
 //	void delete(int id);
 //	
@@ -22,6 +27,6 @@ public interface EducationRepository extends JpaRepository<Education, Integer>{
 //	
 //	List<Post> getAll();
 //
-	@Query(value = "SELECT e FROM Education e WHERE e.account.username = ?1")
+	@Query(value = "SELECT e FROM Education e WHERE e.account.username = ?1 ORDER BY e.sortIndex DESC")
 	List<Education> findAllByAccountId(String id);
 }

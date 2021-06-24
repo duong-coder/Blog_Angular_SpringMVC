@@ -103,6 +103,7 @@ export class MappingService {
     education.description = educationMapping.description;
     education.dateStart = new Date(educationMapping.dateStart);
     education.dateEnd = new Date(educationMapping.dateEnd);
+    education.sortIndex = educationMapping.sortIndex;
 
     const account = new Account();
     account.username = educationMapping.accountDTO.username;
@@ -130,6 +131,7 @@ export class MappingService {
     workExperience.description = weMapping.description;
     workExperience.dateStart = new Date(weMapping.dateStart);
     workExperience.dateEnd = new Date(weMapping.dateEnd);
+    workExperience.sortIndex = weMapping.sortIndex;
 
     const account = new Account();
     account.username = weMapping.accountDTO.username;

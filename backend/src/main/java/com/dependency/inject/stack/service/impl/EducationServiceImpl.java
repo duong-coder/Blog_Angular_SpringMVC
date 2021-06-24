@@ -1,5 +1,6 @@
 package com.dependency.inject.stack.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,13 @@ public class EducationServiceImpl implements EducationService {
 		}
 		return null;
 	}
+	
+	@Override
+	public void setSortIndex(int id) {
+		if (isExistById(id)) {
+			educationRepository.setSortIndex(id);
+		}
+	}
 
 	@Override
 	public boolean isExistById(int id) {
@@ -54,8 +62,9 @@ public class EducationServiceImpl implements EducationService {
 
 	@Override
 	public void delete(int id) {
-		// TODO Auto-generated method stub
-
+		if(isExistById(id)) {
+			educationRepository.deleteById(id);
+		}
 	}
 
 	@Override
@@ -72,8 +81,56 @@ public class EducationServiceImpl implements EducationService {
 
 	@Override
 	public List<EducationDTO> findAllByAccountId(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Education> educations = educationRepository.findAllByAccountId(id);
+		List<EducationDTO> dtos = new ArrayList<>();
+		if(educations != null && !educations.isEmpty()) {
+			dtos = educationMapper.toDTOs(educations);
+		}
+		
+		return dtos;
 	}
-
+	
+	@Override
+	public List<EducationDTO> findAllDTOWillAdd(List<EducationDTO> dtos, String accountId){
+		List<EducationDTO> educationsWillAdd = new ArrayList<>();
+		if(dtos == null) {
+			return educationsWillAdd;
+		}
+		List<EducationDTO> eduDTOsDB = findAllByAccountId(accountId);
+		for(EducationDTO edu : dtos) {
+			boolean isAdd = true;
+			for(EducationDTO eduDB : eduDTOsDB) {
+				if(eduDB.getId() == edu.getId()) {
+					isAdd = false;
+				}
+			}
+			if(isAdd) {
+				educationsWillAdd.add(edu);
+			}
+		}
+		
+		return educationsWillAdd;
+	}
+	
+	@Override
+	public List<EducationDTO> findAllDTOWillDelete(List<EducationDTO> dtos, String accountId){
+		List<EducationDTO> educationsWillDelete = new ArrayList<>();
+		if(dtos == null) {
+			return educationsWillDelete;
+		}
+		List<EducationDTO> educationDTOsDB = this.findAllByAccountId(accountId);
+		for(EducationDTO eduDB : educationDTOsDB) {
+			boolean isDelete = true;
+			for(EducationDTO edu : dtos) {
+				if(eduDB.getId() == edu.getId()) {
+					isDelete = false;
+				}
+			}
+			if(isDelete) {
+				educationsWillDelete.add(eduDB);
+			}
+		}
+		
+		return educationsWillDelete;
+	}
 }

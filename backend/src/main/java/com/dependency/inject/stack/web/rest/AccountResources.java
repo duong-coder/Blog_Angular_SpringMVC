@@ -19,6 +19,8 @@ public class AccountResources {
 	
 	@Autowired
 	private AccountService accountService;
+//	@Autowired
+//	private WorkExperienceService weService;
 	
 	@GetMapping(path = "/{username}")
 	public ResponseEntity<Response> getAccount(@PathVariable("username") String username) {
@@ -41,7 +43,7 @@ public class AccountResources {
 	@PutMapping
 	public ResponseEntity<Response> updateAccount(@RequestBody AccountDTO accountDTO){
 		Response response = null;
-//		System.out.println("ACCOUNT UPDATE: " + accountDTO.toString());
+		System.out.println("ACCOUNT UPDATE: " + accountDTO.toString());
 		try {
 			boolean isExist = accountService.isExistById(accountDTO.getUsername());
 			if(isExist) {
@@ -59,4 +61,6 @@ public class AccountResources {
 		
 		return ResponseEntity.ok(response);
 	}
+	
+	
 }

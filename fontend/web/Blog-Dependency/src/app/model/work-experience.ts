@@ -7,5 +7,6 @@ export class WorkExperience{
     description: string;
     dateStart: Date;
     dateEnd: Date;
+    sortIndex: number;
     accountDTO: Account;
 }

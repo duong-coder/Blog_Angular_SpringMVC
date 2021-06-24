@@ -7,5 +7,6 @@ export class Education{
     gpa: number;
     dateStart: Date;
     dateEnd: Date;
+    sortIndex: number;
     accountDTO: Account;
 }

@@ -46,6 +46,9 @@ public class Education implements Serializable{/**
 	@Temporal(TemporalType.DATE)
 	private Date dateEnd;
 	
+	@Column(name = "sort_index")
+	private int sortIndex;
+	
 	@ManyToOne
 	@JoinColumn(name = "username")
 	private Account account;

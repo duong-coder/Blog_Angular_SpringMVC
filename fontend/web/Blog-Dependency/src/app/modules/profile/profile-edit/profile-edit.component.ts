@@ -6,6 +6,7 @@ import { StarRatingComponent } from 'src/app/common/star-rating/star-rating.comp
 import { Account } from 'src/app/model/account';
 import { Skill } from 'src/app/model/skill';
 import { AccountService } from 'src/app/service/account.service';
+import { FormService } from 'src/app/service/form.service';
 import { ModalService } from 'src/app/service/modal.service';
 import { IProfileContent } from '../profile-detail/profile-detail.component';
 
@@ -41,29 +42,13 @@ export class ProfileEditComponent implements OnInit, OnChanges {
     { hasIcon: false, icon: undefined, title: 'INTERESTS' }
   ];
   isEdit: true;
-  profileForm = this.fb.group({
-    fullname: [''],
-    objective: [''],
-    awards: [''],
-    addInformation: [''],
-    references: [''],
-    phonenumber: [''],
-    birthday: [new Date()],
-    address: [''],
-    email: [''],
-    facebook: [''],
-    github: [''],
-    twitter: [''],
-    gender: [''],
-    hobby: [''],
-    educationDTOs: this.fb.array([]),
-    workExperienceDTOs: this.fb.array([]),
-  });
+  profileForm = this.formService.createAccountFormGroup();
 
   constructor(
     private acccountService: AccountService,
     private fb: FormBuilder,
-    private modalService: ModalService) { }
+    private modalService: ModalService,
+    private formService: FormService) { }
 
   ngOnInit(): void {
     this.getProfile();
@@ -97,51 +82,18 @@ export class ProfileEditComponent implements OnInit, OnChanges {
     const listWEForm = this.fb.array([]);
 
     this.account.educationDTOs.forEach(edu => {
-      const eduForm = this.fb.group({
-        id: [edu.id],
-        name: [edu.name],
-        description: [edu.description],
-        dateStart: [edu.dateStart.toISOString().split('T')[0]],
-        dateEnd: [edu.dateEnd.toISOString().split('T')[0]],
-        gpa: [edu.gpa],
-        accountDTO: [edu.accountDTO]
-      });
+      const eduForm = this.formService.createEducationFormGroup(edu);
 
       listEduForm.push(eduForm);
     });
 
     this.account.workExperienceDTOs.forEach(we => {
-      const weForm = this.fb.group({
-        id: [we.id],
-        companyOrAppName: [we.companyOrAppName],
-        titleOrPosition: [we.titleOrPosition],
-        description: [we.description],
-        dateStart: [we.dateStart.toISOString().split('T')[0]],
-        dateEnd: [we.dateEnd.toISOString().split('T')[0]],
-        accountDTO: [we.accountDTO]
-      });
+      const weForm = this.formService.createWorkExperienceFormGroup(we);
 
       listWEForm.push(weForm);
     });
 
-    this.profileForm = this.fb.group({
-      fullname: [this.account.fullname],
-      objective: [this.account.objective],
-      awards: [this.account.awards],
-      addInformation: [this.account.addInformation],
-      references: [this.account.references],
-      phonenumber: [this.account.phonenumber],
-      birthday: [new Date(this.account.birthday).toISOString().split('T')[0]],
-      address: [this.account.address],
-      email: [this.account.email],
-      facebook: [this.account.facebook],
-      github: [this.account.github],
-      twitter: [this.account.twitter],
-      gender: [this.account.gender ? 'Male' : 'Female'],
-      hobby: [this.account.hobby],
-      educationDTOs: listEduForm,
-      workExperienceDTOs: listWEForm,
-    });
+    this.profileForm = this.formService.createAccountFormGroupWithData(this.account, listEduForm, listWEForm);
   }
 
   getPercentSkill(): void {

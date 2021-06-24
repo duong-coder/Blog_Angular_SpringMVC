@@ -12,5 +12,6 @@ public class EducationDTO {
 	private float gpa;
 	private Date dateStart;
 	private Date dateEnd;
+	private int sortIndex;
 	private AccountDTO accountDTO;
 }

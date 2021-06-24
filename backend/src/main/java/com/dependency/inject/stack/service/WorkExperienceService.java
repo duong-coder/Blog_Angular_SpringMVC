@@ -19,4 +19,10 @@ public interface WorkExperienceService {
 	
 	List<WorkExperienceDTO> findAllByAccountId(String id);
 
+	List<WorkExperienceDTO> findAllDTOWillDelete(List<WorkExperienceDTO> experienceDTOs, String accountId);
+
+	List<WorkExperienceDTO> findAllDTOWillAdd(List<WorkExperienceDTO> experienceDTOs, String accountId);
+
+	void setOrderIndex(int id);
+
 }

@@ -19,4 +19,8 @@ public interface SkillService {
 	
 	List<SkillDTO> findAllByAccountId(String id);
 
+	List<SkillDTO> findAllDTOWillDelete(List<SkillDTO> dtos, String accountId);
+
+	List<SkillDTO> findAllDTOWillAdd(List<SkillDTO> dtos, String accountId);
+
 }
