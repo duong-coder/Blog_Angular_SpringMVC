@@ -64,8 +64,9 @@ public class AccountServiceImpl implements AccountService{
 				});
 				List<EducationDTO> eduDTOsWillAdd = educationService.findAllDTOWillAdd(educationDTOs, dto.getUsername());
 				eduDTOsWillAdd.forEach(edu -> {
-					EducationDTO dtoRT = educationService.insert(edu);
-					educationService.setSortIndex(dtoRT.getId());
+					educationService.insert(edu);
+//					EducationDTO dtoRT = educationService.insert(edu);
+//					educationService.setSortIndex(dtoRT.getId());
 				});
 				educationDTOs.forEach(e -> {
 					educationService.update(e);

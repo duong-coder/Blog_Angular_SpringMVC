@@ -96,6 +96,7 @@ public class SkillServiceImpl implements SkillService {
 			for(SkillDTO skillDB : skillDTOsDB) {
 				if(skillDB.getId() == skill.getId()) {
 					isAdd = false;
+					break;
 				}
 			}
 			if (isAdd) {
@@ -118,6 +119,7 @@ public class SkillServiceImpl implements SkillService {
 			for (SkillDTO skill : dtos) {
 				if (skillDB.getId() == skill.getId()) {
 					isDelete = false;
+					break;
 				}
 			}
 			if (isDelete) {

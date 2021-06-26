@@ -3,15 +3,18 @@
         <ng-container [ngSwitch]="listFormByKind.kind">
             <ng-container *ngSwitchCase="'Education'">
                 <ng-container *ngFor="let item of listFormByKind.formArray.controls; even as isEven; let i = index">
-                    <app-profile-time-item-edit [parentComponent]="self" [isEven]="isEven"
+                    <app-profile-time-item-edit
+                      [parentComponent]="self" [isEven]="isEven"
                       [itemEducationForm]="item" [index]="i">
                     </app-profile-time-item-edit>
                 </ng-container>
             </ng-container>
             <ng-container *ngSwitchCase="'WorkExperience'">
                 <ng-container *ngFor="let item of listFormByKind.formArray.controls; even as isEven; let i = index">
-                    <app-profile-time-item-edit [parentComponent]="self" [isEven]="isEven"
-                      [itemWorkExperienceForm]="item" [index]="i">
+                    <app-profile-time-item-edit
+                      [parentComponent]="self" [isEven]="isEven"
+                      [itemWorkExperienceForm]="item"
+                      [index]="i">
                     </app-profile-time-item-edit>
                 </ng-container>
             </ng-container>

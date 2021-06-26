@@ -1,15 +1,15 @@
 <div class="control">
-    <button class="__btn __move" (click)="moveUp()">
+    <button type="button" class="__btn __move" (click)="moveUp()">
         <fa-icon [icon]="icons[0]" style="font-size: 16px;"></fa-icon>
     </button>
-    <button class="__btn __move" (click)="moveDown()">
+    <button type="button" class="__btn __move" (click)="moveDown()">
         <fa-icon [icon]="icons[1]" style="font-size: 16px;"></fa-icon>
     </button>
-    <button class="__btn __add" (click)="add(item)">
+    <button type="button" class="__btn __add" (click)="add()">
         <fa-icon [icon]="icons[2]" style="font-size: 16px;"></fa-icon>
         <span>Thêm</span>
     </button>
-    <button class="__btn __delete" (click)="delete(item.index)">
+    <button type="button" class="__btn __delete" (click)="delete()">
         <fa-icon [icon]="icons[3]" style="font-size: 16px;"></fa-icon>
         <span>Xóa</span>
     </button>

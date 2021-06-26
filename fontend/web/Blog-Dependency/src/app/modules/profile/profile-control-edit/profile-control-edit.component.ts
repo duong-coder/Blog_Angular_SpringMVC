@@ -14,7 +14,10 @@ import { ComponentService } from 'src/app/service/component.service';
 export class ProfileControlEditComponent implements OnInit {
   @Output() addItemForm = new EventEmitter<KindTimeItemForm>();
   @Output() deleteItemForm = new EventEmitter<number>();
+  @Output() moveUpItemForm = new EventEmitter<{ oldIndex, newIndex }>();
+  @Output() moveDownItemForm = new EventEmitter<{ oldIndex, newIndex }>();
   @Input() item: KindTimeItemForm;
+  @Input() maxIndex: number;
 
   icons: IconDefinition[] = [faSortUp, faSortDown, faPlus, faMinus];
 
@@ -24,18 +27,41 @@ export class ProfileControlEditComponent implements OnInit {
   }
 
   moveUp(): void {
+    const currentIndex = this.item.index;
+    let newIndex: number = currentIndex;
 
+    if (currentIndex > 0 && currentIndex < this.maxIndex) {
+      newIndex = currentIndex - 1;
+    }
+
+    const indexObject = {
+      oldIndex: currentIndex,
+      newIndex
+    };
+
+    this.moveUpItemForm.emit(indexObject);
   }
 
   moveDown(): void {
+    const currentIndex = this.item.index;
+    let newIndex: number = currentIndex;
 
+    if (currentIndex >= 0 && currentIndex < this.maxIndex - 1) {
+      newIndex = currentIndex + 1;
+    }
+
+    const indexObject = {
+      oldIndex: currentIndex,
+      newIndex
+    };
+    this.moveDownItemForm.emit(indexObject);
   }
 
-  add(item: KindTimeItemForm): void {
-    this.addItemForm.emit(item);
+  add(): void {
+    this.addItemForm.emit(this.item);
   }
 
-  delete(index: number): void {
-    this.deleteItemForm.emit(index);
+  delete(): void {
+    this.deleteItemForm.emit(this.item.index);
   }
 }

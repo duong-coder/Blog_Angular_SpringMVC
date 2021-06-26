@@ -33,9 +33,13 @@
                     </div>
                 </div>
             </ng-container>
-            <app-profile-control-edit [item]="itemFormGroup"
+            <app-profile-control-edit
+              [item]="itemFormGroup"
+              [maxIndex]="maxIndex"
               (addItemForm)="addItemForm($event)"
-              (deleteItemForm)="deleteItemForm($event)">
+              (deleteItemForm)="deleteItemForm($event)"
+              (moveUpItemForm)="moveItemForm($event)"
+              (moveDownItemForm)="moveItemForm($event)">
             </app-profile-control-edit>
         </div>
     </div>

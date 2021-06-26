@@ -63,8 +63,7 @@ public class WorkExperienceServiceImpl implements WorkExperienceService{
 
 	@Override
 	public void delete(int id) {
-		// TODO Auto-generated method stub
-		
+		experienceRepository.deleteById(id);
 	}
 
 	@Override
@@ -102,6 +101,7 @@ public class WorkExperienceServiceImpl implements WorkExperienceService{
 			for(WorkExperienceDTO weDB : experienceDTOsInDB) {
 				if(weDB.getId() == we.getId()) {
 					isAdd = false;
+					break;
 				}
 			}
 			if(isAdd) {
@@ -125,6 +125,7 @@ public class WorkExperienceServiceImpl implements WorkExperienceService{
 			for(WorkExperienceDTO we : experienceDTOs) {
 				if(we.getId() == weDb.getId()) {
 					isDelete = false;
+					break;
 				}
 			}
 			if(isDelete) {

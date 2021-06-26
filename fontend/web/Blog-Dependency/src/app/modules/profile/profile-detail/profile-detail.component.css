@@ -54,10 +54,15 @@
     margin-left: 10px;
 }
 
+.sub-contents .__skilss .__item{
+  padding: 2px 0px;
+  margin: 0px;
+}
+
 .sub-contents .__skilss .__item .__name{
     font-size: smaller;
     font-weight: normal;
-    margin-bottom: 0;
+    margin-bottom: 5px;
 }
 
 /* Container for skill bars */

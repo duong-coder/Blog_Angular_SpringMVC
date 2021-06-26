@@ -1,3 +1,6 @@
+app-star-rating{
+  transition: all 0.5s;
+}
 .star-rating {
   display: flex;
   align-content: center;
@@ -8,6 +11,7 @@
   top: 0;
   left: 0;
   z-index: 1000;
+  transition: all 0.5s;
 }
 .--title{
   color: #fcf8e0;
@@ -36,10 +40,12 @@
   opacity: 0.75;
   /* z-index must be below .jw-modal and above everything else  */
   z-index: 900;
+  transition: all 0.5s;
 }
 
 .star-rating__open {
   display: block;
+  transition: all 0.5s;
 }
 
 .__body .--icon-big {

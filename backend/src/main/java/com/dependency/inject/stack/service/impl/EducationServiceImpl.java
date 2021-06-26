@@ -102,6 +102,7 @@ public class EducationServiceImpl implements EducationService {
 			for(EducationDTO eduDB : eduDTOsDB) {
 				if(eduDB.getId() == edu.getId()) {
 					isAdd = false;
+					break;
 				}
 			}
 			if(isAdd) {
@@ -124,6 +125,7 @@ public class EducationServiceImpl implements EducationService {
 			for(EducationDTO edu : dtos) {
 				if(eduDB.getId() == edu.getId()) {
 					isDelete = false;
+					break;
 				}
 			}
 			if(isDelete) {

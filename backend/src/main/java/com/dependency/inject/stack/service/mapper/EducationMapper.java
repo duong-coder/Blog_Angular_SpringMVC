@@ -26,7 +26,7 @@ public class EducationMapper implements EntityMapper<Education, EducationDTO, In
 		education.setGpa(dto.getGpa());
 		education.setDateStart(dto.getDateStart());
 		education.setDateEnd(dto.getDateEnd());
-		education.setSortIndex(dto.getId());
+		education.setSortIndex(dto.getSortIndex());
 
 		AccountDTO accountDTO = dto.getAccountDTO();
 		if (accountDTO != null) {
