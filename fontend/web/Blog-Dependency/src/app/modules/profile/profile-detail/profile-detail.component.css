@@ -6,6 +6,24 @@
     font-family: robotocondensed,Arial,sans-serif;
 }
 
+.title{
+  display: flex;
+  justify-content: flex-end;
+  background-color: #7c7a79;
+  padding: 20px;
+}
+.title .__text{
+  color: #fcf8e0;
+  margin: 0px;
+  padding: 5px;
+  width: 40%;
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 46px;
+  /* border: 1px solid #7c7a79; */
+  /* border: 1px solid #514f50; */
+}
+
 .profile-container {
     display: flex;
     border: solid 1px #514f50;

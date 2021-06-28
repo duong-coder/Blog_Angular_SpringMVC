@@ -12,11 +12,11 @@ import { ComponentService } from 'src/app/service/component.service';
   styleUrls: ['./profile-control-edit.component.css']
 })
 export class ProfileControlEditComponent implements OnInit {
-  @Output() addItemForm = new EventEmitter<KindTimeItemForm>();
+  @Output() addItemForm = new EventEmitter<any>();
   @Output() deleteItemForm = new EventEmitter<number>();
   @Output() moveUpItemForm = new EventEmitter<{ oldIndex, newIndex }>();
   @Output() moveDownItemForm = new EventEmitter<{ oldIndex, newIndex }>();
-  @Input() item: KindTimeItemForm;
+  @Input() item: any;
   @Input() maxIndex: number;
 
   icons: IconDefinition[] = [faSortUp, faSortDown, faPlus, faMinus];

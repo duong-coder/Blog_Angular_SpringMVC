@@ -19,7 +19,7 @@ export class ProfileEditComponent implements OnInit, OnChanges {
   @ViewChild(StarRatingComponent)
   starRatingComponent: StarRatingComponent;
 
-  skillRating: Skill = new Skill(0, '', 0);
+  skillRating: Skill = new Skill();
 
   account: Account = new Account();
 

@@ -72,11 +72,12 @@ export class MappingService {
   }
 
   mappingSkill(skillMapping: any): Skill {
-    const skill = new Skill(0, '', 0);
+    const skill = new Skill();
 
     skill.id = skillMapping.id;
     skill.skill = skillMapping.skill;
     skill.level = skillMapping.level;
+    skill.sortIndex = skillMapping.sortIndex;
 
     const account = new Account();
     account.username = skillMapping.accountDTO.username;

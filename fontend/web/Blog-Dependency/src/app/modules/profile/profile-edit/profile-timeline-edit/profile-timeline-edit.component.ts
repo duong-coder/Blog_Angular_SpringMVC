@@ -5,7 +5,6 @@ import { Education } from 'src/app/model/education';
 import { KindTimeItemForm } from 'src/app/model/kind-time-item';
 import { WorkExperience } from 'src/app/model/work-experience';
 import { ComponentService } from 'src/app/service/component.service';
-import { ProfileTimeItemComponent } from '../profile-time-item/profile-time-item.component';
 
 @Component({
   selector: 'app-profile-timeline-edit',

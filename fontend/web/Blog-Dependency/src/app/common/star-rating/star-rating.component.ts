@@ -12,7 +12,7 @@ import { ModalService } from 'src/app/service/modal.service';
 })
 export class StarRatingComponent implements OnInit, OnChanges {
   @Input() id: string;
-  @Input() skill: Skill = new Skill(0, '', 0);
+  @Input() skill: Skill = new Skill();
   @Output() skillRating = new EventEmitter<Skill>();
 
   faStar = faStar;

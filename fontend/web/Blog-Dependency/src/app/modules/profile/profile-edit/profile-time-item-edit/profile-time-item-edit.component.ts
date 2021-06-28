@@ -8,12 +8,11 @@ import { WorkExperience } from 'src/app/model/work-experience';
 import { ComponentService } from 'src/app/service/component.service';
 import { FormService } from 'src/app/service/form.service';
 import { ProfileTimelineEditComponent } from '../profile-timeline-edit/profile-timeline-edit.component';
-import { ProfileTimelineComponent } from '../profile-timeline/profile-timeline.component';
 
 @Component({
   selector: 'app-profile-time-item-edit',
   templateUrl: './profile-time-item-edit.component.html',
-  styleUrls: ['./profile-time-item-edit.component.css', '../profile-time-item/profile-time-item.component.css']
+  styleUrls: ['./profile-time-item-edit.component.css', '../../profile-detail/profile-time-item/profile-time-item.component.css']
 })
 export class ProfileTimeItemEditComponent implements OnInit, OnChanges {
   @Input() itemEducationForm?: FormGroup;

@@ -85,22 +85,8 @@
                 <div class="__item">
                     <app-profile-content [hasIcon]="profileContents[6].hasIcon" [icon]="profileContents[6].icon"
                         [title]="profileContents[6].title"></app-profile-content>
-                    <div class="__skilss">
-                        <div *ngFor="let skill of account.skillDTOs" class="__item" (click)="openSkillRatingModal(skill)">
-                            <p class="__name" >{{skill.skill}}</p>
-                            <div class="container">
-                                <div class="__skill" [ngStyle]="{'width.%': skill.getPercent()}"  ></div>
-                            </div>
-                            <app-profile-control-edit
-                              [item]="itemFormGroup"
-                              [maxIndex]="maxIndex"
-                              (addItemForm)="addItemForm($event)"
-                              (deleteItemForm)="deleteItemForm($event)"
-                              (moveUpItemForm)="moveItemForm($event)"
-                              (moveDownItemForm)="moveItemForm($event)">
-                            </app-profile-control-edit>
-                        </div>
-                    </div>
+                    <app-skill-edit [skillDTOs]="account.skillDTOs" (openSkillRatingModal)="openSkillRatingModal($event)">
+                    </app-skill-edit>
                 </div>
                 <div class="__item">
                     <app-profile-content [hasIcon]="profileContents[7].hasIcon" [icon]="profileContents[7].icon"

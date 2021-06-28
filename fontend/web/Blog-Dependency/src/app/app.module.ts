@@ -30,14 +30,15 @@ import { HttpTokenInterceptor } from './interceptors/http.token.interceptor';
 import { ProfileDetailComponent } from './modules/profile/profile-detail/profile-detail.component';
 import { ProfileEditComponent } from './modules/profile/profile-edit/profile-edit.component';
 import { ProfileContentComponent } from './modules/profile/profile-content/profile-content.component';
-import { ProfileTimelineComponent } from './modules/profile/profile-timeline/profile-timeline.component';
-import { ProfileTimeItemComponent } from './modules/profile/profile-time-item/profile-time-item.component';
-import { ProfileControlEditComponent } from './modules/profile/profile-control-edit/profile-control-edit.component';
+import { ProfileTimelineComponent } from './modules/profile/profile-detail/profile-timeline/profile-timeline.component';
+import { ProfileTimeItemComponent } from './modules/profile/profile-detail/profile-time-item/profile-time-item.component';
+import { ProfileControlEditComponent } from './modules/profile/profile-edit/profile-control-edit/profile-control-edit.component';
 import { EditAboutPageComponent } from './page/edit-about-page/edit-about-page.component';
-import { ProfileTimeItemEditComponent } from './modules/profile/profile-time-item-edit/profile-time-item-edit.component';
-import { ProfileTimelineEditComponent } from './modules/profile/profile-timeline-edit/profile-timeline-edit.component';
+import { ProfileTimeItemEditComponent } from './modules/profile/profile-edit/profile-time-item-edit/profile-time-item-edit.component';
+import { ProfileTimelineEditComponent } from './modules/profile/profile-edit/profile-timeline-edit/profile-timeline-edit.component';
 import { StarRatingComponent } from './common/star-rating/star-rating.component';
 import { ModalService } from './service/modal.service';
+import { SkillEditComponent } from './modules/profile/profile-edit/skill-edit/skill-edit.component';
 
 
 @NgModule({
@@ -68,7 +69,8 @@ import { ModalService } from './service/modal.service';
     EditAboutPageComponent,
     ProfileTimeItemEditComponent,
     ProfileTimelineEditComponent,
-    StarRatingComponent
+    StarRatingComponent,
+    SkillEditComponent
   ],
   imports: [
     BrowserModule,

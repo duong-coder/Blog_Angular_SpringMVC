@@ -24,6 +24,7 @@ public class SkillMapper implements EntityMapper<Skill, SkillDTO, Integer> {
 		skill.setId(dto.getId());
 		skill.setLevel(dto.getLevel());
 		skill.setSkill(dto.getSkill());
+		skill.setSortIndex(dto.getSortIndex());
 
 		AccountDTO accountDTO = dto.getAccountDTO();
 		if (accountDTO != null) {
@@ -41,6 +42,7 @@ public class SkillMapper implements EntityMapper<Skill, SkillDTO, Integer> {
 		skillDTO.setId(entity.getId());
 		skillDTO.setSkill(entity.getSkill());
 		skillDTO.setLevel(entity.getLevel());
+		skillDTO.setSortIndex(entity.getSortIndex());
 
 		Account account = entity.getAccount();
 		if (account != null) {

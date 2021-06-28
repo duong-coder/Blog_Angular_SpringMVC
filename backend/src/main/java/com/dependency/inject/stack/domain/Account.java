@@ -82,6 +82,7 @@ public class Account implements Serializable{
 	private List<Post> posts;
 	
 	@OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
+	@OrderBy(value = "sortIndex DESC")
 	private List<Skill> skills;
 	
 	@OneToMany(mappedBy = "account", fetch = FetchType.LAZY)

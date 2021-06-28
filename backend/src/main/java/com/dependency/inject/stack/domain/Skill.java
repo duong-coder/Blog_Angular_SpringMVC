@@ -31,6 +31,9 @@ public class Skill implements Serializable{/**
 	
 	@Column(name = "level")
 	private int level;
+
+	@Column(name = "sort_index")
+	private int sortIndex;
 	
 	@ManyToOne
 	@JoinColumn(name = "username")

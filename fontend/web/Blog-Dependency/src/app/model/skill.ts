@@ -1,18 +1,19 @@
 import { Account } from './account';
 
-export class Skill{
-    id: number;
-    skill: string;
-    level: number;
-    accountDTO: Account;
+export class Skill {
+  id: number;
+  skill: string;
+  level: number;
+  sortIndex: number;
+  accountDTO: Account;
 
-    constructor(id: number, skill: string, level: number){
-      this.id = id;
-      this.skill = skill;
-      this.level = level;
-    }
+  constructor() {
+    this.id = 0;
+    this.skill = '';
+    this.level = 0;
+  }
 
-    getPercent(): number{
-      return this.level * 100 / 5;
-    }
+  getPercent(): number {
+    return this.level * 100 / 5;
+  }
 }
