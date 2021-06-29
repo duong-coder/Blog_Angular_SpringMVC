@@ -13,8 +13,6 @@ import { ProfileTimeItemComponent } from '../profile-time-item/profile-time-item
 export class ProfileTimelineComponent implements OnInit, OnChanges, AfterViewInit {
   @Input() listItemEducation?: Education[];
   @Input() listItemWorkExperience?: WorkExperience[];
-  @Input() listEduationForm?: FormArray;
-  @Input() listWorkExperienceForm?: FormArray;
   @Input() isEdit?: boolean;
 
   listItem: {
@@ -29,10 +27,10 @@ export class ProfileTimelineComponent implements OnInit, OnChanges, AfterViewIni
 
   constructor(
     private componentService: ComponentService,
-    private  viewContainerRef: ViewContainerRef
+    private viewContainerRef: ViewContainerRef
   ) { }
 
-  ngOnInit(): void {
+  ngOnChanges(): void {
     if (this.listItemEducation) {
       this.listItem = {
         kind: 'Education',
@@ -47,14 +45,10 @@ export class ProfileTimelineComponent implements OnInit, OnChanges, AfterViewIni
     console.log('INIT TimeLine', this.listItem);
   }
 
-  ngOnChanges(): void {
+  ngOnInit(): void {
+
   }
 
-  ngAfterViewInit(): void{
+  ngAfterViewInit(): void {
   }
-
-  // addEducationItem(value: any): void {
-  //   console.log('Output ', value);
-  //   this.listItem.list.push(value[0].value);
-  // }
 }

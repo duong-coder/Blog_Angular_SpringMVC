@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faMarkdown } from '@fortawesome/free-brands-svg-icons';
@@ -11,7 +11,7 @@ import { PostService } from 'src/app/service/post.service';
   templateUrl: './post-add.component.html',
   styleUrls: ['./post-add.component.css']
 })
-export class PostAddComponent implements OnInit {
+export class PostAddComponent implements OnInit, OnChanges {
   @Input() postEditting: Post;
   @Input() flagEdit: boolean;
   faMarkdown = faMarkdown;
@@ -24,6 +24,7 @@ export class PostAddComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) { }
+
   ngOnChanges(): void {
     this.formPost = this.fb.group({
       heading: [this.flagEdit ? this.postEditting.heading : '', [Validators.required]],
@@ -56,12 +57,12 @@ export class PostAddComponent implements OnInit {
         },
         complete: () => {
           console.log(post);
-          this.router.navigateByUrl(`/post/detail/${this.postEditting.id}`);
+          this.router.navigateByUrl(`/duongnh/post/detail/${this.postEditting.id}`);
         }
       });
     } else {
       post.dateCreate = this.dateService.getDayNow();
-      console.log("INSERT", post);
+      console.log('INSERT', post);
       this.postService.addPost(post).subscribe({
         next: (next) => {
           console.log(next);
@@ -71,7 +72,7 @@ export class PostAddComponent implements OnInit {
         },
         complete: () => {
           console.log(post);
-          this.router.navigateByUrl('/home');
+          this.router.navigateByUrl('/duongnh/home');
         }
       });
     }
@@ -80,7 +81,7 @@ export class PostAddComponent implements OnInit {
     const idDelete: number = this.postEditting.id;
     this.postService.deletePost(idDelete).subscribe(post => {
       console.log(post);
-      this.router.navigateByUrl('/home');
+      this.router.navigateByUrl('/duongnh/home');
     });
   }
   resizeInput(element: HTMLTextAreaElement): void {

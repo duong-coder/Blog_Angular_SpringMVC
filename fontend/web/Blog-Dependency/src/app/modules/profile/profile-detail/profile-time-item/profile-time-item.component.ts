@@ -31,9 +31,6 @@ export class ProfileTimeItemComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(): void {
-  }
-
-  ngOnInit(): void {
     console.log('INIT Time Item');
     if (this.itemEducation) {
       this.item = {
@@ -46,5 +43,9 @@ export class ProfileTimeItemComponent implements OnInit, OnChanges {
         kind: 'WorkExperience'
       };
     }
+  }
+
+  ngOnInit(): void {
+
   }
 }

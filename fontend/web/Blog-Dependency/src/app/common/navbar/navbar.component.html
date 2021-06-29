@@ -1,14 +1,14 @@
 <div class="navbar">
     <a class="title-blog" href="">Start Your Blog</a>
     <ul class="menu-bar">
-        <li><a routerLink="/home">HOME</a></li>
-        <li><a routerLink="/about">ABOUT</a></li>
+        <li><a routerLink="/duongnh/home">HOME</a></li>
+        <li><a routerLink="/duongnh/about">ABOUT</a></li>
         <li *ngIf="showEditPost"><a (click)="editPost()">EDIT POST</a></li>
         <li>
-            <a href="{{account.github}}" target="_blank">
+            <a href="{{urlGithub}}" target="_blank">
                 <fa-icon [icon]="faGithub" style="font-size: 34px;"></fa-icon>
             </a>
         </li>
-        <li class="btn-post new-post"><a routerLink="/post/new">NEW POST</a></li>
+        <li class="btn-post new-post"><a routerLink="/duongnh/post/new">NEW POST</a></li>
     </ul>
 </div>

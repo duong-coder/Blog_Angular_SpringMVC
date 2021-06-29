@@ -14,17 +14,17 @@ export class HttpTokenInterceptor implements HttpInterceptor {
 
   constructor(
     private jwtTokenService: JwttokenService
-  ) {}
+  ) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const headerConfig = {
+    const headerConfig: any = {
       'Content-Type': 'application/json',
-      'Accept': 'application/json'
+      Accept: 'application/json'
     };
 
     const token = this.jwtTokenService.getTokenInLocalStorage();
-    if(token){
-      headerConfig["Authorization"] = `Bearer ${token}`;
+    if (token) {
+      headerConfig.Authorization = `Bearer ${token}`;
     }
 
     const reqNew = request.clone({

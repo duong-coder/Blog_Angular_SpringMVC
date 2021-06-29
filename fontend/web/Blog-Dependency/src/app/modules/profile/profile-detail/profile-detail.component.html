@@ -7,7 +7,6 @@
             <div class="__item">
                 <app-profile-content [hasIcon]="profileContents[0].hasIcon" [icon]="profileContents[0].icon" [title]="profileContents[0].title"></app-profile-content>
                 <div markdown [data]="account.objective" class="__text">
-
                 </div>
             </div>
             <div class="__item">
@@ -65,10 +64,10 @@
             <div class="__item">
                 <app-profile-content [hasIcon]="profileContents[6].hasIcon" [icon]="profileContents[6].icon" [title]="profileContents[6].title"></app-profile-content>
                 <div class="__skilss">
-                    <div *ngFor="let skill of skills" class="__item">
-                        <p class="__name">{{skill.item.skill}}</p>
+                    <div *ngFor="let skill of account.skillDTOs" class="__item">
+                        <p class="__name">{{skill.skill}}</p>
                         <div class="container">
-                            <div class="__skill" [ngStyle]="{'width.%': skill.percent}"></div>
+                            <div class="__skill" [ngStyle]="{'width.%': skill.getPercent()}"></div>
                         </div>
                     </div>
                 </div>
@@ -87,5 +86,5 @@
         </div>
     </div>
     <!-- <button class="btn-post" (click)="edit()">EDIT PROFILE</button> -->
-    <a routerLink="/about/edit">EDIT</a>
+    <a routerLink="/duongnh/about/edit">EDIT</a>
 </div>

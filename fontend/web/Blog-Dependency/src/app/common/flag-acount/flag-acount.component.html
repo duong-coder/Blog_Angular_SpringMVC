@@ -1,3 +1,9 @@
 <div class="fixed">
-    <a class="btn-post btn-acount" (click)="redirecPageLogin()">{{flagIsLoginPage ? 'GO BACK' : 'LOGGING IN'}}</a>
+    <a class="btn-post btn-acount" (click)="redirecPage()">
+      <span [ngSwitch]="currentFlag">
+        <span *ngSwitchCase="statusFlag[0]">LOGIN</span>
+        <span *ngSwitchCase="statusFlag[1]">LOGOUT</span>
+        <span *ngSwitchCase="statusFlag[2]">GO BACK</span>
+      </span>
+    </a>
 </div>

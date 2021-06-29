@@ -10,25 +10,32 @@ import { PostDetailPageComponent } from './page/post-detail-page/post-detail-pag
 import { DefaultComponent } from './layouts/default/default.component';
 import { AmendPostComponent } from './layouts/amend-post/amend-post.component';
 import { EditAboutPageComponent } from './page/edit-about-page/edit-about-page.component';
+import { AuthGuard } from './interceptors/auth.guard';
 
 const routes: Routes = [
   {
-    path: '',
-    component: DefaultComponent,
+    path: 'duongnh',
     children: [
-      { path: 'home', component: HomePageComponent },
-      { path: 'about', component: AboutPageComponent },
-      { path: 'about/edit', component: EditAboutPageComponent },
-      { path: 'post/detail/:id', component: PostDetailPageComponent },
-      { path: '', redirectTo: '/home', pathMatch: 'full'},
-    ]
-  },
-  {
-    path: 'post',
-    component: AmendPostComponent,
-    children: [
-      { path: 'new', component: NewPostPageComponent },
-      { path: 'edit/:id', component: EditPostPageComponent },
+      {
+        path: '',
+        component: DefaultComponent,
+        children: [
+          { path: 'home', component: HomePageComponent },
+          { path: 'about', component: AboutPageComponent },
+          { path: 'about/edit', component: EditAboutPageComponent, canActivate: [AuthGuard] },
+          { path: 'post/detail/:id', component: PostDetailPageComponent },
+          { path: '', redirectTo: 'home', pathMatch: 'full'},
+        ]
+      },
+      {
+        path: 'post',
+        component: AmendPostComponent,
+        children: [
+          { path: 'new', component: NewPostPageComponent },
+          { path: 'edit/:id', component: EditPostPageComponent },
+        ],
+        canActivate: [AuthGuard]
+      }
     ]
   },
   { path: 'login', component: LoginComponent },

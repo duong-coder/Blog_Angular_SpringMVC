@@ -21,35 +21,35 @@ import com.dependency.inject.stack.service.mapper.EntityMapper;
 
 @Service
 @Transactional
-public class AccountServiceImpl implements AccountService{
+public class AccountServiceImpl implements AccountService {
 
 	@Autowired
 	private AccountRepository accountRepository;
 	@Autowired
 	private EntityMapper<Account, AccountDTO, String> accountMapper;
-	
+
 	@Autowired
 	private SkillService skillService;
 	@Autowired
 	private EducationService educationService;
 	@Autowired
 	private WorkExperienceService weService;
-	
+
 	@Override
 	public AccountDTO update(AccountDTO dto) {
-		if(dto == null) {
+		if (dto == null) {
 			return null;
 		}
-		if(isExistById(dto.getUsername())) {
-			
+		if (isExistById(dto.getUsername())) {
+
 			List<SkillDTO> skillDTOs = dto.getSkillDTOs();
-			if(skillDTOs != null) {
+			if (skillDTOs != null) {
 				List<SkillDTO> skillDTOsWillDelete = skillService.findAllDTOWillDelete(skillDTOs, dto.getUsername());
 				skillDTOsWillDelete.forEach(skill -> {
 					skillService.delete(skill.getId());
 				});
 				List<SkillDTO> skillDTOsWillAdd = skillService.findAllDTOWillAdd(skillDTOs, dto.getUsername());
-				skillDTOsWillAdd .forEach(skill -> {
+				skillDTOsWillAdd.forEach(skill -> {
 					skillService.insert(skill);
 				});
 				skillDTOs.forEach((s) -> {
@@ -57,12 +57,14 @@ public class AccountServiceImpl implements AccountService{
 				});
 			}
 			List<EducationDTO> educationDTOs = dto.getEducationDTOs();
-			if(educationDTOs != null) {
-				List<EducationDTO> eduDTOsWillDelete = educationService.findAllDTOWillDelete(educationDTOs, dto.getUsername());
-				eduDTOsWillDelete .forEach(edu -> {
+			if (educationDTOs != null) {
+				List<EducationDTO> eduDTOsWillDelete = educationService.findAllDTOWillDelete(educationDTOs,
+						dto.getUsername());
+				eduDTOsWillDelete.forEach(edu -> {
 					educationService.delete(edu.getId());
 				});
-				List<EducationDTO> eduDTOsWillAdd = educationService.findAllDTOWillAdd(educationDTOs, dto.getUsername());
+				List<EducationDTO> eduDTOsWillAdd = educationService.findAllDTOWillAdd(educationDTOs,
+						dto.getUsername());
 				eduDTOsWillAdd.forEach(edu -> {
 					educationService.insert(edu);
 //					EducationDTO dtoRT = educationService.insert(edu);
@@ -73,7 +75,7 @@ public class AccountServiceImpl implements AccountService{
 				});
 			}
 			List<WorkExperienceDTO> weDTOs = dto.getWorkExperienceDTOs();
-			if(weDTOs != null) {
+			if (weDTOs != null) {
 				List<WorkExperienceDTO> weDTOsWillDelete = weService.findAllDTOWillDelete(weDTOs, dto.getUsername());
 				weDTOsWillDelete.forEach(we -> {
 					weService.delete(we.getId());
@@ -86,28 +88,38 @@ public class AccountServiceImpl implements AccountService{
 					weService.update(w);
 				});
 			}
-			
+
 			Account account = accountMapper.toEntity(dto);
 			Account accountRT = accountRepository.save(account);
-			
-			
+
 			return accountMapper.toDTO(accountRT);
 		}
-		
+
 		return null;
 	}
-	
+
 	@Override
 	public AccountDTO findById(String id) {
 		Optional<Account> entityOp = accountRepository.findById(id);
-		if(entityOp.isPresent()) {
+		if (entityOp.isPresent()) {
 			return accountMapper.toDTO(entityOp.get());
 		}
-		
+
 		return null;
 	}
+
 	@Override
 	public boolean isExistById(String id) {
 		return accountRepository.existsById(id);
+	}
+
+	@Override
+	public AccountDTO getLinkSocialNetworkById(String id) {
+		Account account = accountRepository.getLinkSocialNetworkById(id);
+		if (account != null) {
+			return accountMapper.toDTO(account);
+		}
+
+		return null;
 	}
 }

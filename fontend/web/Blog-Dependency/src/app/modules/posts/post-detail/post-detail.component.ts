@@ -18,6 +18,6 @@ export class PostDetailComponent implements OnInit {
   }
   editPost(): void{
     const idPost = this.route.snapshot.paramMap.get('id');
-    this.router.navigateByUrl(`/post/edit/${idPost}`);
+    this.router.navigateByUrl(`/duongnh/post/edit/${idPost}`);
   }
 }

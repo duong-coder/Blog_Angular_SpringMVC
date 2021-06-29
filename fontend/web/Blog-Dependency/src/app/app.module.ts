@@ -39,6 +39,7 @@ import { ProfileTimelineEditComponent } from './modules/profile/profile-edit/pro
 import { StarRatingComponent } from './common/star-rating/star-rating.component';
 import { ModalService } from './service/modal.service';
 import { SkillEditComponent } from './modules/profile/profile-edit/skill-edit/skill-edit.component';
+import { ErrorInterceptor } from './interceptors/error.interceptor';
 
 
 @NgModule({
@@ -96,6 +97,7 @@ import { SkillEditComponent } from './modules/profile/profile-edit/skill-edit/sk
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     PostService,
     DateService,
     MarkdownService],

@@ -10,21 +10,21 @@ import { PostService } from 'src/app/service/post.service';
 })
 export class DefaultComponent implements OnInit {
   account: Account = new Account();
+
   constructor(
     private accountService: AccountService
   ) { }
 
   ngOnInit(): void {
-    console.log("INIT");
-    this.getAccount();
+    this.getLinkSocialNetworkById();
   }
 
-  getAccount(): void {
-    this.accountService.getAccountByPhone().subscribe(responseAccount => {
-      console.log(responseAccount);
-      
-      this.account = responseAccount.body;
-    });
+  getLinkSocialNetworkById(): void {
+    this.accountService.getLinkSocialNetworkById().subscribe(
+      (res) => {
+        this.account = res.body;
+      }
+    );
   }
 
 }

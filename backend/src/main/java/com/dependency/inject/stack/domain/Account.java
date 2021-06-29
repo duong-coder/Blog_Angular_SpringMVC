@@ -93,4 +93,11 @@ public class Account implements Serializable{
 	@OrderBy(value = "sortIndex DESC")
 	private List<WorkExperience> workExperiences;
 	
+	public Account() {}
+	
+	public Account(String github, String facebook, String twitter) {
+		this.github = github;
+		this.facebook = facebook;
+		this.twitter = twitter;
+	}
 }

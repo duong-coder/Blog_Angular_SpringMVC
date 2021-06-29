@@ -25,7 +25,7 @@ export class PostListComponent implements OnInit {
         this.posts = Array.from(this.posts).reverse();
       },
       error => {
-        console.log("Loi dang nhap");
+        console.log('Loi dang nhap');
         this.posts = undefined;
       });
   }

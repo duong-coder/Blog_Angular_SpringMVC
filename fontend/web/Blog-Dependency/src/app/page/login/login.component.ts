@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
+import { Router } from '@angular/router';
 import { AccountLogin } from 'src/app/model/acccount-login';
 import { JwtToken } from 'src/app/model/token';
 import { JwttokenService } from 'src/app/service/jwttoken.service';
@@ -12,7 +13,7 @@ import {AccountService} from '../../service/account.service';
 })
 export class LoginComponent implements OnInit {
   loginForm = new FormGroup({
-    phone: new FormControl('0773314448'),
+    phone: new FormControl('duongnh'),
     password: new FormControl(''),
     rememberMe: new FormControl('true')
   });
@@ -20,6 +21,7 @@ export class LoginComponent implements OnInit {
   private jwtToken: JwtToken;
 
   constructor(
+    private router: Router,
     private accountService: AccountService,
     private jwttokenService: JwttokenService) { }
 
@@ -33,15 +35,11 @@ export class LoginComponent implements OnInit {
     accountLogin.rememberMe = this.loginForm.get('rememberMe').value;
 
     this.accountService.login(accountLogin).subscribe(
-      function next(token: JwtToken): void{
-        localStorage.setItem('id_token', token.id_token);
+      token => {
+        this.router.navigateByUrl('/duongnh/home');
       },
       function error(err): void{
         console.log(err);
-      },
-      function complete(): void{
-        console.log('Complete Call API Login');
-        location.replace("/home");
       }
     );
   }

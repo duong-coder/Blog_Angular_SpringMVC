@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit } from '@angular/core';
 import { faAward, faBookmark, faBullseye, faCalendarAlt, faEnvelope, faLightbulb, faMapMarkedAlt, faPen, faPhone, faUser, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { Account } from 'src/app/model/account';
 import { AccountService } from 'src/app/service/account.service';
@@ -14,9 +14,9 @@ export interface IProfileContent {
   templateUrl: './profile-detail.component.html',
   styleUrls: ['./profile-detail.component.css']
 })
-export class ProfileDetailComponent implements OnInit {
-  account: Account;
-  skills: { item, percent }[];
+export class ProfileDetailComponent implements OnInit, OnChanges {
+  account: Account = new Account();
+  // skills: { item, percent }[];
 
   faCalendar = faCalendarAlt;
   faUser = faUser;
@@ -38,14 +38,15 @@ export class ProfileDetailComponent implements OnInit {
 
   constructor(private acccountService: AccountService) { }
 
+  ngOnChanges(): void {
+
+  }
+
   ngOnInit(): void {
     this.acccountService.getAccountByPhone().subscribe({
       next: (res) => {
         if (res.status === 200) {
           this.account = res.body;
-          this.skills = this.account.skillDTOs.map(dto => {
-            return { item: dto, percent: (dto.level / 5) * 100 };
-          });
         }
       },
       error: (error) => {
@@ -55,9 +56,5 @@ export class ProfileDetailComponent implements OnInit {
         console.log('Complete get profile');
       }
     });
-  }
-
-  getPercentSkill(): void {
-
   }
 }

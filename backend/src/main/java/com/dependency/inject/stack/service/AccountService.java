@@ -11,4 +11,6 @@ public interface AccountService {
 	boolean isExistById(String id);
 
 	AccountDTO update(AccountDTO dto);
+
+	AccountDTO getLinkSocialNetworkById(String id);
 }

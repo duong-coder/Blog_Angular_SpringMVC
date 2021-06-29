@@ -1,5 +1,5 @@
-import { Component, OnInit, DoCheck, Input} from '@angular/core';
-import { ActivatedRoute, Router, UrlSegment } from '@angular/router';
+import { Component, OnInit, DoCheck, Input } from '@angular/core';
+import { ActivatedRoute, NavigationStart, Router, UrlSegment } from '@angular/router';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { Account } from 'src/app/model/account';
 import { AccountService } from 'src/app/service/account.service';
@@ -8,9 +8,9 @@ import { AccountService } from 'src/app/service/account.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
 })
-export class NavbarComponent implements OnInit{
-  account: Account = new Account();
-  
+export class NavbarComponent implements OnInit {
+  @Input() urlGithub;
+
   faGithub = faGithub;
   showEditPost: boolean;
   constructor(
@@ -23,23 +23,22 @@ export class NavbarComponent implements OnInit{
     this.checkAtPageDetailPost();
   }
 
-  getAccountCurrent(): void{
-    
-  }
-
   checkAtPageDetailPost(): void {
-    this.route.url.subscribe((urlSegment) => {
-      console.log(urlSegment);
-      const existUrlSegment = urlSegment.find((url) => {
-        return url.path.includes('detail') ? url : null;
-      });
-      if (existUrlSegment != null){
-        this.showEditPost = true;
+    this.router.events.subscribe((evt) => {
+      if (evt instanceof NavigationStart) {
+        const href = evt.url;
+        const currentAccount = this.accountService.getCurrentAccountValue;
+        console.log('href and current: ', href, currentAccount);
+
+        if (href.includes('detail') && currentAccount) {
+          this.showEditPost = true;
+        }
       }
     });
   }
+
   editPost(): void {
     const idPost = this.route.snapshot.paramMap.get('id');
-    this.router.navigateByUrl(`/post/edit/${idPost}`);
+    this.router.navigateByUrl(`/duongnh/post/edit/${idPost}`);
   }
 }

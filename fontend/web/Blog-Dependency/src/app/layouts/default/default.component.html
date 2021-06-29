@@ -1,4 +1,4 @@
-<!-- <app-navbar></app-navbar> -->
-<app-flag-acount></app-flag-acount>
+<app-navbar [urlGithub]="account.github"></app-navbar>
+<app-flag-acount [isLoginPage]="false"></app-flag-acount>
 <router-outlet></router-outlet>
-<app-footer [urlTwitter]="account.twitter" [urlFacebook]="account.facebook" [urlGithub]="account.github"></app-footer>  
+<app-footer [urlTwitter]="account.twitter" [urlFacebook]="account.facebook" [urlGithub]="account.github"></app-footer>
