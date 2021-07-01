@@ -13,6 +13,8 @@ export class NavbarComponent implements OnInit {
 
   faGithub = faGithub;
   showEditPost: boolean;
+  showEditProfile: boolean;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -24,6 +26,8 @@ export class NavbarComponent implements OnInit {
   }
 
   checkAtPageDetailPost(): void {
+    // console.log('ROUTE: ', this.route);
+
     this.router.events.subscribe((evt) => {
       if (evt instanceof NavigationStart) {
         const href = evt.url;
@@ -33,12 +37,23 @@ export class NavbarComponent implements OnInit {
         if (href.includes('detail') && currentAccount) {
           this.showEditPost = true;
         }
+
+        if (href.includes('about') && currentAccount) {
+          this.showEditProfile = true;
+        }
       }
     });
   }
 
   editPost(): void {
-    const idPost = this.route.snapshot.paramMap.get('id');
+    const url = this.router.url;
+    const indexDetail = url.lastIndexOf('/');
+    const idPost = +url.substring(indexDetail + 1);
+
     this.router.navigateByUrl(`/duongnh/post/edit/${idPost}`);
+  }
+
+  editProfile(): void{
+    this.router.navigateByUrl(`/duongnh/about/edit`);
   }
 }

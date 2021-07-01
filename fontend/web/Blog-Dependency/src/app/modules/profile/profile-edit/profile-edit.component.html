@@ -85,7 +85,7 @@
                 <div class="__item">
                     <app-profile-content [hasIcon]="profileContents[6].hasIcon" [icon]="profileContents[6].icon"
                         [title]="profileContents[6].title"></app-profile-content>
-                    <app-skill-edit [skillDTOs]="account.skillDTOs" (openSkillRatingModal)="openSkillRatingModal($event)">
+                    <app-skill-edit [skillDTOs]="skills" (openSkillRatingModal)="openSkillRatingModal($event)">
                     </app-skill-edit>
                 </div>
                 <div class="__item">
@@ -103,7 +103,9 @@
 
             </div>
         </div>
-        <button class="btn-post" (click)="update()">EDIT PROFILE</button>
-    </div>
+        <div class="buttons">
+          <button class="btn-post" (click)="update()">UPDATE</button>
+        </div>
+      </div>
 </form>
 <app-star-rating [id]="skillRating.skill" [skill]="skillRating" (skillRating)="getSkillRating($event)"></app-star-rating>

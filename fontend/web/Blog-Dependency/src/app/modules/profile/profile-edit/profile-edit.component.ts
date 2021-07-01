@@ -43,6 +43,7 @@ export class ProfileEditComponent implements OnInit, OnChanges {
   ];
   isEdit: true;
   profileForm = this.formService.createAccountFormGroup();
+  skills: Skill[];
 
   constructor(
     private acccountService: AccountService,
@@ -93,6 +94,7 @@ export class ProfileEditComponent implements OnInit, OnChanges {
       listWEForm.push(weForm);
     });
 
+    this.skills = this.account.skillDTOs;
     this.profileForm = this.formService.createAccountFormGroupWithData(this.account, listEduForm, listWEForm);
   }
 

@@ -2,5 +2,5 @@
     <div markdown [data]="content" class="content-post">
         {{content}}
     </div>
-    <button class="btn-post" (click)="editPost()">EDIT POST</button>
+    <button class="btn-post" [hidden]="currentAccount?false:true" (click)="editPost()" >EDIT POST</button>
 </div>

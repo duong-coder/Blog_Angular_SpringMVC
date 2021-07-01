@@ -4,6 +4,7 @@
         <li><a routerLink="/duongnh/home">HOME</a></li>
         <li><a routerLink="/duongnh/about">ABOUT</a></li>
         <li *ngIf="showEditPost"><a (click)="editPost()">EDIT POST</a></li>
+        <li *ngIf="showEditProfile"><a (click)="editProfile()">EDIT PROFILE</a></li>
         <li>
             <a href="{{urlGithub}}" target="_blank">
                 <fa-icon [icon]="faGithub" style="font-size: 34px;"></fa-icon>

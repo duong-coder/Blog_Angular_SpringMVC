@@ -100,3 +100,9 @@
     font-size: smaller;
     font-weight: normal;
 }
+
+.buttons{
+  padding: 20px 0px;
+  display: flex;
+  justify-content: center;
+}

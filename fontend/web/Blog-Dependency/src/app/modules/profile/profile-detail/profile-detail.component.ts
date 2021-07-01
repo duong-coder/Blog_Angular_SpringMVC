@@ -1,5 +1,7 @@
 import { Component, OnChanges, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { faAward, faBookmark, faBullseye, faCalendarAlt, faEnvelope, faLightbulb, faMapMarkedAlt, faPen, faPhone, faUser, faUsers } from '@fortawesome/free-solid-svg-icons';
+import { AccountLogin } from 'src/app/model/acccount-login';
 import { Account } from 'src/app/model/account';
 import { AccountService } from 'src/app/service/account.service';
 
@@ -17,6 +19,7 @@ export interface IProfileContent {
 export class ProfileDetailComponent implements OnInit, OnChanges {
   account: Account = new Account();
   // skills: { item, percent }[];
+  currentAccount: AccountLogin;
 
   faCalendar = faCalendarAlt;
   faUser = faUser;
@@ -36,7 +39,10 @@ export class ProfileDetailComponent implements OnInit, OnChanges {
   ];
 
 
-  constructor(private acccountService: AccountService) { }
+  constructor(
+    private acccountService: AccountService,
+    private router: Router
+  ) { }
 
   ngOnChanges(): void {
 
@@ -56,5 +62,12 @@ export class ProfileDetailComponent implements OnInit, OnChanges {
         console.log('Complete get profile');
       }
     });
+    this.currentAccount = this.acccountService.getCurrentAccountValue;
+  }
+
+  openEditProfilePage(): void {
+    if (this.currentAccount) {
+      this.router.navigateByUrl('/duongnh/about/edit');
+    }
   }
 }

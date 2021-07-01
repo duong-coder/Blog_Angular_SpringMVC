@@ -27,14 +27,14 @@
                 <p class="error-input" *ngIf="formPost.get('content').errors?.required">Content required</p>
             </div>
 
-            <button class="btn-post" type="submit" [disabled]="formPost.invalid">{{flagEdit ? 'UPDATE POST' : 'CREATE POST'}}</button>
+            <button class="btn-post" type="submit" [disabled]="formPost.invalid" [hidden]="!currentAccount">{{flagEdit ? 'UPDATE POST' : 'CREATE POST'}}</button>
             <br> <br> <br>
             <h2 class="title-form">Post Preview</h2>
             <div class="post-preview">
                 <div markdown [data]="postPreview">
                 </div>
             </div><br>
-            <button class="btn-post btn-post-delete" (click)="deletePost()" [hidden]="!flagEdit">DELETE POST</button>
+            <button class="btn-post btn-post-delete" (click)="deletePost()" [hidden]="!flagEdit || !currentAccount">DELETE POST</button>
         </form>
     </div>
 </div>

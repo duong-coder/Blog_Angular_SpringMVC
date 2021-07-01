@@ -77,3 +77,9 @@ input {
 .__favorites textarea{
   border: 1px solid #414142;
 }
+
+.buttons{
+  padding: 20px 0px;
+  display: flex;
+  justify-content: center;
+}

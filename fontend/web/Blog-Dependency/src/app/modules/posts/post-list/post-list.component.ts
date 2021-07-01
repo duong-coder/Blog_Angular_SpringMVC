@@ -26,7 +26,7 @@ export class PostListComponent implements OnInit {
       },
       error => {
         console.log('Loi dang nhap');
-        this.posts = undefined;
+        this.posts = [];
       });
   }
 }

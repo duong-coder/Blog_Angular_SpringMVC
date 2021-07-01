@@ -85,6 +85,8 @@
 
         </div>
     </div>
-    <!-- <button class="btn-post" (click)="edit()">EDIT PROFILE</button> -->
-    <a routerLink="/duongnh/about/edit">EDIT</a>
+    <div class="buttons">
+      <button class="btn-post" [hidden]="currentAccount?false:true" (click)="openEditProfilePage()">EDIT PROFILE</button>
+      <!-- <a routerLink="/duongnh/about/edit">EDIT</a> -->
+    </div>
 </div>

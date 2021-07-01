@@ -9,21 +9,34 @@
 .break-footer {
     width: 60%;
 }
+.footer .quickstart{
+  width: 40%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.quickstart .link li{
+  margin: 0 20px;
+}
+.quickstart  .left{
 
-.footer>ul {
-    width: max-content;
+}
+.quickstart ul {
+    /* width: 100%; */
     margin: 0px;
     padding: 10px 0px;
     list-style: none;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
-.footer>ul>li {
+.quickstart ul>li{
+    display: block;
     margin: 0px 10px;
 }
 
-.footer>p {
+.quickstart p {
     margin-top: 10px;
     margin-bottom: 0px;
     font-size: 16px;

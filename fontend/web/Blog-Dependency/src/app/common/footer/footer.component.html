@@ -1,21 +1,31 @@
 <div class="footer">
     <hr class="break-footer">
-    <ul>
-        <li>
-            <a href="{{urlTwitter}}" target="_blank">
-                <fa-icon class="icon-footer" [icon]="faTwitter"></fa-icon>
-            </a>
-        </li>
-        <li>
-            <a href="{{urlFacebook}}" target="_blank">
-                <fa-icon class="icon-footer" [icon]="faFacebook"></fa-icon>
-            </a>
-        </li>
-        <li>
-            <a href="{{urlGithub}}" target="_blank">
-                <fa-icon class="icon-footer" [icon]="faGithub"></fa-icon>
-            </a>
-        </li>
-    </ul>
+    <div class="quickstart">
+      <ul class="link left">
+        <li><a [routerLink]="'/duongnh'">Home</a></li>
+        <li><a [routerLink]="'/duongnh/about'">About</a></li>
+      </ul>
+      <ul>
+          <li>
+              <a href="{{urlTwitter}}" target="_blank">
+                  <fa-icon class="icon-footer" [icon]="faTwitter"></fa-icon>
+              </a>
+          </li>
+          <li>
+              <a href="{{urlFacebook}}" target="_blank">
+                  <fa-icon class="icon-footer" [icon]="faFacebook"></fa-icon>
+              </a>
+          </li>
+          <li>
+              <a href="{{urlGithub}}" target="_blank">
+                  <fa-icon class="icon-footer" [icon]="faGithub"></fa-icon>
+              </a>
+          </li>
+      </ul>
+      <ul class="link right">
+        <li><a [routerLink]="'/login'">Login</a></li>
+        <li><a [routerLink]="'/duongnh/post/new'">Post</a></li>
+      </ul>
+    </div>
     <p>Copyright © Blog Website 2020</p>
 </div>

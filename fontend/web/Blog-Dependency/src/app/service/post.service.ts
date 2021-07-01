@@ -11,7 +11,9 @@ import { Account } from '../model/account';
 import { JwttokenService } from './jwttoken.service';
 import { ResponseEnity } from '../model/response-entity';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class PostService{
     private URL_GET_ALL_POST = '/api/post/all/duongnh';
     // private URL_GET_ALL_POST: string = environment.apiUrl + '/api/account/0773314448';

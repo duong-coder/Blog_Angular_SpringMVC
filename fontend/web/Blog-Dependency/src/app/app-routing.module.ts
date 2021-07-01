@@ -39,6 +39,7 @@ const routes: Routes = [
     ]
   },
   { path: 'login', component: LoginComponent },
+  { path: '', redirectTo: 'duongnh', pathMatch: 'full'},
   { path: '**', component: PageNotFoundComponent }
 ];
 

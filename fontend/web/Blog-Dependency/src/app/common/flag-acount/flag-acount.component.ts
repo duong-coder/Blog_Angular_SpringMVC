@@ -9,7 +9,6 @@ import { AccountService } from 'src/app/service/account.service';
   styleUrls: ['./flag-acount.component.css']
 })
 export class FlagAcountComponent implements OnInit {
-  @Input() isLoginPage: boolean;
   statusFlag = ['login', 'logout', 'goback'];
   currentFlag: string;
 
@@ -22,9 +21,6 @@ export class FlagAcountComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.isLoginPage) {
-      this.currentFlag = this.statusFlag[2];
-    } else {
       this.router.events.subscribe((evt) => {
         if (evt instanceof NavigationStart) {
           const url = evt.url;
@@ -42,7 +38,6 @@ export class FlagAcountComponent implements OnInit {
 
         }
       });
-    }
   }
 
   redirecPage(): void {
@@ -77,6 +72,7 @@ export class FlagAcountComponent implements OnInit {
 
   logout(): void {
     this.accountService.logout();
+    this.currentFlag = this.statusFlag[1];
     this.goBack();
   }
 }
