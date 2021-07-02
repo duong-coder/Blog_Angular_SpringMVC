@@ -22,7 +22,7 @@ public class Account implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@Column(name = "username")
+	@Column(name = "username", length = 50)
 	private String username;
 	
 	@Column(name = "phone_number")

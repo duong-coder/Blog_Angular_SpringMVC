@@ -1,5 +1,5 @@
 export class AccountLogin{
-    phone: string;
+    username: string;
     password: string;
     rememberMe: boolean;
 

@@ -13,7 +13,7 @@ public class LoginVM {
 
     @NotNull
     @Size(min = 1, max = 50)
-    private String phone;
+    private String username;
 
     private String password;
 

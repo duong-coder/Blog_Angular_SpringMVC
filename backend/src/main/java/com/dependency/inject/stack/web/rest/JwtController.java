@@ -61,9 +61,9 @@ public class JwtController {
      */
     @PostMapping(AUTHENTICATE_MAPPING)
     public ResponseEntity<JwtToken> authorize(@Valid @RequestBody LoginVM loginVM) {
-//    	log.info("phone: " + loginVM.getPhone() + "; pass" + loginVM.getPassword() + "encode" + pass.matches("1234", "$2a$10$IDXaDhjrSSsbLPx9BqHvheodo8Yfex9dRxUmb7l77VD9ShveDL7vy"));
+//    	log.info("Username: " + loginVM.getPhone() + "; pass" + loginVM.getPassword() + "encode" + pass.matches("1234", "$2a$10$IDXaDhjrSSsbLPx9BqHvheodo8Yfex9dRxUmb7l77VD9ShveDL7vy"));
         Authentication authentication = authenticationManager
-                .authenticate(new UsernamePasswordAuthenticationToken(loginVM.getPhone(),loginVM.getPassword()));
+                .authenticate(new UsernamePasswordAuthenticationToken(loginVM.getUsername(),loginVM.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         boolean rememberMe = (loginVM.getRememberMe() == null) ? false : loginVM.getRememberMe();
@@ -74,7 +74,7 @@ public class JwtController {
 
         log.info("Authenticated with token {}", jwt);
 
-//        TwilioSms.sendMessage(loginVM.getPhone(), "Bạn vừa đăng nhập vào hệ thống HDHT Medical");
+//        TwilioSms.sendMessage(loginVM.getUsername(), "Bạn vừa đăng nhập vào hệ thống HDHT Medical");
 
         return new ResponseEntity<>(new JwtToken(jwt), httpHeaders, HttpStatus.OK);
     }
