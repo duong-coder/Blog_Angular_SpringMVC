@@ -8,15 +8,16 @@ import { JwttokenService } from './jwttoken.service';
 import { Account } from '../model/account';
 import { ResponseEnity } from '../model/response-entity';
 import { MappingService } from './mapping.service';
+import { Constant } from './constant';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccountService {
-  private URL_LOGIN_APP = '/api/authenticate';
-  private URL_GET_ACCOUNT = '/api/account/duongnh';
-  private URL_GET_ACCOUNT_LINK_SOCIAL_NETWORK = '/api/account/duongnh/link-social-network';
-  private URL_UPDATE_ACCOUNT = '/api/account';
+  private URL_LOGIN_APP ='/authenticate';
+  private URL_GET_ACCOUNT = '/account/duongnh';
+  private URL_GET_ACCOUNT_LINK_SOCIAL_NETWORK = '/account/duongnh/link-social-network';
+  private URL_UPDATE_ACCOUNT = '/account';
 
   private NAME_ACCOUNT_IN_STORAGE = 'accountCurrent';
   private currentAccountSubject: BehaviorSubject<AccountLogin>;
@@ -36,7 +37,7 @@ export class AccountService {
   }
 
   getAccountByPhone(): Observable<ResponseEnity<Account>> {
-    const observableAccountConvert = this.http.get<ResponseEnity<Account>>(this.URL_GET_ACCOUNT).pipe(
+    const observableAccountConvert = this.http.get<ResponseEnity<Account>>(Constant.API_URL + this.URL_GET_ACCOUNT).pipe(
       map((account) => {
         if (account.status === 200) {
           const accountBE = account.body;
@@ -51,16 +52,16 @@ export class AccountService {
     return observableAccountConvert;
   }
   getLinkSocialNetworkById(): Observable<ResponseEnity<Account>> {
-    return this.http.get<ResponseEnity<Account>>(this.URL_GET_ACCOUNT_LINK_SOCIAL_NETWORK);
+    return this.http.get<ResponseEnity<Account>>(Constant.API_URL + this.URL_GET_ACCOUNT_LINK_SOCIAL_NETWORK);
   }
 
   updateByUsername(account: Account): Observable<ResponseEnity<Account>> {
 
-    return this.http.put<ResponseEnity<Account>>(this.URL_UPDATE_ACCOUNT, account);
+    return this.http.put<ResponseEnity<Account>>(Constant.API_URL + this.URL_UPDATE_ACCOUNT, account);
   }
 
   login(accountLogin: AccountLogin): Observable<JwtToken> {
-    return this.http.post<JwtToken>(this.URL_LOGIN_APP, accountLogin)
+    return this.http.post<JwtToken>(Constant.API_URL + this.URL_LOGIN_APP, accountLogin)
       .pipe(map(tokenObj => {
         localStorage.setItem(this.NAME_ACCOUNT_IN_STORAGE, JSON.stringify(accountLogin));
         this.jwttokenService.addTokenInLocalStorage(tokenObj.id_token);

@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+  apiUrl: 'http://spring-blog:8081',
+  enableDebug: false
 };
