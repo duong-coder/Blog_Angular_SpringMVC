@@ -15,7 +15,7 @@ import { PostService } from 'src/app/service/post.service';
   styleUrls: ['./post-add.component.css']
 })
 export class PostAddComponent implements OnInit, OnChanges {
-  @Input() postEditting: Post;
+  @Input() postEditting?: Post;
   @Input() flagEdit: boolean;
   faMarkdown = faMarkdown;
   formPost: FormGroup;
@@ -57,7 +57,10 @@ export class PostAddComponent implements OnInit, OnChanges {
     post.subHeading = this.formPost.get('subHeading').value;
     post.content = this.formPost.get('content').value;
     post.urlImage = this.formPost.get('urlImage').value;
-    post.accountDTO = this.postEditting.accountDTO;
+
+    const accountDTO = new Account();
+    accountDTO.username = this.currentAccount.username;
+    post.accountDTO = accountDTO;
 
     if (this.flagEdit) {
       post.id = this.postEditting.id;

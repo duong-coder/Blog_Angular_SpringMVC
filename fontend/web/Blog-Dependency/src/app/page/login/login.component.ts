@@ -13,7 +13,7 @@ import {AccountService} from '../../service/account.service';
 })
 export class LoginComponent implements OnInit {
   loginForm = new FormGroup({
-    phone: new FormControl('duongnh'),
+    username: new FormControl('duongnh'),
     password: new FormControl(''),
     rememberMe: new FormControl('true')
   });
@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
 
   submit(): void{
     const accountLogin: AccountLogin = new AccountLogin();
-    accountLogin.phone = this.loginForm.get('phone').value;
+    accountLogin.username = this.loginForm.get('username').value;
     accountLogin.password = this.loginForm.get('password').value;
     accountLogin.rememberMe = this.loginForm.get('rememberMe').value;
 
