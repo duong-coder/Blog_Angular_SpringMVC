@@ -4,6 +4,7 @@ INSERT INTO account (username,phone_number,password,date_create,fullname,birthda
 Teacher at FPT Polytechnic College Danang\\
 Email: anhnn4@fpt.edu.vn','* The first prize of Group B team in Hackathon organized by FPT Education Organization.
 * 4 excellent students: SPRING 2020, SUMMER 2021, FALL 2020, SPRING 2021.
+<<<<<<< HEAD
 * 1 semester of good students: FALL 2019.');
 
 INSERT INTO educations (name,description,gpa,date_start,date_end,sort_index,username) VALUES 
@@ -20,3 +21,6 @@ INSERT INTO work_experience (company_or_app_name,title_or_position,description,d
 ('STUDENT MANAGER','Java Core','\\- Description: Application used to manage students, running on the console.
 \\- Team size: 1.','2019-10-01','2019-12-01',1,'duongnh')
 ;
+=======
+* 1 semester of good students: FALL 2019.');
+>>>>>>> 90fe94485dddd7f8e378cc67845fccf57b82bbd2
