@@ -7,3 +7,8 @@ export interface KindTimeItemForm {
     kind: string;
     index: number;
 }
+
+export interface ItemSkillFormGroup {
+  skillFormGroup: FormGroup;
+  index: number;
+}

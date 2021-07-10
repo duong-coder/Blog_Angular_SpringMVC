@@ -1,28 +1,26 @@
 package com.dependency.inject.stack.config.jwt;
 
-
-import com.dependency.inject.stack.common.SecurityConstants;
-
-import io.jsonwebtoken.ExpiredJwtException;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
-import org.springframework.web.filter.GenericFilterBean;
+import java.io.IOException;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.util.StringUtils;
+import org.springframework.web.filter.GenericFilterBean;
+
+import com.dependency.inject.stack.common.SecurityConstants;
+
+import io.jsonwebtoken.ExpiredJwtException;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * The type Jwt filter.
@@ -30,31 +28,30 @@ import java.io.IOException;
 @Slf4j
 public class JwtFilter extends GenericFilterBean {
 
-    @Autowired
-    private TokenProvider tokenProvider;
-    @Autowired
-    private PasswordEncoder pass;
-    
-    @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
-            throws IOException, ServletException {
-        HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
+	@Autowired
+	private TokenProvider tokenProvider;
+	@Autowired
+	private PasswordEncoder pass;
 
-        
-        try {
+	@Override
+	public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
+			throws IOException, ServletException {
+		HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
+		
+		try {
 			// JWT Token is in the form "Bearer token". Remove Bearer word and
 			// get only the Token
 
 			String jwt = resolveToken(httpServletRequest);
-	        System.out.println("jwt" + jwt);
-	        if (StringUtils.hasText(jwt) && this.tokenProvider.validateToken(jwt)) {
-	            Authentication authentication = this.tokenProvider.getAuthentication(jwt);
-	            SecurityContextHolder.getContext().setAuthentication(authentication);
-	            log.info(jwt);
-	            log.info(authentication.toString());
-	        } else {
+			System.out.println("jwt" + jwt);
+			if (StringUtils.hasText(jwt) && this.tokenProvider.validateToken(jwt)) {
+				Authentication authentication = this.tokenProvider.getAuthentication(jwt);
+				SecurityContextHolder.getContext().setAuthentication(authentication);
+				log.info(jwt);
+				log.info(authentication.toString());
+			} else {
 				System.out.println("Cannot set the Security Context");
-				
+
 			}
 		} catch (ExpiredJwtException ex) {
 
@@ -65,16 +62,17 @@ public class JwtFilter extends GenericFilterBean {
 				allowForRefreshToken(ex, httpServletRequest);
 			} else {
 				httpServletRequest.setAttribute("exception", ex);
+//				throw new ExpiredJwtException(ex.getHeader(), ex.getClaims(), "Expired token");
 			}
 		} catch (BadCredentialsException ex) {
 			httpServletRequest.setAttribute("exception", ex);
 		} catch (Exception ex) {
 			System.out.println(ex);
 		}
-        filterChain.doFilter(servletRequest, servletResponse);
-    }
-    
-    private void allowForRefreshToken(ExpiredJwtException ex, HttpServletRequest request) {
+		filterChain.doFilter(servletRequest, servletResponse);
+	}
+
+	private void allowForRefreshToken(ExpiredJwtException ex, HttpServletRequest request) {
 
 		// create a UsernamePasswordAuthenticationToken with null values.
 		UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
@@ -88,14 +86,14 @@ public class JwtFilter extends GenericFilterBean {
 		request.setAttribute("claims", ex.getClaims());
 
 	}
-    
-    private String resolveToken(HttpServletRequest request) {
-        String bearerToken = request.getHeader(SecurityConstants.AUTHORIZATION_HEADER);
-        System.out.println("token" + bearerToken);
-        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(SecurityConstants.TOKEN_PREFIX)) {
-            return bearerToken.substring(7);
-        }
-        return null;
-    }
+
+	private String resolveToken(HttpServletRequest request) {
+		String bearerToken = request.getHeader(SecurityConstants.AUTHORIZATION_HEADER);
+		System.out.println("token" + bearerToken);
+		if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(SecurityConstants.TOKEN_PREFIX)) {
+			return bearerToken.substring(7);
+		}
+		return null;
+	}
 
 }

@@ -3,15 +3,22 @@
   padding: 0px 0px;
   margin: 40px 0px;
   position: relative;
-  transition: all 0.5s;
+  /* transition: all 0.5s; */
 }
-.__item:hover{
+/* .__item:hover{
   border: 1px solid #fcf8e0;
-}
+} */
 .__item .__name{
   font-size: smaller;
   font-weight: normal;
   margin-bottom: 5px;
+  background-color: #414142;
+  border: 1px solid #414142;
+  outline: none;
+  transition: all 0.5s ease;
+}
+.__item .__name:hover, .__item .__name:focus{
+  border: 1px solid #fcf8e0;
 }
 
 .container {

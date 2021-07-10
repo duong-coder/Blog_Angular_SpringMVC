@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   loginForm = new FormGroup({
     username: new FormControl('duongnh'),
     password: new FormControl(''),
-    rememberMe: new FormControl('true')
+    rememberMe: new FormControl(true)
   });
 
   private jwtToken: JwtToken;
@@ -29,10 +29,10 @@ export class LoginComponent implements OnInit {
   }
 
   submit(): void{
-    const accountLogin: AccountLogin = new AccountLogin();
-    accountLogin.username = this.loginForm.get('username').value;
-    accountLogin.password = this.loginForm.get('password').value;
-    accountLogin.rememberMe = this.loginForm.get('rememberMe').value;
+    const accountLogin = this.loginForm.getRawValue() as AccountLogin;
+    // accountLogin.username = this.loginForm.get('username').value;
+    // accountLogin.password = this.loginForm.get('password').value;
+    // accountLogin.rememberMe = this.loginForm.get('rememberMe').value;
 
     this.accountService.login(accountLogin).subscribe(
       token => {

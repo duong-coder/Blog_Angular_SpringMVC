@@ -32,6 +32,10 @@
     color: #216672;
 }
 
+label{
+  color: #fff;
+}
+
 .example-pass {
     color: gray;
 }

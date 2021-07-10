@@ -68,9 +68,9 @@ public class PostResources {
 		System.out.println("Time" + date.getTime());
 		try {
 			postDTO.setDateCreate(date);
-			postService.insert(postDTO);
+			PostDTO postDTORT = postService.insert(postDTO);
 			System.out.println("new post" + postDTO.getContent());
-			Response response = new Response("Create", 201, postDTO);
+			Response response = new Response("Create", 201, postDTORT);
 
 			return ResponseEntity.ok(response);
 		} catch (Exception e) {
@@ -84,9 +84,9 @@ public class PostResources {
 	@PutMapping
 	public ResponseEntity<Response> updatePost(@RequestBody PostDTO postDTO) {
 		try {
-			postService.update(postDTO);
+			PostDTO postDTORT = postService.update(postDTO);
 			System.out.println("PUT - UPDATE" + postDTO.toString());
-			Response response = new Response("Update", 201, postDTO);
+			Response response = new Response("Update", 201, postDTORT);
 
 			return ResponseEntity.ok(response);
 		} catch (Exception e) {

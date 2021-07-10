@@ -23,4 +23,6 @@ public interface SkillService {
 
 	List<SkillDTO> findAllDTOWillAdd(List<SkillDTO> dtos, String accountId);
 
+	long countByAccountId(String id);
+
 }

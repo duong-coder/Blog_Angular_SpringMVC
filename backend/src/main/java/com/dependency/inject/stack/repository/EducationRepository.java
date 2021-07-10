@@ -29,4 +29,7 @@ public interface EducationRepository extends JpaRepository<Education, Integer>{
 //
 	@Query(value = "SELECT e FROM Education e WHERE e.account.username = ?1 ORDER BY e.sortIndex DESC")
 	List<Education> findAllByAccountId(String id);
+	
+	@Query(value = "SELECT COUNT(e) FROM Education e WHERE e.account.username = ?1")
+	long countByAccountId(String id);
 }

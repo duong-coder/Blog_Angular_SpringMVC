@@ -16,8 +16,9 @@ public interface WorkExperienceRepository extends JpaRepository<WorkExperience, 
 //	void insert(Post post);
 //	
 //	void update(Post post);
+	
 	@Modifying
-	@Query(value = "update Education e set e.sortIndex = ?1 where e.id = ?1")
+	@Query(value = "update WorkExperience we set we.sortIndex = ?1 where we.id = ?1")
 	void setSortIndex(int id);
 //	
 //	void delete(int id);
@@ -28,4 +29,8 @@ public interface WorkExperienceRepository extends JpaRepository<WorkExperience, 
 //
 	@Query(value = "SELECT we FROM WorkExperience we WHERE we.account.username = ?1 ORDER BY we.sortIndex DESC")
 	List<WorkExperience> findAllByAccountId(String id);
+	
+
+	@Query(value = "SELECT COUNT(we) FROM WorkExperience we WHERE we.account.username = ?1")
+	long countByAccountId(String id);
 }
