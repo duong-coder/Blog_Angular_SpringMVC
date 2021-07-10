@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output, ViewContainerRef } from
 import { faMinus, faPlus, faSortDown, faSortUp, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { Education } from 'src/app/model/education';
 import { InputComponent } from 'src/app/model/input-component';
-import { KindTimeItemForm } from 'src/app/model/kind-time-item';
+import { KindTimeItemForm } from 'src/app/model/kind-tem';
 import { WorkExperience } from 'src/app/model/work-experience';
 import { ComponentService } from 'src/app/service/component.service';
 

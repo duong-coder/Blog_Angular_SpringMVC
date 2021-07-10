@@ -1,5 +1,6 @@
 import { Component, OnInit, forwardRef, OnChanges, ElementRef, ViewChild } from '@angular/core';
-import { FormBuilder, NG_VALUE_ACCESSOR, NG_VALIDATORS, FormArray } from '@angular/forms';
+import { FormBuilder, NG_VALUE_ACCESSOR, NG_VALIDATORS, FormArray, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { faFacebook, faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { faAward, faBookmark, faBullseye, faCalendarAlt, faEnvelope, faLightbulb, faMapMarkedAlt, faPen, faPhone, faUser, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { StarRatingComponent } from 'src/app/common/star-rating/star-rating.component';
@@ -19,7 +20,7 @@ export class ProfileEditComponent implements OnInit, OnChanges {
   @ViewChild(StarRatingComponent)
   starRatingComponent: StarRatingComponent;
 
-  skillRating: Skill = new Skill();
+  skillFormGroupRating = this.formService.createSkillFormGroup(undefined);
 
   account: Account = new Account();
 
@@ -43,13 +44,14 @@ export class ProfileEditComponent implements OnInit, OnChanges {
   ];
   isEdit: true;
   profileForm = this.formService.createAccountFormGroup();
-  skills: Skill[];
+  // skills: Skill[];
 
   constructor(
     private acccountService: AccountService,
     private fb: FormBuilder,
     private modalService: ModalService,
-    private formService: FormService) { }
+    private formService: FormService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.getProfile();
@@ -63,7 +65,7 @@ export class ProfileEditComponent implements OnInit, OnChanges {
       next: (res) => {
         if (res.status === 200) {
           this.account = { ...res.body };
-          this.skillRating = this.account.skillDTOs[0];
+          // this.skillRating = this.account.skillDTOs[0];
 
           console.log('response', this.account);
           this.mapDataToForm();
@@ -81,6 +83,7 @@ export class ProfileEditComponent implements OnInit, OnChanges {
   mapDataToForm(): void {
     const listEduForm = this.fb.array([]);
     const listWEForm = this.fb.array([]);
+    const listSkillForm = this.fb.array([]);
 
     this.account.educationDTOs.forEach(edu => {
       const eduForm = this.formService.createEducationFormGroup(edu);
@@ -94,37 +97,45 @@ export class ProfileEditComponent implements OnInit, OnChanges {
       listWEForm.push(weForm);
     });
 
-    this.skills = this.account.skillDTOs;
-    this.profileForm = this.formService.createAccountFormGroupWithData(this.account, listEduForm, listWEForm);
+    this.account.skillDTOs.forEach(s => {
+      const skillForm = this.formService.createSkillFormGroup(s);
+
+      listSkillForm.push(skillForm);
+    });
+
+    this.skillFormGroupRating = listSkillForm.at(0) as FormGroup;
+    this.profileForm = this.formService.createAccountFormGroupWithData(this.account, listSkillForm, listEduForm, listWEForm);
   }
 
   getPercentSkill(): void {
   }
-  openSkillRatingModal(skill: Skill): void {
-    this.skillRating = skill;
+  openSkillRatingModal(skillFormGroup: FormGroup): void {
+    this.skillFormGroupRating = skillFormGroup;
     // const ele = document.getElementsByTagName('app-star-rating').item(0);
     // const eleRef = new ElementRef<Element>(ele);
     // const modal = new StarRatingComponent(eleRef, this.modalService);
     const modal = this.starRatingComponent;
 
     this.modalService.set(modal, false);
-    console.log('OPEN MODAL', skill);
+    console.log('OPEN MODAL', skillFormGroup);
 
   }
-  getSkillRating(item: Skill): void {
-    const skillDTOs = this.account.skillDTOs;
-    let skill: Skill;
-    if (skillDTOs != null && skillDTOs !== undefined) {
-      skill = skillDTOs.find(s => {
-        return s.skill === item.skill;
-      });
-      skill.level = item.level;
-    }
+  getSkillRating(skillFormGroup: FormGroup): void {
+    // const skillDTOs = this.account.skillDTOs;
+    // let skill: Skill;
+    // if (skillDTOs != null && skillDTOs !== undefined) {
+    //   skill = skillDTOs.find(s => {
+    //     return s.skill === skillFormGroup.get('skill').value;
+    //   });
+    //   skill.level = skillFormGroup.level;
+    // }
+    console.log('SKILL FORM GROUP RATING: ', skillFormGroup);
+
   }
 
   update(): void {
     const accountAfterUpdate = this.profileForm.getRawValue();
-    accountAfterUpdate.skillDTOs = this.account.skillDTOs;
+    // accountAfterUpdate.skillDTOs = this.account.skillDTOs;
     accountAfterUpdate.gender = accountAfterUpdate.gender === 'Female';
     accountAfterUpdate.password = this.account.password;
     accountAfterUpdate.role = this.account.role;
@@ -136,7 +147,7 @@ export class ProfileEditComponent implements OnInit, OnChanges {
     this.acccountService.updateByUsername(accountAfterUpdate).subscribe({
       next: (res) => {
         console.log('RESPONSE UPDATE: ', res);
-
+        this.router.navigateByUrl('/duongnh/about');
       },
       error: (error) => {
         console.error('RESPONSE UPDATE: ', error);

@@ -1,6 +1,6 @@
 <div class="star-rating">
   <div class="__body">
-    <p class="--title">{{id}}</p>
+    <p class="--title">{{id.value}}</p>
     <div class="--icons">
       <span *ngFor="let level of levels">
         <fa-icon (mousemove)="getSkillRating(level)" class="--icon --icon-big checked" [icon]="faStar"></fa-icon>

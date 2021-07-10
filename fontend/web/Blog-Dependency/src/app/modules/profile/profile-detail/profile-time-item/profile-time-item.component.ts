@@ -2,7 +2,7 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewContainerRef } 
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Education } from 'src/app/model/education';
 import { InputComponent } from 'src/app/model/input-component';
-import { KindTimeItemForm } from 'src/app/model/kind-time-item';
+import { KindTimeItemForm } from 'src/app/model/kind-tem';
 import { WorkExperience } from 'src/app/model/work-experience';
 import { ComponentService } from 'src/app/service/component.service';
 import { ProfileTimelineComponent } from '../profile-timeline/profile-timeline.component';

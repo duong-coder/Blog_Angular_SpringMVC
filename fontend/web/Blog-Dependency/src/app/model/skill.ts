@@ -11,6 +11,7 @@ export class Skill {
     this.id = 0;
     this.skill = '';
     this.level = 0;
+    this.accountDTO = new Account();
   }
 
   getPercent(): number {

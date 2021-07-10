@@ -1,12 +1,13 @@
 <div class="__skilss">
-  <div class="__item" *ngFor="let skill of skillDTOs; let i = index">
-    <div (click)="openSkillRating(skill)">
-      <p class="__name">{{skill.skill}}</p>
-      <div class="container">
-        <div class="__skill" [ngStyle]="{'width.%': skill.getPercent()}"></div>
+  <div class="__item" *ngFor="let skillFormGroup of listSkillForm.controls; let i = index, let l = count">
+    <div [formGroup]="skillFormGroup">
+      <!-- <p class="__name">{{skill.skill}}</p> -->
+      <input class="__name" type="text" formControlName="skill">
+      <div class="container" (click)="openSkillRating(skillFormGroup)" >
+        <div class="__skill" [ngStyle]="{'width.%': getPercentSkill(skillFormGroup.get('level'))}"></div>
       </div>
     </div>
-    <app-profile-control-edit [item]="{item: skill, index: i}" [maxIndex]="skillDTOs.length"
+    <app-profile-control-edit [item]="{skillFormGroup: skillFormGroup, index: i}" [maxIndex]="l"
       (addItemForm)="addItemForm($event)" (deleteItemForm)="deleteItemForm($event)"
       (moveUpItemForm)="moveItemForm($event)" (moveDownItemForm)="moveItemForm($event)">
     </app-profile-control-edit>

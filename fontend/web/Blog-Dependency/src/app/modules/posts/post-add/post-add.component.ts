@@ -1,4 +1,5 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { async } from '@angular/core/testing';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faMarkdown } from '@fortawesome/free-brands-svg-icons';
@@ -65,18 +66,7 @@ export class PostAddComponent implements OnInit, OnChanges {
     if (this.flagEdit) {
       post.id = this.postEditting.id;
       post.dateCreate = this.postEditting.dateCreate;
-      this.postService.updatePost(post).subscribe({
-        next: (next) => {
-          console.log(next);
-        },
-        error: (err) => {
-          console.error(err);
-        },
-        complete: () => {
-          console.log(post);
-          this.router.navigateByUrl(`/duongnh/post/detail/${this.postEditting.id}`);
-        }
-      });
+      this.updatePost(post);
     } else {
       post.dateCreate = this.dateService.getDayNow();
       console.log('INSERT', post);
@@ -93,6 +83,23 @@ export class PostAddComponent implements OnInit, OnChanges {
         }
       });
     }
+  }
+  updatePost(post: Post): void {
+    this.postService.updatePost(post).subscribe({
+      next: (next) => {
+        console.log('ADD POST: ' + next);
+      },
+      error: (err) => {
+        console.error('ADD POST: ', err);
+        // if (err.status === 401) {
+        //   this.updatePost(post);
+        // }
+      },
+      complete: () => {
+        console.log(post);
+        this.router.navigateByUrl(`/duongnh/post/detail/${this.postEditting.id}`);
+      }
+    });
   }
   deletePost(): void {
     if (!this.currentAccount) {
