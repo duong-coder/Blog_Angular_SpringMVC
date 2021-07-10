@@ -83,7 +83,12 @@ public class SkillServiceImpl implements SkillService {
 
 		return skillDTOs;
 	}
-
+	
+	@Override
+	public long countByAccountId(String id) {
+		return skillRepository.countByAccountId(id);
+	}
+	
 	@Override
 	public List<SkillDTO> findAllDTOWillAdd(List<SkillDTO> dtos, String accountId) {
 		List<SkillDTO> skillsWillAdd = new ArrayList<>();

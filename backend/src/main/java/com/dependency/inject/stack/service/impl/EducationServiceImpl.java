@@ -91,6 +91,11 @@ public class EducationServiceImpl implements EducationService {
 	}
 	
 	@Override
+	public long countByAccountId(String id) {
+		return educationRepository.countByAccountId(id);
+	}
+	
+	@Override
 	public List<EducationDTO> findAllDTOWillAdd(List<EducationDTO> dtos, String accountId){
 		List<EducationDTO> educationsWillAdd = new ArrayList<>();
 		if(dtos == null) {

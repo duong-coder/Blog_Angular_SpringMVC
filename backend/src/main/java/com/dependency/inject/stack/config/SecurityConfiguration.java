@@ -1,5 +1,6 @@
 package com.dependency.inject.stack.config;
 
+import com.dependency.inject.stack.config.jwt.CORSFilter;
 import com.dependency.inject.stack.config.jwt.JwtFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -15,6 +16,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.firewall.HttpFirewall;
 import org.springframework.security.web.firewall.StrictHttpFirewall;
@@ -32,6 +35,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private DomainAccountDetailsService userDetailsService;
 
+    @Autowired
+    private AuthenticationEntryPoint authenticationEntryPoint;
+    
+    @Autowired
+    private AccessDeniedHandler accessDeniedHandler;
+    
+    @Autowired
+    private CORSFilter corsFilter;
+    
     /**
      * Jwt filter jwt filter.
      *
@@ -95,13 +107,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .cors().disable()
                 .csrf().disable()
                 .addFilterBefore(jwtFilter(), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(corsFilter,UsernamePasswordAuthenticationFilter.class)
 //                .headers().frameOptions().disable()
 //                .and()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/api/post/{\\d+}", "/api/post/all/{\\d+}").permitAll()
                 .antMatchers("/api/authenticate", "/api/refreshtoken", "/api/account/**").permitAll()
+                .antMatchers("/api/account").hasAuthority(AUTHORITY_ADMIN)
                 .antMatchers("/api/post").hasAuthority(AUTHORITY_ADMIN)
-                .antMatchers( HttpMethod.DELETE, "/api/post/**").hasAuthority(AUTHORITY_ADMIN)
+                .antMatchers(HttpMethod.DELETE, "/api/post/**").hasAuthority(AUTHORITY_ADMIN)
 //                .antMatchers().hasAuthority(AUTHORITY_ADMIN)
 //
 //                .antMatchers(SWAGGER_UI_MAPPING, SWAGGER_UI_MAPPING.concat(RESOURCE_SUFFIX), SWAGGER_RESOURCES_MAPPING.concat(RESOURCE_SUFFIX), API_DOCS_MAPPING, API_DOCS_MAPPING.concat(RESOURCE_SUFFIX), WEBJARS_MAPPING.concat(RESOURCE_SUFFIX)).permitAll()
@@ -127,8 +141,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/uploads/**").permitAll()
 //                .antMatchers("/uploads/", "/uploads").permitAll()
 //                .antMatchers(RESOURCE_SUFFIX).authenticated()
-                .anyRequest().authenticated();
-//                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .anyRequest().authenticated()
+                .and().exceptionHandling().authenticationEntryPoint(authenticationEntryPoint)
+                .and().exceptionHandling().accessDeniedHandler(accessDeniedHandler)
+                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         
 //                http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
         

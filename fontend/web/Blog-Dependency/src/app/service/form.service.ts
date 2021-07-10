@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable, SkipSelf } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Account } from '../model/account';
 import { Education } from '../model/education';
+import { Skill } from '../model/skill';
 import { WorkExperience } from '../model/work-experience';
 
 @Injectable({
@@ -30,6 +31,7 @@ export class FormService {
       twitter: [''],
       gender: [''],
       hobby: [''],
+      skillDTOs: this.fb.array([]),
       educationDTOs: this.fb.array([]),
       workExperienceDTOs: this.fb.array([]),
     });
@@ -37,7 +39,7 @@ export class FormService {
     return accountForm;
   }
 
-  createAccountFormGroupWithData(account: Account, listEduForm: FormArray, listWEForm: FormArray): FormGroup {
+  createAccountFormGroupWithData(account: Account, listSkillForm: FormArray, listEduForm: FormArray, listWEForm: FormArray): FormGroup {
     const accountForm = this.fb.group({
       fullname: [account.fullname],
       objective: [account.objective],
@@ -53,6 +55,7 @@ export class FormService {
       twitter: [account.twitter],
       gender: [account.gender ? 'Male' : 'Female'],
       hobby: [account.hobby],
+      skillDTOs: listSkillForm,
       educationDTOs: listEduForm,
       workExperienceDTOs: listWEForm,
     });
@@ -114,5 +117,27 @@ export class FormService {
     }
 
     return weForm;
+  }
+
+  createSkillFormGroup(skill: Skill): FormGroup {
+    let skillForm = this.fb.group({
+      id: [null],
+      skill: [''],
+      level: [0],
+      sortIndex: [0],
+      accountDTO: [new Account()]
+    });
+
+    if (skill) {
+      skillForm = this.fb.group({
+        id: [skill.id],
+        skill: [skill.skill],
+        level: [skill.level],
+        sortIndex: [skill.sortIndex],
+        accountDTO: [skill.accountDTO]
+      });
+    }
+
+    return skillForm;
   }
 }

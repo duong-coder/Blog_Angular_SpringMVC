@@ -25,4 +25,6 @@ public interface WorkExperienceService {
 
 	void setOrderIndex(int id);
 
+	long countByAccountId(String id);
+
 }

@@ -2,7 +2,7 @@ import { Component, Input, OnInit, OnChanges, ViewContainerRef, AfterViewInit } 
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Account } from 'src/app/model/account';
 import { Education } from 'src/app/model/education';
-import { KindTimeItemForm } from 'src/app/model/kind-time-item';
+import { KindTimeItemForm } from 'src/app/model/kind-tem';
 import { WorkExperience } from 'src/app/model/work-experience';
 import { ComponentService } from 'src/app/service/component.service';
 

@@ -25,4 +25,6 @@ public interface EducationService {
 
 	void setSortIndex(int id);
 
+	long countByAccountId(String id);
+
 }

@@ -46,7 +46,10 @@ public class AccountServiceImpl implements AccountService {
 			if (skillDTOs != null) {
 				List<SkillDTO> skillDTOsWillDelete = skillService.findAllDTOWillDelete(skillDTOs, dto.getUsername());
 				skillDTOsWillDelete.forEach(skill -> {
-					skillService.delete(skill.getId());
+					long countSkill = skillService.countByAccountId(dto.getUsername());
+					if (countSkill > 1) {
+						skillService.delete(skill.getId());
+					}
 				});
 				List<SkillDTO> skillDTOsWillAdd = skillService.findAllDTOWillAdd(skillDTOs, dto.getUsername());
 				skillDTOsWillAdd.forEach(skill -> {
@@ -61,7 +64,10 @@ public class AccountServiceImpl implements AccountService {
 				List<EducationDTO> eduDTOsWillDelete = educationService.findAllDTOWillDelete(educationDTOs,
 						dto.getUsername());
 				eduDTOsWillDelete.forEach(edu -> {
-					educationService.delete(edu.getId());
+					long countEducation = educationService.countByAccountId(dto.getUsername());
+					if (countEducation > 1) {
+						educationService.delete(edu.getId());
+					}
 				});
 				List<EducationDTO> eduDTOsWillAdd = educationService.findAllDTOWillAdd(educationDTOs,
 						dto.getUsername());
@@ -78,7 +84,10 @@ public class AccountServiceImpl implements AccountService {
 			if (weDTOs != null) {
 				List<WorkExperienceDTO> weDTOsWillDelete = weService.findAllDTOWillDelete(weDTOs, dto.getUsername());
 				weDTOsWillDelete.forEach(we -> {
-					weService.delete(we.getId());
+					long countWE = weService.countByAccountId(dto.getUsername());
+					if (countWE > 1) {
+						weService.delete(we.getId());
+					}
 				});
 				List<WorkExperienceDTO> weDTOsWillAdd = weService.findAllDTOWillAdd(weDTOs, dto.getUsername());
 				weDTOsWillAdd.forEach(we -> {

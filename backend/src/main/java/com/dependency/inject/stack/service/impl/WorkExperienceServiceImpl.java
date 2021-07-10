@@ -90,6 +90,11 @@ public class WorkExperienceServiceImpl implements WorkExperienceService{
 	}
 	
 	@Override
+	public long countByAccountId(String id) {
+		return experienceRepository.countByAccountId(id);
+	}
+	
+	@Override
 	public List<WorkExperienceDTO> findAllDTOWillAdd(List<WorkExperienceDTO> experienceDTOs, String accountId){
 		List<WorkExperienceDTO> experienceDTOsWillAdd = new ArrayList<>();
 		if(experienceDTOs == null) {

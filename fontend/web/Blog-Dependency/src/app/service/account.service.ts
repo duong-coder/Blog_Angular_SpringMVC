@@ -10,6 +10,7 @@ import { ResponseEnity } from '../model/response-entity';
 import { MappingService } from './mapping.service';
 import { Constant } from './constant';
 import { environment } from 'src/environments/environment';
+import { async } from '@angular/core/testing';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,7 @@ export class AccountService {
   private URL_GET_ACCOUNT = '/account/duongnh';
   private URL_GET_ACCOUNT_LINK_SOCIAL_NETWORK = '/account/duongnh/link-social-network';
   private URL_UPDATE_ACCOUNT = '/account';
+  private URL_REFRESH_TOKEN = '/refreshtoken';
 
   private NAME_ACCOUNT_IN_STORAGE = 'accountCurrent';
   private currentAccountSubject: BehaviorSubject<AccountLogin>;
@@ -64,10 +66,23 @@ export class AccountService {
   login(accountLogin: AccountLogin): Observable<JwtToken> {
     return this.http.post<JwtToken>(environment.apiUrl + this.URL_LOGIN_APP, accountLogin)
       .pipe(map(tokenObj => {
+        accountLogin.password = '';
         localStorage.setItem(this.NAME_ACCOUNT_IN_STORAGE, JSON.stringify(accountLogin));
         this.jwttokenService.addTokenInLocalStorage(tokenObj.id_token);
 
         this.currentAccountSubject.next(accountLogin);
+
+        return tokenObj;
+      }));
+  }
+
+  refreshToken(): Observable<JwtToken> {
+    const options = {
+      headers: {isRefreshToken: 'true'}
+    };
+    return this.http.get<JwtToken>(environment.apiUrl + this.URL_REFRESH_TOKEN, options)
+      . pipe(map(tokenObj => {
+        this.jwttokenService.addTokenInLocalStorage(tokenObj.id_token);
 
         return tokenObj;
       }));

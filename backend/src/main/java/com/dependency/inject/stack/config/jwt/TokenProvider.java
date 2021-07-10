@@ -18,7 +18,6 @@ import org.springframework.stereotype.Component;
 import com.dependency.inject.stack.common.SecurityConstants;
 
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -36,12 +35,13 @@ public class TokenProvider {
     @Value("${app.jwtSecret}")
     private String jwtSecret;
 
-//    private long tokenValidityInMilliseconds = 1080000000;
-    private long tokenValidityInMilliseconds = 0;
+    @Value("${app.jwtExpirationInMs}")
+    private long tokenValidityInMilliseconds;
 
-    private long tokenValidityInMillisecondsForRememberMe = 259200000;
+    private long tokenValidityInMillisecondsForRememberMe = 86400000;//86400000
     
-    private long refreshExpirationDateInMs = 9000000;
+    @Value("${app.jwtExpirationInMs}")
+    private long refreshExpirationDateInMs;
 
     /**
      * Create token string.
@@ -62,7 +62,7 @@ public class TokenProvider {
         } else {
             validity = new Date(now + this.tokenValidityInMilliseconds);
         }
-
+        System.out.println("TIME: " + validity.toString());
         return Jwts.builder()
                 .setSubject(authentication.getName())
                 .setIssuedAt(new Date())
